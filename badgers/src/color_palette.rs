@@ -1,3 +1,5 @@
+use std::borrow::Cow;
+
 #[derive(Debug, Clone)]
 pub struct ColorPalette {
     black: &'static str,
@@ -22,19 +24,23 @@ impl ColorPalette {
         self.black
     }
 
-    pub fn resolve_color_string(&self, color: &str) -> Option<&'static str> {
+    pub fn resolve_color_string(&self, color: &str) -> Option<Cow<'static, str>> {
         match color {
-            "black" => Some(self.black),
-            "white" => Some(self.white),
-            "gray" | "grey" => Some(self.gray),
-            "red" => Some(self.red),
-            "yellow" => Some(self.yellow),
-            "orange" => Some(self.orange),
-            "green" => Some(self.green),
-            "cyan" => Some(self.cyan),
-            "blue" => Some(self.blue),
-            "pink" => Some(self.pink),
-            "purple" => Some(self.purple),
+            // Handle supported color names
+            "black" => Some(self.black.into()),
+            "white" => Some(self.white.into()),
+            "gray" | "grey" => Some(self.gray.into()),
+            "red" => Some(self.red.into()),
+            "yellow" => Some(self.yellow.into()),
+            "orange" => Some(self.orange.into()),
+            "green" => Some(self.green.into()),
+            "cyan" => Some(self.cyan.into()),
+            "blue" => Some(self.blue.into()),
+            "pink" => Some(self.pink.into()),
+            "purple" => Some(self.purple.into()),
+            // Handle supported hex colors
+            c if c.chars().all(|c| c.is_ascii_hexdigit()) => Some(format!("#{c}").into()),
+            // Handle unsupported color names
             _ => None,
         }
     }

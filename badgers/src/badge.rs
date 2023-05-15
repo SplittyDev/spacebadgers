@@ -2,7 +2,7 @@ use std::borrow::Cow;
 
 use crate::{
     ColorPalette,
-    util::{calculate_width, html_escape},
+    util::calculate_width,
 };
 
 pub struct Badge {
@@ -45,14 +45,16 @@ impl Badge {
         // Evaluate badge parameters
         let color = self.color.as_ref()
             .and_then(|color| self.color_palette.resolve_color_string(color.as_ref()))
-            .or_else(|| self.color.as_ref().map(|s| s.as_ref()))
-            .unwrap_or_else(|| self.color_palette.default_color());
+            .or_else(|| self.color.clone())
+            .unwrap_or_else(|| self.color_palette.default_color().into());
         let label_color = self.label_color.as_ref()
             .and_then(|color| self.color_palette.resolve_color_string(color.as_ref()))
-            .or_else(|| self.label_color.as_ref().map(|s| s.as_ref()))
-            .unwrap_or_else(|| self.color_palette.default_label_color());
-        let label = self.label.as_ref().map(html_escape).unwrap_or_default();
-        let status = html_escape(self.status.as_ref());
+            .or_else(|| self.label_color.clone())
+            .unwrap_or_else(|| self.color_palette.default_label_color().into());
+        let label = self.label.as_ref()
+            .map(|str| htmlize::escape_text(str.as_ref()))
+            .unwrap_or_default();
+        let status = htmlize::escape_text(self.status.as_ref());
         let accessible_text = self.accessible_text();
 
         // Build additional svg

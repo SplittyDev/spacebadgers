@@ -22,6 +22,9 @@ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 [[package]]
 name = "badgers"
 version = "0.1.0"
+dependencies = [
+ "htmlize",
+]
 
 [[package]]
 name = "badgers-cli"
@@ -38,6 +41,7 @@ dependencies = [
  "cfg-if",
  "console_error_panic_hook",
  "serde_json",
+ "urlencoding",
  "worker",
 ]
 
@@ -180,6 +184,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "htmlize"
+version = "1.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3ebaa6fa16c015015edec1041cf720bd43e3fef17ca07d15ae22dca96f7da2ec"
+dependencies = [
+ "memchr",
+ "paste",
+]
+
+[[package]]
 name = "http"
 version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -269,6 +283,12 @@ checksum = "c705f256449c60da65e11ff6626e0c16a0a0b96aaa348de61376b249bc340f41"
 dependencies = [
  "regex",
 ]
+
+[[package]]
+name = "paste"
+version = "1.0.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9f746c4065a8fa3fe23974dd82f15431cc8d40779821001404d10d2e79ca7d79"
 
 [[package]]
 name = "percent-encoding"
@@ -555,6 +575,12 @@ dependencies = [
  "idna",
  "percent-encoding",
 ]
+
+[[package]]
+name = "urlencoding"
+version = "2.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e8db7427f936968176eaa7cdf81b7f98b980b18495ec28f1b5791ac3bfe3eea9"
 
 [[package]]
 name = "version_check"

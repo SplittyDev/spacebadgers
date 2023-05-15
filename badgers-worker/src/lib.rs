@@ -44,14 +44,20 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         }
 
         let label = match label {
-            Some(label) => label,
+            Some(label) => urlencoding::decode(&label)
+                .unwrap_or_else(|_| label.to_owned().into())
+                .into_owned(),
             None => return Response::error("Missing label in url path.", 400),
         };
 
         let status = match status {
-            Some(status) => status,
+            Some(status) => urlencoding::decode(&status)
+                .unwrap_or(status.to_owned().into())
+                .into_owned(),
             None => return Response::error("Missing status in url path.", 400),
         };
+
+        println!("Label: {label}; Status: {status}");
 
         let badge = BadgeBuilder::new()
             .label(label)
@@ -71,8 +77,8 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
     }
 
     Router::new()
-        .get("/badge/:label/:status", handle_badge_route)
         .get("/badge/:label/:status/:color", handle_badge_route)
+        .get("/badge/:label/:status", handle_badge_route)
         .run(req, env)
         .await
 }
