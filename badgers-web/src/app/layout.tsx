@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex min-h-screen flex-col items-center p-16 gap-8">
+        <div className="flex min-h-screen flex-col items-center py-4 md:p-16 gap-8">
             <header className="flex flex-col gap-4">
                 <h1 className="text-6xl font-bold text-center">
                     Badge

@@ -12,8 +12,10 @@ const ApiParams = [
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-8">
-        <div className="bg-gray-100 p-4 rounded-md font-mono text-sm text-center">
+    <main className="flex flex-col gap-8 px-4">
+
+        {/* API URL */}
+        <div className="flex flex-wrap justify-center bg-gray-100 p-4 rounded-md font-mono text-sm text-center">
             <span className="text-gray-400">https://</span>
             <span className="text-gray-700">honey.badgers.space</span>
             <span className="text-gray-400">/</span>
@@ -25,6 +27,8 @@ export default function Home() {
             <span className="text-gray-400">/</span>
             <span className="text-teal-600">:color</span>
         </div>
+
+        {/* Named Colors */}
         <div className="flex flex-col gap-4 items-center">
             <h2 className="text-xl text-gray-700 font-bold">Supported Colors</h2>
             <div className="flex flex-col gap-1 items-center md:flex-row">
@@ -44,12 +48,15 @@ export default function Home() {
                 </div>
             </div>
         </div>
+
         <div className="flex flex-col gap-6 lg:flex-row lg:justify-between">
+
+            {/* Query Parameters */}
             <div className="flex flex-col gap-4 flex-grow">
                 <h2 className="text-xl text-gray-700 font-bold">Query Parameters</h2>
                 <ul className="list-disc flex flex-col gap-2">
                     {ApiParams.map(([name, description]) => (
-                        <li key={name} className="flex gap-2 items-center">
+                        <li key={name} className="flex flex-wrap gap-2 items-center">
                             <span className="bg-gray-100 rounded-sm text-gray-800 px-2 py-1 font-mono text-sm">
                                 {name}
                             </span>
@@ -59,6 +66,7 @@ export default function Home() {
                 </ul>
             </div>
 
+            {/* Themes */}
             <div className="flex flex-col gap-4 flex-grow">
                 <h2 className="text-xl text-gray-700 font-bold">Themes</h2>
                 <ThemeStrip themes={[
