@@ -67,7 +67,7 @@ impl Badge {
         return format!(
             r##"<svg
     width="{svg_width}"
-    height={svg_height}
+    height="{svg_height}"
     viewBox="0 0 {width} 200"
     xmlns="http://www.w3.org/2000/svg" {xlink}
     role="img">

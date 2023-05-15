@@ -67,6 +67,12 @@ impl BadgeBuilder {
         self
     }
 
+    /// Set an optional label color.
+    pub fn label_color_option(mut self, label_color: Option<impl Into<Cow<'static, str>>>) -> Self {
+        self.label_color = label_color.map(Into::into);
+        self
+    }
+
     /// Set the badge scale.
     pub fn scale(mut self, scale: f32) -> Self {
         self.scale = scale;
