@@ -2,6 +2,8 @@ use std::borrow::Cow;
 
 #[derive(Debug, Clone)]
 pub struct ColorPalette {
+    default_label: &'static str,
+    default_status: &'static str,
     black: &'static str,
     white: &'static str,
     gray: &'static str,
@@ -17,11 +19,11 @@ pub struct ColorPalette {
 
 impl ColorPalette {
     pub fn default_color(&self) -> &'static str {
-        self.blue
+        self.default_status
     }
 
     pub fn default_label_color(&self) -> &'static str {
-        self.black
+        self.default_label
     }
 
     pub fn resolve_color_string(&self, color: &str) -> Option<Cow<'static, str>> {
@@ -50,6 +52,8 @@ pub mod palettes {
     use super::ColorPalette;
 
     pub const BADGEN: ColorPalette = ColorPalette {
+        default_label: "#555", // dark gray
+        default_status: "#08c", // blue
         black: "#2a2a2a",
         white: "#fff",
         gray: "#999",
