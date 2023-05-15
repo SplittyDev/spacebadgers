@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+.yarn/
+
+**/*.rs.bk
+wasm-pack.log
+
+build/
+target/
+dist/

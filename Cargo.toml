@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "badgers",
+    "badgers-cli",
+    "badgers-worker"
+]

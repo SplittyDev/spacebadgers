@@ -1,0 +1,9 @@
+name = "badgers"
+main = "build/worker/shim.mjs"
+compatibility_date = "2023-05-15"
+
+[vars]
+WORKERS_RS_VERSION = "0.0.16"
+
+[build]
+command = "cargo install -q worker-build && worker-build"
