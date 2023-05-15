@@ -1,5 +1,7 @@
+use std::borrow::Cow;
+
 use worker::*;
-use badgers::BadgeBuilder;
+use badgers::{BadgeBuilder, ColorPalette, color_palettes};
 
 mod utils;
 
@@ -21,6 +23,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         let status = ctx.param("status").cloned();
         let mut label_color: Option<String> = None;
         let mut scale: Option<f32> = None;
+        let mut theme: &'static ColorPalette = &color_palettes::BADGEN;
 
         if let Ok(options) = req.url().as_ref().map(|url| url.query_pairs()) {
             for (key, value) in options {
@@ -29,6 +32,12 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
                     "label_color" => label_color = Some(value.into_owned()),
                     "color" => color = Some(value.into_owned()),
                     "scale" => scale = value.parse().ok(),
+                    "theme" => {
+                        theme = match value.as_ref() {
+                            "badgen" => &color_palettes::BADGEN,
+                            _ => theme,
+                        }
+                    }
                     _ => (),
                 }
             }
@@ -50,6 +59,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             .status(status)
             .color_option(color)
             .scale(scale.unwrap_or(1.0))
+            .color_palette(Cow::Borrowed(theme))
             .build()
             .svg();
 
