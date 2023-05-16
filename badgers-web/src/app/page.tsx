@@ -16,8 +16,8 @@ export default function Home() {
 
         {/* API URL */}
         <div className="flex flex-wrap justify-center bg-gray-100 p-4 rounded-md font-mono text-sm text-center">
-            <span className="text-gray-400">https://</span>
-            <span className="text-gray-700">honey.badgers.space</span>
+            <span className="text-gray-400">{process.env.NEXT_PUBLIC_API_PROTO}://</span>
+            <span className="text-gray-700">{process.env.NEXT_PUBLIC_API_HOST}</span>
             <span className="text-gray-400">/</span>
             <span>badge</span>
             <span className="text-gray-400">/</span>
@@ -73,8 +73,8 @@ export default function Home() {
                     {
                         name: 'badgen',
                         palette: [
-                            { name: 'default_label', color: '#555' },
                             { name: 'black', color: '#2a2a2a' },
+                            { name: 'default_label', color: '#555' },
                             { name: 'gray', color: '#999' },
                             { name: 'red', color: '#e43' },
                             { name: 'yellow', color: '#db1' },
@@ -85,7 +85,39 @@ export default function Home() {
                             { name: 'pink', color: '#e5b' },
                             { name: 'purple', color: '#94e' },
                         ]
-                    }
+                    },
+                    {
+                        name: 'tailwind',
+                        palette: [
+                            { name: 'black', color: '#030712' },
+                            { name: 'default_label', color: '#334155' },
+                            { name: 'gray', color: '#9ca3af' },
+                            { name: 'red', color: '#ef4444' },
+                            { name: 'yellow', color: '#eab308' },
+                            { name: 'orange', color: '#f97316' },
+                            { name: 'green', color: '#22c55e' },
+                            { name: 'cyan', color: '#06b6d4' },
+                            { name: 'blue', color: '#3b82f6' },
+                            { name: 'pink', color: '#ec4899' },
+                            { name: 'purple', color: '#a855f7' },
+                        ]
+                    },
+                    // {
+                    //     name: 'monokai',
+                    //     palette: [
+                    //         { name: 'black', color: '#272822' },
+                    //         { name: 'default_label', color: '#595b4d' },
+                    //         { name: 'gray', color: '#9ea191' },
+                    //         { name: 'red', color: '#ff616e' },
+                    //         { name: 'yellow', color: '#e5b567' },
+                    //         { name: 'orange', color: '#f73' },
+                    //         { name: 'green', color: '#b4d273' },
+                    //         { name: 'cyan', color: '#78dce8' },
+                    //         { name: 'blue', color: '#6c99e9' },
+                    //         { name: 'pink', color: '#f25fa6' },
+                    //         { name: 'purple', color: '#745af6' },
+                    //     ]
+                    // },
                 ]} />
             </div>
         </div>

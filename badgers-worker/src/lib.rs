@@ -35,6 +35,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
                     "theme" => {
                         theme = match value.as_ref() {
                             "badgen" => &color_palettes::BADGEN,
+                            "tailwind" => &color_palettes::TAILWIND,
                             _ => theme,
                         }
                     }

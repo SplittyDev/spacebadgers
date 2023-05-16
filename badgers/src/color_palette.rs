@@ -66,4 +66,20 @@ pub mod palettes {
         pink: "#e5b",
         purple: "#94e",
     };
+
+    pub const TAILWIND: ColorPalette = ColorPalette {
+        default_label: "#334155",
+        default_status: "#f97316",
+        black: "#030712",
+        white: "#f9fafb",
+        gray: "#9ca3af",
+        red: "#ef4444",
+        yellow: "#eab308",
+        orange: "#f97316",
+        green: "#22c55e",
+        cyan: "#06b6d4",
+        blue: "#3b82f6",
+        pink: "#ec4899",
+        purple: "#a855f7",
+    };
 }
