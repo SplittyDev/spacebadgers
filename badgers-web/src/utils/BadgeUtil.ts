@@ -24,10 +24,13 @@ export default class BadgeUtil {
             .join('&')
         const resp = await fetch(`${api.proto}://${api.host}/badge/${pathParams.label}/${pathParams.status}?${queryParams}`)
         const data = await resp.arrayBuffer()
-        const headers = pick(
-            Object.fromEntries(resp.headers.entries()),
-            ['cache-control', 'content-length', 'content-type']
-        )
+        const headers = {
+            'content-type': 'image/svg+xml',
+        } as Record<string, string>
+        const cacheControl = resp.headers.get('cache-control')
+        if (cacheControl) {
+            headers['cache-control'] = cacheControl
+        }
         return new NextResponse(data, {
             status: resp.status,
             statusText: resp.statusText,
@@ -40,12 +43,18 @@ export default class BadgeUtil {
             proto: process.env.NEXT_PUBLIC_API_PROTO,
             host: process.env.NEXT_PUBLIC_API_HOST,
         }
-        const resp = await fetch(`${api.proto}://${api.host}${request.nextUrl.pathname}${request.nextUrl.search}`)
+        const urlPath = request.nextUrl.pathname.replace(/^[/]+/gm, '')
+        const urlQuery = request.nextUrl.search.replace(/^\?+/gm, '')
+        const url = `${api.proto}://${api.host}/${urlPath}?${urlQuery}`
+        const resp = await fetch(url)
         const data = await resp.arrayBuffer()
-        const headers = pick(
-            Object.fromEntries(resp.headers.entries()),
-            ['cache-control', 'content-length', 'content-type']
-        )
+        const headers = {
+            'content-type': 'image/svg+xml',
+        } as Record<string, string>
+        const cacheControl = resp.headers.get('cache-control')
+        if (cacheControl) {
+            headers['cache-control'] = cacheControl
+        }
         return new NextResponse(data, {
             status: resp.status,
             statusText: resp.statusText,
