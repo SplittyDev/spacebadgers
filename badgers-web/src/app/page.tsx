@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import Badge from './Badge'
-import ThemeStrip from './ThemeStrip'
+
+import { Badge, Section, ThemeStrip } from '@/components'
+import { BadgeEndpointRow as Row } from '@/components'
 
 const ApiParams = [
     ['color', 'Override default color (named color or hex)'],
@@ -120,6 +121,18 @@ export default function Home() {
                     // },
                 ]} />
             </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+            <h2 className="text-xl text-gray-700 font-bold">Service Integrations</h2>
+            <Section name="GitHub">
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
+                    <Row name="Latest release" path="/github/release/:owner/:repo" inject={['quintschaf', 'schafkit']} />
+                    <Row name="Issues" path="/github/issues/:owner/:repo" inject={['quintschaf', 'schafkit']} />
+                    <Row name="Open issues" path="/github/open-issues/:owner/:repo" inject={['quintschaf', 'schafkit']} />
+                    <Row name="Closed issues" path="/github/closed-issues/:owner/:repo" inject={['quintschaf', 'schafkit']} />
+                </div>
+            </Section>
         </div>
     </main>
   )

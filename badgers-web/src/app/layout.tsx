@@ -23,8 +23,8 @@ export default function RootLayout({
             <div className="flex min-h-screen flex-col items-center py-4 md:p-16 gap-8">
                 <header className="flex flex-col gap-4">
                     <div className="flex gap-4">
-                        <div className="w-[64px] h-[64px] rounded-full shadow-md">
-                            <Image alt="badgers.space Logo" src={Logo} width={256} height={256} />
+                        <div className="max-w-[64px] max-h-[64px] rounded-full shadow-md">
+                            <Image placeholder='blur' priority unoptimized alt="badgers.space Logo" src={Logo} width={256} height={256} />
                         </div>
                         <h1 className="text-6xl font-bold text-center">
                             Badge
