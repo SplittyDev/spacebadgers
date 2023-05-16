@@ -25,9 +25,7 @@ export default class BadgeUtil {
         return new NextResponse(data, {
             status: resp.status,
             statusText: resp.statusText,
-            headers: {
-                'Content-Type': 'image/svg+xml',
-            }
+            headers: resp.headers,
         })
     }
 
@@ -41,9 +39,7 @@ export default class BadgeUtil {
         return new NextResponse(data, {
             status: resp.status,
             statusText: resp.statusText,
-            headers: {
-                'Content-Type': 'image/svg+xml',
-            }
+            headers: resp.headers,
         })
     }
 }
