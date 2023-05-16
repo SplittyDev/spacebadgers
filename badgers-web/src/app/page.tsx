@@ -4,11 +4,35 @@ import { Badge, Section, ThemeStrip } from '@/components'
 import { BadgeEndpointRow as Row } from '@/components'
 
 const ApiParams = [
-    ['color', 'Override default color (named color or hex)'],
-    ['label_color', 'Override label color (named color or hex)'],
-    ['label', 'Override label text'],
-    ['scale', 'Override badge size (default: 1)'],
-    ['theme', 'Specify color theme (default: badgen)'],
+    {
+        name: 'color',
+        description: 'Override status color',
+        extra: ['named color', 'hex'],
+    },
+    {
+        name: 'label_color',
+        description: 'Override label color',
+        extra: ['named color', 'hex'],
+    },
+    {
+        name: 'label',
+        description: 'Override label text',
+    },
+    {
+        name: 'scale',
+        description: 'Set badge scale',
+        extra: ['default: 1'],
+    },
+    {
+        name: 'theme',
+        description: 'Set color theme',
+        extra: ['default: badgen'],
+    },
+    {
+        name: 'cache',
+        description: 'Set cache duration',
+        extra: ['min: 300', 'default: 3600'],
+    }
 ]
 
 export default function Home() {
@@ -55,13 +79,22 @@ export default function Home() {
             {/* Query Parameters */}
             <div className="flex flex-col gap-4 flex-grow">
                 <h2 className="text-xl text-gray-700 font-bold">Query Parameters</h2>
-                <ul className="list-disc flex flex-col gap-2">
-                    {ApiParams.map(([name, description]) => (
+                <ul className="list-none flex flex-col gap-2">
+                    {ApiParams.map(({ name, description, extra }) => (
                         <li key={name} className="flex flex-wrap gap-2 items-center">
-                            <span className="bg-gray-100 rounded-sm text-gray-800 px-2 py-1 font-mono text-sm">
+                            <span className="bg-gray-100 rounded-md text-gray-800 px-2 py-1 font-mono text-sm">
                                 {name}
                             </span>
-                            <span>{description}</span>
+                            <span className="text-gray-800">{description}</span>
+                            {extra && (
+                                <div className="flex flex-wrap gap-1">
+                                    {extra.map(item => (
+                                        <div key={item} className="bg-gray-100 rounded-md text-gray-700 px-[0.33rem] py-[0.1rem] font-mono text-xs">
+                                            {item}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>

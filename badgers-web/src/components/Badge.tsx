@@ -15,12 +15,13 @@ export default function Badge({ label, status, color }: Props) {
             color,
         ]
 
-        return `${baseUrl}/${params.filter(Boolean).join('/')}`
+        return `${baseUrl}/${params.filter(Boolean).join('/').replace(/^[/]+/gm, '')}`
     }
 
     return (
-        <div className="">
-            <img loading="lazy" src={buildUrl()} alt={label} />
+        <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img decoding="async" loading="lazy" src={buildUrl()} alt={label} />
         </div>
     )
 }
