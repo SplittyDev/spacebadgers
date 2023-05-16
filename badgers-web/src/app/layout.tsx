@@ -1,4 +1,6 @@
+import Image from 'next/image'
 import Badge from './Badge'
+import Logo from './logo.png'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -19,10 +21,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="flex min-h-screen flex-col items-center py-4 md:p-16 gap-8">
             <header className="flex flex-col gap-4">
-                <h1 className="text-6xl font-bold text-center">
-                    Badge
-                    <span className="text-orange-500">rs</span>
-                </h1>
+                <div className="flex gap-4">
+                    <div className="w-[64px] h-[64px] rounded-full shadow-md">
+                        <Image alt="badgers.space Logo" src={Logo} width={256} height={256} />
+                    </div>
+                    <h1 className="text-6xl font-bold text-center">
+                        Badge
+                        <span className="text-orange-500">rs</span>
+                    </h1>
+                </div>
                 <div className="flex flex-col items-center justify-center">
                     Fast and clean SVG badges for your projects
                 </div>
