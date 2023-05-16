@@ -14,6 +14,15 @@
 - `badgers-worker`: Cloudflare worker
 - `badgers-web`: Web frontend for [badgers.space](https://badgers.space)
 
+## Environment Variables
+
+```dotenv
+NEXT_PUBLIC_API_PROTO = "http"          # Worker protocol
+NEXT_PUBLIC_API_HOST = "127.0.0.1:8787" # Worker host
+NEXT_PUBLIC_WEB_PROTO = "http"          # Web frontend protocol
+NEXT_PUBLIC_WEB_HOST = "127.0.0.1:3000" # Web frontend host
+GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges
+```
 
 ## Why
 

@@ -1,8 +1,9 @@
-import Image from 'next/image'
-import Badge from './Badge'
-import Logo from './logo.png'
-import './globals.css'
 import { Inter } from 'next/font/google'
+import Image from 'next/image'
+
+import Logo from './logo.png'
+
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

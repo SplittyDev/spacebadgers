@@ -16,8 +16,8 @@ export default function Home() {
 
         {/* API URL */}
         <div className="flex flex-wrap justify-center bg-gray-100 p-4 rounded-md font-mono text-sm text-center">
-            <span className="text-gray-400">{process.env.NEXT_PUBLIC_API_PROTO}://</span>
-            <span className="text-gray-700">{process.env.NEXT_PUBLIC_API_HOST}</span>
+            <span className="text-gray-400">{process.env.NEXT_PUBLIC_WEB_PROTO}://</span>
+            <span className="text-gray-700">{process.env.NEXT_PUBLIC_WEB_HOST}</span>
             <span className="text-gray-400">/</span>
             <span>badge</span>
             <span className="text-gray-400">/</span>
