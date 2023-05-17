@@ -19,7 +19,7 @@ export default function StaticBadge({ label, status, color }: Props) {
     }
 
     return (
-        <div>
+        <div className="flex justify-start items-start">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img decoding="async" loading="lazy" src={buildUrl()} alt={label} />
         </div>

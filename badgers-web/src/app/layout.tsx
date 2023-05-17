@@ -36,7 +36,19 @@ export default function RootLayout({
                         Fast and clean SVG badges for your projects
                     </div>
                 </header>
-                {children}
+                <div className="flex flex-col gap-8">
+                    {children}
+                    <footer className="flex flex-wrap justify-between gap-2 bg-gray-100 mx-4 px-4 py-2 rounded-md">
+                        <div className="text-sm">
+                            <span className="text-gray-600">
+                                Made with <span className="text-rose-500">♥</span> by <a target="_blank" className="text-gray-500 hover:text-amber-600" href="https://github.com/SplittyDev">Marco Quinten</a>.
+                            </span>
+                        </div>
+                        <div className="flex gap-4 text-sm">
+                            <a target="_blank" className="text-gray-500 hover:text-amber-600" href="https://github.com/splittydev/badgers">GitHub</a>
+                        </div>
+                    </footer>
+                </div>
             </div>
             <Analytics />
         </body>

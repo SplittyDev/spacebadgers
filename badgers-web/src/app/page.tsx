@@ -54,17 +54,17 @@ export default function Home() {
         </div>
 
         {/* Named Colors */}
-        <div className="flex flex-col gap-4 items-center">
-            <h2 className="text-xl text-gray-700 font-bold">Supported Colors</h2>
-            <div className="flex flex-col gap-1 items-center md:flex-row">
-                <div className="flex gap-1">
+        <div className="flex flex-col gap-4">
+            <h2 className="text-xl text-gray-700 font-bold self-start">Supported Colors</h2>
+            <div className="flex flex-col gap-1 items-start md:items-center md:flex-row">
+                <div className="flex gap-1 w-full">
                     <StaticBadge label="color" status="blue" color="blue" />
                     <StaticBadge label="color" status="cyan" color="cyan" />
                     <StaticBadge label="color" status="green" color="green" />
                     <StaticBadge label="color" status="yellow" color="yellow" />
                     <StaticBadge label="color" status="orange" color="orange" />
                 </div>
-                <div className="flex gap-1">
+                <div className="flex gap-1 w-full">
                     <StaticBadge label="color" status="red" color="red" />
                     <StaticBadge label="color" status="pink" color="pink" />
                     <StaticBadge label="color" status="purple" color="purple" />
