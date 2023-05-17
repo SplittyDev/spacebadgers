@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 badgers = { path = "../badgers" }
+clap = { version = "4.2.7", features = ["derive"] }
