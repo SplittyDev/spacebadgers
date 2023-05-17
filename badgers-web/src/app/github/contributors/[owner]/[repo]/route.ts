@@ -14,5 +14,5 @@ export async function GET(request: NextRequest, { params: { owner, repo } }: Par
         octokit => octokit.repos.listContributors({ owner, repo })
     )
     if (resp.data === undefined) return await Badge.error('github')
-    return Badge.generate('contributors', resp.data!.length.toString())
+    return await Badge.generate('contributors', resp.data!.length.toString())
 }
