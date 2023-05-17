@@ -24,6 +24,8 @@ type Props = {
 //     return isIntersecting
 // }
 
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 export default function BadgeEndpoint({ name, path, inject }: Props) {
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_WEB_PROTO
@@ -32,6 +34,7 @@ export default function BadgeEndpoint({ name, path, inject }: Props) {
         const injectables = path.split('/').filter((part) => part.startsWith(':'))
         const injectionTable = Object.fromEntries(injectables.map((part, i) => [part, inject[i]]))
         const examplePath = path.replace(/:[^/]+/g, (match) => injectionTable[match])
+        if (isDevelopment) return `${baseUrl}/${examplePath}?bust=${Date.now()}`
         return `${baseUrl}/${examplePath}`
     }
 

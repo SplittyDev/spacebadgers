@@ -38,6 +38,10 @@ export default class BadgeUtil {
         })
     }
 
+    static async error(subsystem: string): Promise<NextResponse> {
+        return await BadgeUtil.generate(subsystem, 'error', { color: 'gray' })
+    }
+
     static async passThrough(request: NextRequest): Promise<NextResponse> {
         const api = {
             proto: process.env.NEXT_PUBLIC_API_PROTO,

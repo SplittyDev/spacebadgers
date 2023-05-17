@@ -4,7 +4,7 @@ type Props = {
     color?: string
 }
 
-export default function Badge({ label, status, color }: Props) {
+export default function StaticBadge({ label, status, color }: Props) {
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_API_PROTO
         const host = process.env.NEXT_PUBLIC_API_HOST
@@ -15,7 +15,7 @@ export default function Badge({ label, status, color }: Props) {
             color,
         ]
 
-        return `${baseUrl}/${params.filter(Boolean).join('/').replace(/^[/]+/gm, '')}`
+        return `${baseUrl}/${params.filter(Boolean).join('/').replace(/^[/]+/gm, '')}?cache=86400`
     }
 
     return (

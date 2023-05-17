@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Badge, Section, ThemeStrip } from '@/components'
+import { StaticBadge, Section, ThemeStrip } from '@/components'
 import { BadgeEndpointRow as Row } from '@/components'
 
 const ApiParams = [
@@ -58,18 +58,18 @@ export default function Home() {
             <h2 className="text-xl text-gray-700 font-bold">Supported Colors</h2>
             <div className="flex flex-col gap-1 items-center md:flex-row">
                 <div className="flex gap-1">
-                    <Badge label="color" status="blue" color="blue" />
-                    <Badge label="color" status="cyan" color="cyan" />
-                    <Badge label="color" status="green" color="green" />
-                    <Badge label="color" status="yellow" color="yellow" />
-                    <Badge label="color" status="orange" color="orange" />
+                    <StaticBadge label="color" status="blue" color="blue" />
+                    <StaticBadge label="color" status="cyan" color="cyan" />
+                    <StaticBadge label="color" status="green" color="green" />
+                    <StaticBadge label="color" status="yellow" color="yellow" />
+                    <StaticBadge label="color" status="orange" color="orange" />
                 </div>
                 <div className="flex gap-1">
-                    <Badge label="color" status="red" color="red" />
-                    <Badge label="color" status="pink" color="pink" />
-                    <Badge label="color" status="purple" color="purple" />
-                    <Badge label="color" status="gray" color="gray" />
-                    <Badge label="color" status="black" color="black" />
+                    <StaticBadge label="color" status="red" color="red" />
+                    <StaticBadge label="color" status="pink" color="pink" />
+                    <StaticBadge label="color" status="purple" color="purple" />
+                    <StaticBadge label="color" status="gray" color="gray" />
+                    <StaticBadge label="color" status="black" color="black" />
                 </div>
             </div>
         </div>
@@ -164,6 +164,10 @@ export default function Home() {
                     <Row name="Issues" path="/github/issues/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                     <Row name="Open issues" path="/github/open-issues/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                     <Row name="Closed issues" path="/github/closed-issues/:owner/:repo" inject={['quintschaf', 'schafkit']} />
+                    <Row name="Checks (combined)" path="/github/checks/:owner/:repo" inject={['quintschaf', 'schafkit']} />
+                    <Row name="Checks (combined)" path="/github/checks/:owner/:repo/:branch" inject={['quintschaf', 'schafkit', 'master']} />
+                    <Row name="Checks (specific)" path="/github/checks/:owner/:repo/:branch/:check" inject={['quintschaf', 'schafkit', 'master', 'build']} />
+                    <Row name="Contributors" path="/github/contributors/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                 </div>
             </Section>
         </div>

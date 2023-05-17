@@ -1,4 +1,4 @@
-export { default as Badge } from './Badge'
+export { default as StaticBadge } from './StaticBadge'
 export { default as ThemeStrip } from './ThemeStrip'
 export { default as BadgeEndpointRow } from './BadgeEndpoint'
 export { default as Path } from './Path'

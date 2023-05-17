@@ -11,8 +11,8 @@ interface Params {
 
 export async function GET(request: NextRequest, { params: { owner, repo } }: Params) {
     const resp = await GitHub.wrapRequest(
-        octokit => octokit.issues.listForRepo({ owner, repo, state: 'all' })
+        octokit => octokit.repos.listContributors({ owner, repo })
     )
-    const issues = resp.data?.filter(issue => issue.pull_request === undefined)
-    return Badge.generate('issues', issues?.length?.toString() ?? 'None', )
+    if (resp.data === undefined) return await Badge.error('github')
+    return Badge.generate('contributors', resp.data!.length.toString())
 }
