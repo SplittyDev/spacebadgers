@@ -44,10 +44,8 @@ export default function BadgeEndpoint({ name, path, inject }: Props) {
             <div className="text-sm cursor-pointer">
                 <Path value={path} />
             </div>
-            <div className="pr-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img decoding="async" loading="lazy" src={buildUrl()} alt={path} />
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="w-[120px] object-left object-scale-down" decoding="async" loading="lazy" src={buildUrl()} alt={path} />
         </>
     )
 }
