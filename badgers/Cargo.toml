@@ -7,4 +7,6 @@ edition = "2021"
 
 [dependencies]
 htmlize = "1.0.2"
+
+[dev-dependencies]
 insta = "1.29.0"

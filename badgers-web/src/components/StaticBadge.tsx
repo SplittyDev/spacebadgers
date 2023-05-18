@@ -4,6 +4,8 @@ type Props = {
     color?: string
 }
 
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 export default function StaticBadge({ label, status, color }: Props) {
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_API_PROTO
@@ -14,8 +16,8 @@ export default function StaticBadge({ label, status, color }: Props) {
             status,
             color,
         ]
-
-        return `${baseUrl}/${params.filter(Boolean).join('/').replace(/^[/]+/gm, '')}?cache=86400`
+        const bustParam = isDevelopment ? `&bust=${Date.now()}` : ''
+        return `${baseUrl}/${params.filter(Boolean).join('/').replace(/^[/]+/gm, '')}?cache=86400${bustParam}`
     }
 
     return (
