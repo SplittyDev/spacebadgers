@@ -1,12 +1,12 @@
 {
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"scripts": {
-		"deploy": "wrangler publish",
+		"deploy": "wrangler deploy",
 		"dev": "wrangler dev --local"
 	},
 	"devDependencies": {
-		"wrangler": "^2.0.0"
+		"wrangler": "^3.0.0"
 	},
 	"packageManager": "yarn@3.5.1"
 }

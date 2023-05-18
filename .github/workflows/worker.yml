@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-    - main
+      - main
 
 env:
   CARGO_TERM_COLOR: always
@@ -18,25 +18,27 @@ jobs:
   test:
     runs-on: [ubuntu-latest]
     steps:
-    - uses: actions/checkout@v3
-    - run: rustup toolchain install stable --profile minimal
-    - name: cargo test
-      run: cargo test --release -p badgers-worker
-    - name: cargo test (doctests)
-      run: cargo test --release --doc -p badgers-worker
-  clippy:
+      - uses: actions/checkout@v3
+      - run: rustup toolchain install stable --profile default
+      - name: cargo test
+        run: cargo test --release -p badgers-worker
+      - name: cargo test (doctests)
+        run: cargo test --release --doc -p badgers-worker
+      - name: cargo clippy
+        run: cargo clippy -p badgers-worker
+      - name: rustfmt
+        run: cargo fmt -p badgers-worker --check
+  deploy:
+    needs: [test]
+    if: github.ref == 'refs/heads/main'
     runs-on: [ubuntu-latest]
     steps:
-    - uses: actions/checkout@v3
-    - run: rustup toolchain install stable --profile minimal
-    - run: rustup component add clippy
-    - name: cargo clippy
-      run: cargo clippy -p badgers-worker
-  rustfmt:
-    runs-on: [ubuntu-latest]
-    steps:
-    - uses: actions/checkout@v3
-    - run: rustup toolchain install stable --profile minimal
-    - run: rustup component add rustfmt
-    - name: rustfmt
-      run: cargo fmt -p badgers-worker --check
+      - uses: actions/checkout@v3
+      - run: rustup toolchain install stable --profile minimal
+      - run: yarn
+        working-directory: ./badgers-worker
+      - name: Deploy to Cloudflare
+        run: npx wrangler deploy
+        working-directory: ./badgers-worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
