@@ -2,9 +2,11 @@
 name = "spacebadgers"
 version = "1.0.0"
 edition = "2021"
+
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+authors.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

@@ -9,6 +9,7 @@ members = [
 license = "MIT"
 repository = "https://github.com/splittydev/badgers"
 homepage = "https://github.com/splittydev/badgers"
+authors = ["Marco Quinten <splittydev@gmail.com>"]
 
 [workspace.dependencies]
 spacebadgers = { path = "badgers" }
