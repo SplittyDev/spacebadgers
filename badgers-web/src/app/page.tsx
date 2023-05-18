@@ -168,6 +168,7 @@ export default function Home() {
                     <Row name="Checks (combined)" path="/github/checks/:owner/:repo/:branch" inject={['quintschaf', 'schafkit', 'master']} />
                     <Row name="Checks (specific)" path="/github/checks/:owner/:repo/:branch/:check" inject={['quintschaf', 'schafkit', 'master', 'build']} />
                     <Row name="Contributors" path="/github/contributors/:owner/:repo" inject={['quintschaf', 'schafkit']} />
+                    <Row name="License" path="/github/license/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                 </div>
             </Section>
         </div>
