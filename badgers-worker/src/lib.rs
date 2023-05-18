@@ -40,6 +40,8 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         let mut scale: Option<f32> = None;
         let mut theme: &'static ColorPalette = &color_palettes::BADGEN;
         let mut cache = DEFAULT_CACHE_DURATION;
+        let mut icon: Option<String> = None;
+        let mut icon_width: Option<u32> = None;
 
         // Parse query params
         if let Ok(options) = req.url().as_ref().map(|url| url.query_pairs()) {
@@ -50,6 +52,8 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
                     "color" => color = Some(value.into_owned()),
                     "scale" => scale = value.parse().ok(),
                     "cache" => cache = value.parse().unwrap_or(cache),
+                    "icon" => icon = Some(value.into_owned()),
+                    "icon_width" => icon_width = value.parse().ok(),
                     "theme" => {
                         theme = match value.as_ref() {
                             "badgen" => &color_palettes::BADGEN,
@@ -86,6 +90,8 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             .color_option(color)
             .scale(scale.unwrap_or(1.0))
             .color_palette(Cow::Borrowed(theme))
+            .icon_option(icon)
+            .icon_width_option(icon_width)
             .build()
             .svg();
 
