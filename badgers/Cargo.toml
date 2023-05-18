@@ -2,6 +2,7 @@
 name = "spacebadgers"
 version = "1.0.0"
 edition = "2021"
+description = "Fast SVG badge generator"
 
 license.workspace = true
 repository.workspace = true

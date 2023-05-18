@@ -2,6 +2,7 @@
 name = "badgers-cli"
 version = "0.1.0"
 edition = "2021"
+description = "Command-line SVG badge generation"
 
 license.workspace = true
 repository.workspace = true
