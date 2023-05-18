@@ -4,7 +4,7 @@
 
 # Badgers - Fast SVG Badges
 
-[![](https://badgers.space/badge/visit/badgers.space/orange)](https://badgers.space)
+[![](https://badgers.space/badge/live%20instance/badgers.space/orange?icon=https://badgers.space/favicon.ico)](https://badgers.space)
 [![](https://badgers.space/github/license/splittydev/badgers)](./LICENSE)
 
 > Yes, badgers is an ingenious name. It contains the word badge, is similar to [badgen](https://badgen.net) (a popular badge generation service), includes the `-rs` suffix 🦀 and it's an actual word! Badgers are awesome animals. And they're also the mascot of the [University of Wisconsin-Madison](https://en.wikipedia.org/wiki/Wisconsin_Badgers). I don't know why I'm telling you this, I don't even live in the US. But hey, the more you know.
@@ -14,17 +14,68 @@
 ## Project Structure
 
 - `badgers`: Core badgers library
+- `badgers-cli`: CLI for generating SVG badges
 - `badgers-worker`: Cloudflare worker
 - `badgers-web`: Web frontend for [badgers.space](https://badgers.space)
 
-## Environment Variables
+## Development
 
-```dotenv
+### Environment Variables
+> Paste this template into `badgers-web/.env.local`
+
+```py
 NEXT_PUBLIC_API_PROTO = "http"          # Worker protocol
 NEXT_PUBLIC_API_HOST = "127.0.0.1:8787" # Worker host
 NEXT_PUBLIC_WEB_PROTO = "http"          # Web frontend protocol
 NEXT_PUBLIC_WEB_HOST = "127.0.0.1:3000" # Web frontend host
 GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges
+```
+
+### badgers
+> Requires: cargo
+
+#### Running tests
+
+```bash
+cargo test -p badgers
+```
+
+### badgers-worker
+> Requires: cargo, npm/yarn
+
+#### Running locally
+
+```bash
+cd badgers-worker
+npm run dev         # If you're using npm
+yarn dev            # If you're using yarn
+```
+
+#### Deploying to Cloudflare
+
+```bash
+cd badgers-worker
+npm run deploy      # If you're using npm
+yarn deploy         # If you're using yarn
+```
+
+### badgers-web
+> Requires: npm/yarn
+
+#### Installing dependencies
+
+```bash
+cd badgers-web
+npm install         # If you're using npm
+yarn                # If you're using yarn
+```
+
+#### Running locally
+
+```bash
+cd badgers-web
+npm run dev     # If you're using npm
+yarn dev        # If you're using yarn
 ```
 
 ## Why
