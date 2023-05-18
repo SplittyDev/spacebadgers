@@ -2,9 +2,14 @@
 name = "badgers-cli"
 version = "0.1.0"
 edition = "2021"
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-spacebadgers = { path = "../badgers" }
 clap = { version = "4.2.7", features = ["derive"] }
+
+[dependencies.spacebadgers]
+workspace = true

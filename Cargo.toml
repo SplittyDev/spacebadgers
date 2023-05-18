@@ -4,3 +4,15 @@ members = [
     "badgers-cli",
     "badgers-worker"
 ]
+
+[workspace.package]
+license = "MIT"
+repository = "https://github.com/splittydev/badgers"
+homepage = "https://github.com/splittydev/badgers"
+
+[workspace.dependencies]
+spacebadgers = { path = "badgers" }
+
+[profile.release.package.badgers-worker]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"

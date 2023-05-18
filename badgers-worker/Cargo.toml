@@ -1,7 +1,10 @@
 [package]
 name = "badgers-worker"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -10,18 +13,15 @@ crate-type = ["cdylib", "rlib"]
 default = ["console_error_panic_hook"]
 
 [dependencies]
-spacebadgers = { path = "../badgers" }
+urlencoding = "2.1.2"
 worker = "0.0.16"
 cfg-if = "1.0.0"
-serde_json = "1.0.96"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
 # all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
 # code size when deploying.
 console_error_panic_hook = { version = "0.1.7", optional = true }
-urlencoding = "2.1.2"
 
-[profile.release]
-# Tell `rustc` to optimize for small code size.
-opt-level = "s"
+[dependencies.spacebadgers]
+workspace = true
