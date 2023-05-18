@@ -1,0 +1,42 @@
+name: Spacebadgers Library
+
+on:
+  pull_request:
+  push:
+    branches:
+    - main
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+  RUST_BACKTRACE: short
+  RUSTDOCFLAGS: -Dwarnings
+
+jobs:
+  test:
+    runs-on: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v3
+    - run: rustup toolchain install stable --profile minimal
+    - name: cargo test
+      run: cargo test --release -p spacebadgers
+    - name: cargo test (doctests)
+      run: cargo test --release --doc -p spacebadgers
+  clippy:
+    runs-on: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v3
+    - run: rustup toolchain install stable --profile minimal
+    - run: rustup component add clippy
+    - name: cargo clippy
+      run: cargo clippy -p spacebadgers
+  rustfmt:
+    runs-on: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v3
+    - run: rustup toolchain install stable --profile minimal
+    - run: rustup component add rustfmt
+    - name: rustfmt
+      run: cargo fmt -p spacebadgers --check
