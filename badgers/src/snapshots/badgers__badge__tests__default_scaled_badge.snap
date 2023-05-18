@@ -1,0 +1,5 @@
+---
+source: badgers/src/badge.rs
+expression: "Badge {\n        color_palette: Cow::Borrowed(&color_palettes::BADGEN),\n        status: \"foo\".into(),\n        label: Some(\"bar\".into()),\n        color: None,\n        label_color: None,\n        icon: None,\n        icon_width: None,\n        scale: 5.0,\n    }.svg()"
+---
+"<svg\n    width=\"277.5\"\n    height=\"100\"\n    viewBox=\"0 0 555 200\"\n    xmlns=\"http://www.w3.org/2000/svg\" \n    role=\"img\">\n    <title>bar: foo</title>\n    <g>\n        <rect fill=\"#555\" width=\"282\" height=\"200\" />\n        <rect fill=\"#08c\" x=\"282\" width=\"273\" height=\"200\" />\n    </g>\n    <g aria-hidden=\"true\" fill=\"#fff\" text-anchor=\"start\" font-family=\"Verdana,DejaVu Sans,sans-serif\" font-size=\"110\">\n        <text x=\"60\" y=\"148\" textLength=\"182\" fill=\"#000\" opacity=\"0.1\">bar</text>\n        <text x=\"50\" y=\"138\" textLength=\"182\">bar</text>\n        <text x=\"337\" y=\"148\" textLength=\"173\" fill=\"#000\" opacity=\"0.1\">foo</text>\n        <text x=\"327\" y=\"138\" textLength=\"173\">foo</text>\n    </g>\n</svg>"

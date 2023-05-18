@@ -37,15 +37,27 @@ impl BadgeBuilder {
         self
     }
 
+    /// Set the label text.
+    pub fn label(mut self, label: impl Into<Cow<'static, str>>) -> Self {
+        self.label = Some(label.into());
+        self
+    }
+
+    /// Set an optional label text.
+    pub fn label_option(mut self, label: Option<impl Into<Cow<'static, str>>>) -> Self {
+        self.label = label.map(Into::into);
+        self
+    }
+
     /// Set the status text.
     pub fn status(mut self, status: impl Into<Cow<'static, str>>) -> Self {
         self.status = Some(status.into());
         self
     }
 
-    /// Set the label text.
-    pub fn label(mut self, label: impl Into<Cow<'static, str>>) -> Self {
-        self.label = Some(label.into());
+    /// Set an optional status text.
+    pub fn status_option(mut self, status: Option<impl Into<Cow<'static, str>>>) -> Self {
+        self.status = status.map(Into::into);
         self
     }
 
@@ -76,6 +88,30 @@ impl BadgeBuilder {
     /// Set the badge scale.
     pub fn scale(mut self, scale: f32) -> Self {
         self.scale = scale;
+        self
+    }
+
+    /// Set the icon.
+    pub fn icon(mut self, icon: impl Into<Cow<'static, str>>) -> Self {
+        self.icon = Some(icon.into());
+        self
+    }
+
+    /// Set an optional icon.
+    pub fn icon_option(mut self, icon: Option<impl Into<Cow<'static, str>>>) -> Self {
+        self.icon = icon.map(Into::into);
+        self
+    }
+
+    /// Set the icon width.
+    pub fn icon_width(mut self, icon_width: u32) -> Self {
+        self.icon_width = Some(icon_width);
+        self
+    }
+
+    /// Set an optional icon width.
+    pub fn icon_width_option(mut self, icon_width: Option<u32>) -> Self {
+        self.icon_width = icon_width;
         self
     }
 
