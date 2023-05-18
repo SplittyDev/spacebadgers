@@ -6,8 +6,10 @@ use clap::Parser;
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
 struct App {
-    label: String,
-    status: String,
+    #[clap(long = "label")]
+    label: Option<String>,
+    #[clap(long = "status")]
+    status: Option<String>,
     #[clap(long = "theme", default_value = "badgen")]
     theme: String,
     #[clap(long = "color")]
@@ -18,22 +20,34 @@ struct App {
     scale: f32,
     #[clap(long = "out")]
     output_file: Option<PathBuf>,
+    #[clap(long = "icon")]
+    icon: Option<String>,
+    #[clap(long = "icon-width")]
+    icon_width: Option<u32>,
 }
 
 fn main() {
     let app = App::parse();
+
+    if app.label.is_none() && app.icon.is_none() {
+        eprintln!("Either --label or --icon must be specified");
+        std::process::exit(1);
+    }
+
     let color_palette = match app.theme.as_ref() {
         "tailwind" => color_palettes::TAILWIND,
         _ => color_palettes::BADGEN,
     };
 
     let svg = BadgeBuilder::new()
-        .label(Cow::Owned(app.label))
-        .status(Cow::Owned(app.status))
+        .label_option(app.label.map(Cow::Owned))
+        .status_option(app.status.map(Cow::Owned))
         .color_palette(Cow::Owned(color_palette))
         .color_option(app.color.map(Cow::Owned))
         .label_color_option(app.label_color.map(Cow::Owned))
         .scale(app.scale)
+        .icon_option(app.icon)
+        .icon_width_option(app.icon_width)
         .build()
         .svg();
 

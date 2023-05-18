@@ -79,7 +79,7 @@ impl Badge {
         <rect fill="{color}" x="{sb_rect_width}" width="{st_rect_width}" height="200" />
     </g>
     <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
-        <text x="{sb_text_start_2}" y="148" textLength="{sb_text_width}" fill="#000" opacity="0.1">{label}</text>
+        <text x="{label_shadow_start}" y="148" textLength="{sb_text_width}" fill="#000" opacity="0.1">{label}</text>
         <text x="{sb_text_start}" y="138" textLength="{sb_text_width}">{label}</text>
         <text x="{sb_rect_width_2}" y="148" textLength="{st_text_width}" fill="#000" opacity="0.1">{status}</text>
         <text x="{sb_rect_width_3}" y="138" textLength="{st_text_width}">{status}</text>
@@ -87,9 +87,87 @@ impl Badge {
 </svg>"##,
             svg_width = self.scale * width / 10.0,
             svg_height = self.scale * 20.0,
-            sb_text_start_2 = sb_text_start + 10.0,
+            label_shadow_start = sb_text_start + 10.0,
             sb_rect_width_2 = sb_rect_width + 55.0,
             sb_rect_width_3 = sb_rect_width + 45.0,
         );
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::borrow::Cow;
+
+    use crate::color_palettes;
+    use super::Badge;
+
+    #[test]
+    fn test_default_badge() {
+        insta::assert_debug_snapshot!(Badge {
+            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            status: "foo".into(),
+            label: Some("bar".into()),
+            color: None,
+            label_color: None,
+            icon: None,
+            icon_width: None,
+            scale: 1.0,
+        }.svg());
+    }
+
+    #[test]
+    fn test_colored_badge() {
+        insta::assert_debug_snapshot!(Badge {
+            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            status: "passing".into(),
+            label: Some("checks".into()),
+            color: Some("green".into()),
+            label_color: Some("gray".into()),
+            icon: None,
+            icon_width: None,
+            scale: 1.0,
+        }.svg());
+    }
+
+    #[test]
+    fn test_default_scaled_badge() {
+        insta::assert_debug_snapshot!(Badge {
+            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            status: "foo".into(),
+            label: Some("bar".into()),
+            color: None,
+            label_color: None,
+            icon: None,
+            icon_width: None,
+            scale: 5.0,
+        }.svg());
+    }
+
+    #[test]
+    fn test_colored_scaled_badge() {
+        insta::assert_debug_snapshot!(Badge {
+            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            status: "passing".into(),
+            label: Some("checks".into()),
+            color: Some("green".into()),
+            label_color: Some("gray".into()),
+            icon: None,
+            icon_width: None,
+            scale: 5.0,
+        }.svg());
+    }
+
+    #[test]
+    fn test_icon_badge() {
+        insta::assert_debug_snapshot!(Badge {
+            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            status: "Quintschaf".into(),
+            label: None,
+            color: None,
+            label_color: None,
+            icon: Some("https://quintschaf.com/favicon.ico".into()),
+            icon_width: None,
+            scale: 1.0,
+        }.svg());
     }
 }
