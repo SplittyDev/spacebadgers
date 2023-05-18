@@ -69,29 +69,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
 
 [[package]]
-name = "badgers"
-version = "0.1.0"
-dependencies = [
- "htmlize",
- "insta",
-]
-
-[[package]]
 name = "badgers-cli"
 version = "0.1.0"
 dependencies = [
- "badgers",
  "clap",
+ "spacebadgers",
 ]
 
 [[package]]
 name = "badgers-worker"
 version = "0.1.0"
 dependencies = [
- "badgers",
  "cfg-if",
  "console_error_panic_hook",
  "serde_json",
+ "spacebadgers",
  "urlencoding",
  "worker",
 ]
@@ -718,6 +710,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6528351c9bc8ab22353f9d776db39a20288e8d6c37ef8cfe3317cf875eecfc2d"
 dependencies = [
  "autocfg",
+]
+
+[[package]]
+name = "spacebadgers"
+version = "1.0.0"
+dependencies = [
+ "htmlize",
+ "insta",
 ]
 
 [[package]]

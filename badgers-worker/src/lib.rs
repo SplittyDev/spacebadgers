@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 
 use worker::*;
-use badgers::{BadgeBuilder, ColorPalette, color_palettes};
+use spacebadgers::{BadgeBuilder, ColorPalette, color_palettes};
 
 mod utils;
 
@@ -38,7 +38,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         // Initialize query params
         let mut label_color: Option<String> = None;
         let mut scale: Option<f32> = None;
-        let mut theme: &'static ColorPalette = &color_palettes::BADGEN;
+        let mut theme: ColorPalette = color_palettes::BADGEN;
         let mut cache = DEFAULT_CACHE_DURATION;
         let mut icon: Option<String> = None;
         let mut icon_width: Option<u32> = None;
@@ -54,13 +54,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
                     "cache" => cache = value.parse().unwrap_or(cache),
                     "icon" => icon = Some(value.into_owned()),
                     "icon_width" => icon_width = value.parse().ok(),
-                    "theme" => {
-                        theme = match value.as_ref() {
-                            "badgen" => &color_palettes::BADGEN,
-                            "tailwind" => &color_palettes::TAILWIND,
-                            _ => theme,
-                        }
-                    },
+                    "theme" => theme = ColorPalette::from_name(&value).into_owned(),
                     _ => (),
                 }
             }
@@ -85,13 +79,13 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         // Build badge svg
         let badge = BadgeBuilder::new()
             .label(label)
-            .label_color_option(label_color)
+            .optional_label_color(label_color)
             .status(status)
-            .color_option(color)
+            .optional_color(color)
             .scale(scale.unwrap_or(1.0))
-            .color_palette(Cow::Borrowed(theme))
-            .icon_option(icon)
-            .icon_width_option(icon_width)
+            .color_palette(Cow::Owned(theme))
+            .optional_icon(icon)
+            .optional_icon_width(icon_width)
             .build()
             .svg();
 

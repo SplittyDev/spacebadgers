@@ -6,5 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-badgers = { path = "../badgers" }
+spacebadgers = { path = "../badgers" }
 clap = { version = "4.2.7", features = ["derive"] }

@@ -5,6 +5,7 @@ use crate::{
     util::calculate_width,
 };
 
+/// Badge generator.
 pub struct Badge {
     pub(crate) color_palette: Cow<'static, ColorPalette>,
     pub(crate) status: Cow<'static, str>,
@@ -24,6 +25,7 @@ impl Badge {
        return format!("{prefix}{status}", status = self.status);
     }
 
+    /// Generate an SVG badge.
     pub fn svg(&self) -> String {
         let label_padding: f32 = 50.0;
         let status_padding: f32 = 50.0;

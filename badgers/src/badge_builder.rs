@@ -44,7 +44,7 @@ impl BadgeBuilder {
     }
 
     /// Set an optional label text.
-    pub fn label_option(mut self, label: Option<impl Into<Cow<'static, str>>>) -> Self {
+    pub fn optional_label(mut self, label: Option<impl Into<Cow<'static, str>>>) -> Self {
         self.label = label.map(Into::into);
         self
     }
@@ -56,7 +56,7 @@ impl BadgeBuilder {
     }
 
     /// Set an optional status text.
-    pub fn status_option(mut self, status: Option<impl Into<Cow<'static, str>>>) -> Self {
+    pub fn optional_status(mut self, status: Option<impl Into<Cow<'static, str>>>) -> Self {
         self.status = status.map(Into::into);
         self
     }
@@ -68,7 +68,7 @@ impl BadgeBuilder {
     }
 
     /// Set an optional color.
-    pub fn color_option(mut self, color: Option<impl Into<Cow<'static, str>>>) -> Self {
+    pub fn optional_color(mut self, color: Option<impl Into<Cow<'static, str>>>) -> Self {
         self.color = color.map(Into::into);
         self
     }
@@ -80,7 +80,7 @@ impl BadgeBuilder {
     }
 
     /// Set an optional label color.
-    pub fn label_color_option(mut self, label_color: Option<impl Into<Cow<'static, str>>>) -> Self {
+    pub fn optional_label_color(mut self, label_color: Option<impl Into<Cow<'static, str>>>) -> Self {
         self.label_color = label_color.map(Into::into);
         self
     }
@@ -98,7 +98,7 @@ impl BadgeBuilder {
     }
 
     /// Set an optional icon.
-    pub fn icon_option(mut self, icon: Option<impl Into<Cow<'static, str>>>) -> Self {
+    pub fn optional_icon(mut self, icon: Option<impl Into<Cow<'static, str>>>) -> Self {
         self.icon = icon.map(Into::into);
         self
     }
@@ -110,7 +110,7 @@ impl BadgeBuilder {
     }
 
     /// Set an optional icon width.
-    pub fn icon_width_option(mut self, icon_width: Option<u32>) -> Self {
+    pub fn optional_icon_width(mut self, icon_width: Option<u32>) -> Self {
         self.icon_width = icon_width;
         self
     }

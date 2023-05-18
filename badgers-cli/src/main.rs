@@ -1,6 +1,6 @@
 use std::{borrow::Cow, fs::File, io::Write, path::PathBuf};
 
-use badgers::{color_palettes, BadgeBuilder};
+use spacebadgers::{BadgeBuilder, ColorPalette};
 use clap::Parser;
 
 #[derive(Debug, Parser)]
@@ -34,20 +34,17 @@ fn main() {
         std::process::exit(1);
     }
 
-    let color_palette = match app.theme.as_ref() {
-        "tailwind" => color_palettes::TAILWIND,
-        _ => color_palettes::BADGEN,
-    };
+    let color_palette = ColorPalette::from_name(&app.theme);
 
     let svg = BadgeBuilder::new()
-        .label_option(app.label.map(Cow::Owned))
-        .status_option(app.status.map(Cow::Owned))
-        .color_palette(Cow::Owned(color_palette))
-        .color_option(app.color.map(Cow::Owned))
-        .label_color_option(app.label_color.map(Cow::Owned))
+        .optional_label(app.label.map(Cow::Owned))
+        .optional_status(app.status.map(Cow::Owned))
+        .color_palette(color_palette)
+        .optional_color(app.color.map(Cow::Owned))
+        .optional_label_color(app.label_color.map(Cow::Owned))
         .scale(app.scale)
-        .icon_option(app.icon)
-        .icon_width_option(app.icon_width)
+        .optional_icon(app.icon)
+        .optional_icon_width(app.icon_width)
         .build()
         .svg();
 

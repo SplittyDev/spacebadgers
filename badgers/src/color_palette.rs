@@ -1,7 +1,9 @@
 use std::borrow::Cow;
 
+/// Badge color palette.
 #[derive(Debug, Clone)]
 pub struct ColorPalette {
+    name: &'static str,
     default_label: &'static str,
     default_status: &'static str,
     black: &'static str,
@@ -18,14 +20,22 @@ pub struct ColorPalette {
 }
 
 impl ColorPalette {
+    /// Get the name of the color palette.
+    pub fn name(&self) -> &'static str {
+        self.name
+    }
+
+    /// Get the default status background color.
     pub fn default_color(&self) -> &'static str {
         self.default_status
     }
 
+    /// Get the default label background color.
     pub fn default_label_color(&self) -> &'static str {
         self.default_label
     }
 
+    /// Resolve a color string to a color value. Supports named colors and hex colors.
     pub fn resolve_color_string(&self, color: &str) -> Option<Cow<'static, str>> {
         match color {
             // Handle supported color names
@@ -46,12 +56,33 @@ impl ColorPalette {
             _ => None,
         }
     }
+
+    /// Get a [ColorPalette] by name.
+    ///
+    /// If the desired palette is not found, the default palette is returned.
+    pub fn from_name(name: &str) -> Cow<'static, ColorPalette> {
+        palettes::ALL.iter()
+            .find(|p| p.name == name)
+            .map(|palette| Cow::Borrowed(*palette))
+            .unwrap_or_else(|| {
+                eprintln!(
+                    "Warning: color palette '{}' not found, using default",
+                    name
+                );
+                Cow::Borrowed(&palettes::BADGEN)
+            })
+    }
 }
 
 pub mod palettes {
     use super::ColorPalette;
 
+    /// All available color palettes.
+    pub const ALL: &[&ColorPalette] = &[&BADGEN, &TAILWIND];
+
+    /// The same color palette used by [badgen.net](https://badgen.net).
     pub const BADGEN: ColorPalette = ColorPalette {
+        name: "badgen",
         default_label: "#555", // dark gray
         default_status: "#08c", // blue
         black: "#2a2a2a",
@@ -67,7 +98,9 @@ pub mod palettes {
         purple: "#94e",
     };
 
+    /// A color palette based on [Tailwind CSS](https://tailwindcss.com) colors.
     pub const TAILWIND: ColorPalette = ColorPalette {
+        name: "tailwind",
         default_label: "#334155",
         default_status: "#f97316",
         black: "#030712",
