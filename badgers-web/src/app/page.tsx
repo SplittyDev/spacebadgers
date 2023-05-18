@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import { StaticBadge, Section, ThemeStrip } from '@/components'
 import { BadgeEndpointRow as Row } from '@/components'
 
@@ -17,6 +15,7 @@ const ApiParams = [
     {
         name: 'label',
         description: 'Override label text',
+        extra: ['string'],
     },
     {
         name: 'scale',
@@ -27,6 +26,16 @@ const ApiParams = [
         name: 'theme',
         description: 'Set color theme',
         extra: ['default: badgen'],
+    },
+    {
+        name: 'icon',
+        description: 'Set label icon',
+        extra: ['image url'],
+    },
+    {
+        name: 'icon_width',
+        description: 'Set icon width',
+        extra: ['number'],
     },
     {
         name: 'cache',
@@ -87,7 +96,7 @@ export default function Home() {
                             </span>
                             <span className="text-gray-800">{description}</span>
                             {extra && (
-                                <div className="flex flex-wrap gap-1">
+                                <div className="flex flex-wrap gap-1 items-center">
                                     {extra.map(item => (
                                         <div key={item} className="bg-gray-100 rounded-md text-gray-700 px-[0.33rem] py-[0.1rem] font-mono text-xs">
                                             {item}
