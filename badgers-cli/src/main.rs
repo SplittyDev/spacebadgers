@@ -1,7 +1,7 @@
 use std::{borrow::Cow, fs::File, io::Write, path::PathBuf};
 
-use spacebadgers::{BadgeBuilder, ColorPalette};
 use clap::Parser;
+use spacebadgers::{BadgeBuilder, ColorPalette};
 
 #[derive(Debug, Parser)]
 #[command(author, version, about, long_about = None)]
@@ -53,7 +53,7 @@ fn main() {
             .write(true)
             .create(true)
             .truncate(true)
-            .open(&path)
+            .open(path)
             .expect("Unable to open output file");
         file.write_all(&svg.into_bytes())
             .expect("Unable to write to output file");

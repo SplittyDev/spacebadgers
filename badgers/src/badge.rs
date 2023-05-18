@@ -1,9 +1,6 @@
 use std::borrow::Cow;
 
-use crate::{
-    ColorPalette,
-    util::calculate_width,
-};
+use crate::{util::calculate_width, ColorPalette};
 
 /// Badge generator.
 pub struct Badge {
@@ -19,10 +16,12 @@ pub struct Badge {
 
 impl Badge {
     fn accessible_text(&self) -> String {
-       let prefix = self.label.as_ref()
-        .map(|label| format!("{label}: "))
-        .unwrap_or_default();
-       return format!("{prefix}{status}", status = self.status);
+        let prefix = self
+            .label
+            .as_ref()
+            .map(|label| format!("{label}: "))
+            .unwrap_or_default();
+        format!("{prefix}{status}", status = self.status)
     }
 
     /// Generate an SVG badge.
@@ -34,16 +33,25 @@ impl Badge {
 
         // Space between icon and text
         let actual_icon_gap = {
-            let label_is_empty = self.label.as_ref().map(|s| s.chars().count()).unwrap_or_default() == 0;
-            (self.icon.is_some() && !label_is_empty).then(|| icon_gap).unwrap_or_default()
+            let label_is_empty = self
+                .label
+                .as_ref()
+                .map(|s| s.chars().count())
+                .unwrap_or_default()
+                == 0;
+            (self.icon.is_some() && !label_is_empty)
+                .then_some(icon_gap)
+                .unwrap_or_default()
         };
 
         // Calculate icon and text widths
         let icon_width = self.icon_width.unwrap_or(13) * 10;
-        let actual_icon_width = self.icon.is_some().then(|| icon_width).unwrap_or_default();
-        let label_text_width = self.label.as_ref()
-            .map(|label| calculate_width(label))
+        let actual_icon_width = self
+            .icon
+            .is_some()
+            .then_some(icon_width)
             .unwrap_or_default();
+        let label_text_width = self.label.as_ref().map(calculate_width).unwrap_or_default();
         let status_text_width = calculate_width(self.status.as_ref());
         let label_full_width = label_text_width + actual_icon_width as f32 + actual_icon_gap;
 
@@ -65,23 +73,31 @@ impl Badge {
         let badge_scaled_height = self.scale * 20.0;
 
         // Evaluate badge parameters
-        let color = self.color.as_ref()
+        let color = self
+            .color
+            .as_ref()
             .and_then(|color| self.color_palette.resolve_color_string(color.as_ref()))
             .or_else(|| self.color.clone())
             .unwrap_or_else(|| self.color_palette.default_color().into());
-        let label_color = self.label_color.as_ref()
+        let label_color = self
+            .label_color
+            .as_ref()
             .and_then(|color| self.color_palette.resolve_color_string(color.as_ref()))
             .or_else(|| self.label_color.clone())
             .unwrap_or_else(|| self.color_palette.default_label_color().into());
-        let label = self.label.as_ref()
+        let label = self
+            .label
+            .as_ref()
             .map(|str| htmlize::escape_text(str.as_ref()))
             .unwrap_or_default();
         let status = htmlize::escape_text(self.status.as_ref());
         let accessible_text = self.accessible_text();
 
         // Build additional svg
-        let xlink = self.icon.is_some()
-            .then(|| " xmlns:xlink=\"http://www.w3.org/1999/xlink\"")
+        let xlink = self
+            .icon
+            .is_some()
+            .then_some(" xmlns:xlink=\"http://www.w3.org/1999/xlink\"")
             .unwrap_or_default();
         let icon_markup = self.icon.as_ref().map(|icon| {
             format!(r#"<image x="{icon_start}" y="35" width="{icon_width}" height="132" xlink:href="{icon}" />"#)
@@ -105,7 +121,7 @@ r##"
 {icon_markup}
 </svg>
 "##
-        ).trim().replace("\n", "");
+        ).trim().replace('\n', "");
     }
 }
 
@@ -113,8 +129,8 @@ r##"
 mod tests {
     use std::borrow::Cow;
 
-    use crate::color_palettes;
     use super::Badge;
+    use crate::color_palettes;
 
     #[test]
     fn test_default_badge() {
@@ -127,7 +143,8 @@ mod tests {
             icon: None,
             icon_width: None,
             scale: 1.0,
-        }.svg());
+        }
+        .svg());
     }
 
     #[test]
@@ -141,7 +158,8 @@ mod tests {
             icon: None,
             icon_width: None,
             scale: 1.0,
-        }.svg());
+        }
+        .svg());
     }
 
     #[test]
@@ -155,7 +173,8 @@ mod tests {
             icon: None,
             icon_width: None,
             scale: 5.0,
-        }.svg());
+        }
+        .svg());
     }
 
     #[test]
@@ -169,7 +188,8 @@ mod tests {
             icon: None,
             icon_width: None,
             scale: 5.0,
-        }.svg());
+        }
+        .svg());
     }
 
     #[test]
@@ -183,6 +203,7 @@ mod tests {
             icon: Some("https://quintschaf.com/favicon.ico".into()),
             icon_width: None,
             scale: 1.0,
-        }.svg());
+        }
+        .svg());
     }
 }

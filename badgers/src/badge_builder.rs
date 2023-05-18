@@ -80,7 +80,10 @@ impl BadgeBuilder {
     }
 
     /// Set an optional label color.
-    pub fn optional_label_color(mut self, label_color: Option<impl Into<Cow<'static, str>>>) -> Self {
+    pub fn optional_label_color(
+        mut self,
+        label_color: Option<impl Into<Cow<'static, str>>>,
+    ) -> Self {
         self.label_color = label_color.map(Into::into);
         self
     }
@@ -127,5 +130,11 @@ impl BadgeBuilder {
             icon_width: self.icon_width,
             scale: self.scale,
         }
+    }
+}
+
+impl Default for BadgeBuilder {
+    fn default() -> Self {
+        Self::new()
     }
 }

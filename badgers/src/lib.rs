@@ -15,11 +15,11 @@
 //! println!("{}", badge_svg);
 //! ```
 
-mod width;
 mod badge;
 mod badge_builder;
 mod color_palette;
 mod util;
+mod width;
 
 pub use badge::Badge;
 pub use badge_builder::BadgeBuilder;

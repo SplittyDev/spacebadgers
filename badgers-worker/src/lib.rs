@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 
+use spacebadgers::{color_palettes, BadgeBuilder, ColorPalette};
 use worker::*;
-use spacebadgers::{BadgeBuilder, ColorPalette, color_palettes};
 
 mod utils;
 
@@ -25,7 +25,12 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         let mut headers = Headers::new();
         headers.set("Encoding", "UTF-8").ok()?;
         headers.set("Content-Type", "image/svg+xml").ok()?;
-        headers.set("Cache-Control", &format!("public, max-age={cache_duration}, immutable")).ok()?;
+        headers
+            .set(
+                "Cache-Control",
+                &format!("public, max-age={cache_duration}, immutable"),
+            )
+            .ok()?;
         Some(headers)
     }
 
