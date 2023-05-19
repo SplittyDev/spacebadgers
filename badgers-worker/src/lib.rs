@@ -3,6 +3,7 @@ use std::borrow::Cow;
 use spacebadgers::{color_palettes, BadgeBuilder, ColorPalette};
 use worker::*;
 
+mod icon;
 mod utils;
 
 const DEFAULT_CACHE_DURATION: u32 = 3600; // 1 hour
@@ -34,7 +35,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         Some(headers)
     }
 
-    fn handle_badge_route(req: Request, ctx: RouteContext<()>) -> worker::Result<Response> {
+    async fn handle_badge_route(req: Request, ctx: RouteContext<()>) -> worker::Result<Response> {
         // Get path params
         let mut label = ctx.param("label").cloned();
         let mut color = ctx.param("color").cloned();
@@ -81,6 +82,13 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             None => return Response::error("Missing status in url path.", 400),
         };
 
+        // Fetch icon as base64
+        let fetched_icon = if let Some(icon) = icon {
+            icon::Icon::new(&icon).fetch_as_data().await
+        } else {
+            None
+        };
+
         // Build badge svg
         let badge = BadgeBuilder::new()
             .label(label)
@@ -89,7 +97,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             .optional_color(color)
             .scale(scale.unwrap_or(1.0))
             .color_palette(Cow::Owned(theme))
-            .optional_icon(icon)
+            .optional_icon(fetched_icon)
             .optional_icon_width(icon_width)
             .build()
             .svg();
@@ -105,8 +113,8 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
     }
 
     Router::new()
-        .get("/badge/:label/:status/:color", handle_badge_route)
-        .get("/badge/:label/:status", handle_badge_route)
+        .get_async("/badge/:label/:status/:color", handle_badge_route)
+        .get_async("/badge/:label/:status", handle_badge_route)
         .run(req, env)
         .await
 }
