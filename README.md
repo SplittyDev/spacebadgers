@@ -7,6 +7,7 @@
 [![](https://badgers.space/badge/live%20instance/badgers.space)](https://badgers.space)
 [![](https://badgers.space/github/license/splittydev/badgers)](./LICENSE)
 [![](https://badgers.space/badge/crates.io/spacebadgers)](https://crates.io/crates/spacebadgers)
+![](https://badgers.space/github/checks/splittydev/badgers)
 
 > Yes, badgers is an ingenious name. It contains the word badge, is similar to [badgen](https://badgen.net) (a popular badge generation service), includes the `-rs` suffix 🦀 and it's an actual word! Badgers are awesome animals. And they're also the mascot of the [University of Wisconsin-Madison](https://en.wikipedia.org/wiki/Wisconsin_Badgers). I don't know why I'm telling you this, I don't even live in the US. But hey, the more you know.
 
