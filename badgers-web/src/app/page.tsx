@@ -25,7 +25,7 @@ const ApiParams = [
     {
         name: 'theme',
         description: 'Set color theme',
-        extra: ['default: badgen'],
+        extra: ['default: honeypunk'],
     },
     {
         name: 'icon',
