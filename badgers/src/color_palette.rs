@@ -180,7 +180,7 @@ pub mod palettes {
         white: "#f9f6f7",
         gray: "#8f8494",
         red: "#dd3c4f",
-        yellow: "#ddb23c",
+        yellow: "#dfb920",
         orange: "#ee6f2b",
         green: "#1bbb40",
         cyan: "#12b4bf",
