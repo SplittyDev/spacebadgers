@@ -14,7 +14,7 @@ export async function GET(request: NextRequest, { params: { owner, repo } }: Par
         octokit => octokit.licenses.getForRepo({ owner, repo })
     )
     const licenseName = resp.data?.license?.spdx_id ?? resp.data?.license?.name
-    return await Badge.generate('license', licenseName ?? 'unknown', {
+    return await Badge.generate(request, 'license', licenseName ?? 'unknown', {
         color: !!licenseName ? 'blue' : 'gray'
     })
 }

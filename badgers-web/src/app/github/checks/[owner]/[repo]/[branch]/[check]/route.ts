@@ -22,13 +22,13 @@ export async function GET(request: NextRequest, { params: { owner, repo, branch,
     const checkResults = allChecksData.data?.check_runs
         .filter(checkRun => checkRun.name.toLowerCase() === lowerCaseCheck)
         .map(checkRun => checkRun.conclusion)
-    if (checkResults === undefined) return await Badge.error('github')
-    if (checkResults.length === 0) return await Badge.error('github')
+    if (checkResults === undefined) return await Badge.error(request, 'github')
+    if (checkResults.length === 0) return await Badge.error(request, 'github')
 
     // Combine check results
     const combinedConclusion = GitHub.getCombinedCheckConclusion(checkResults as string[])
 
-    return await Badge.generate(check, combinedConclusion.status, {
+    return await Badge.generate(request, check, combinedConclusion.status, {
         color: combinedConclusion.color
     })
 }
