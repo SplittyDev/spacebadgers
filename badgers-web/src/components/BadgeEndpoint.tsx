@@ -45,7 +45,7 @@ export default function BadgeEndpoint({ name, path, inject }: Props) {
                 <Path value={path} />
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="w-[120px] object-left object-scale-down" decoding="async" loading="lazy" src={buildUrl()} alt={path} />
+            <img className="w-[200px] h-[20px] object-left object-scale-down" loading="lazy" src={buildUrl()} alt={path} />
         </>
     )
 }
