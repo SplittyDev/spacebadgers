@@ -130,10 +130,10 @@ impl ColorPalette {
 pub mod palettes {
     use super::ColorPalette;
 
-    pub const DEFAULT: &ColorPalette = &HONEYPUNK;
+    pub const DEFAULT: &ColorPalette = &HONEY;
 
     /// All available color palettes.
-    pub const ALL: &[&ColorPalette] = &[&HONEYPUNK, &TAILWIND, &BADGEN];
+    pub const ALL: &[&ColorPalette] = &[&HONEY, &TAILWIND, &BADGEN];
 
     /// The same color palette used by [badgen.net](https://badgen.net).
     pub const BADGEN: ColorPalette = ColorPalette {
@@ -172,8 +172,8 @@ pub mod palettes {
     };
 
     /// Spacebadger's own hand-picked color palette.
-    pub const HONEYPUNK: ColorPalette = ColorPalette {
-        name: "honeypunk",
+    pub const HONEY: ColorPalette = ColorPalette {
+        name: "honey",
         default_label: "#4a414e",
         default_status: "#3373cc",
         black: "#030712",

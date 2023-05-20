@@ -8,7 +8,7 @@ export default function ThemeStrip({ themes }: Props) {
     return (
         <div className="flex flex-col gap-2">
             {themes.map(theme => {
-                const name = theme === 'honeypunk' ? 'honeypunk (default)' : theme
+                const name = theme === 'honey' ? 'honey (default)' : theme
                 const bust = isDevelopment ? `?bust=${Date.now()}` : ''
                 const url = `${process.env.NEXT_PUBLIC_API_PROTO}://${process.env.NEXT_PUBLIC_API_HOST}/theme/${theme}${bust}`
                 return (

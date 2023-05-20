@@ -25,7 +25,7 @@ const ApiParams = [
     {
         name: 'theme',
         description: 'Set color theme',
-        extra: ['default: honeypunk'],
+        extra: ['default: honey'],
     },
     {
         name: 'icon',
@@ -128,7 +128,7 @@ export default function Home() {
                     //         { name: 'purple', color: '#745af6' },
                     //     ]
                 */}
-                <ThemeStrip themes={['honeypunk', 'tailwind', 'badgen']} />
+                <ThemeStrip themes={['honey', 'tailwind', 'badgen']} />
             </div>
         </div>
 
