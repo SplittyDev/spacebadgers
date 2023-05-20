@@ -1,4 +1,5 @@
 use std::borrow::Cow;
+use indoc::formatdoc;
 
 use crate::{util::calculate_width, ColorPalette};
 
@@ -104,24 +105,22 @@ impl Badge {
         }).unwrap_or_default();
 
         // Build final svg
-        return format!(
-r##"
-<svg width="{badge_scaled_width}" height="{badge_scaled_height}" viewBox="0 0 {badge_viewbox_width} 200" xmlns="http://www.w3.org/2000/svg"{xlink} role="img">
-<title>{accessible_text}</title>
-<g>
-<rect fill="{label_color}" width="{label_rect_width}" height="200" />
-<rect fill="{color}" x="{status_rect_start}" width="{status_rect_width}" height="200" />
-</g>
-<g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
-<text x="{label_text_shadow_start}" y="148" textLength="{label_text_width}" fill="#000" opacity="0.1">{label}</text>
-<text x="{label_text_start}" y="138" textLength="{label_text_width}">{label}</text>
-<text x="{status_text_shadow_start}" y="148" textLength="{status_text_width}" fill="#000" opacity="0.1">{status}</text>
-<text x="{status_text_start}" y="138" textLength="{status_text_width}">{status}</text>
-</g>
-{icon_markup}
-</svg>
-"##
-        ).trim().replace('\n', "");
+        return formatdoc!(r##"
+            <svg width="{badge_scaled_width}" height="{badge_scaled_height}" viewBox="0 0 {badge_viewbox_width} 200" xmlns="http://www.w3.org/2000/svg"{xlink} role="img">
+            <title>{accessible_text}</title>
+            <g>
+            <rect fill="{label_color}" width="{label_rect_width}" height="200" />
+            <rect fill="{color}" x="{status_rect_start}" width="{status_rect_width}" height="200" />
+            </g>
+            <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+            <text x="{label_text_shadow_start}" y="148" textLength="{label_text_width}" fill="#000" opacity="0.1">{label}</text>
+            <text x="{label_text_start}" y="138" textLength="{label_text_width}">{label}</text>
+            <text x="{status_text_shadow_start}" y="148" textLength="{status_text_width}" fill="#000" opacity="0.1">{status}</text>
+            <text x="{status_text_start}" y="138" textLength="{status_text_width}">{status}</text>
+            </g>
+            {icon_markup}
+            </svg>
+        "##).trim().replace('\n', "");
     }
 }
 
