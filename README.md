@@ -20,17 +20,28 @@
 - `badgers-worker`: Cloudflare worker
 - `badgers-web`: Web frontend for [badgers.space](https://badgers.space)
 
+## Service Integrations
+
+- GitHub
+- crates.io
+
+<small>More integrations coming soon!</small>
+
 ## Development
 
 ### Environment Variables
 > Paste this template into `badgers-web/.env.local`
 
 ```py
+# Frontend Configuration
 NEXT_PUBLIC_API_PROTO = "http"          # Worker protocol
 NEXT_PUBLIC_API_HOST = "127.0.0.1:8787" # Worker host
 NEXT_PUBLIC_WEB_PROTO = "http"          # Web frontend protocol
 NEXT_PUBLIC_WEB_HOST = "127.0.0.1:3000" # Web frontend host
+
+# API Tokens
 GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges
+CRATESIO_TOKEN = "cio51fdR1234567"      # Required for crates.io badges
 ```
 
 ### badgers

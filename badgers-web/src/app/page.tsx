@@ -180,6 +180,15 @@ export default function Home() {
                     <Row name="License" path="/github/license/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                 </div>
             </Section>
+            <Section name="Crates.io">
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
+                    <Row name="Name" path="/crates/name/:crate" inject={['serde']} />
+                    <Row name="Version" path="/crates/version/:crate" inject={['serde']} />
+                    <Row name="Name and Version" path="/crates/info/:crate" inject={['serde']} />
+                    <Row name="Downloads" path="/crates/downloads/:crate" inject={['serde']} />
+                    <Row name="Downloads (latest version)" path="/crates/downloads/:crate/latest" inject={['serde']} />
+                </div>
+            </Section>
         </div>
     </main>
   )
