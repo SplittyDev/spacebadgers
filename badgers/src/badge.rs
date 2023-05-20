@@ -1,3 +1,4 @@
+use indoc::formatdoc;
 use std::borrow::Cow;
 
 use crate::{util::calculate_width, ColorPalette};
@@ -104,24 +105,22 @@ impl Badge {
         }).unwrap_or_default();
 
         // Build final svg
-        return format!(
-r##"
-<svg width="{badge_scaled_width}" height="{badge_scaled_height}" viewBox="0 0 {badge_viewbox_width} 200" xmlns="http://www.w3.org/2000/svg"{xlink} role="img">
-<title>{accessible_text}</title>
-<g>
-<rect fill="{label_color}" width="{label_rect_width}" height="200" />
-<rect fill="{color}" x="{status_rect_start}" width="{status_rect_width}" height="200" />
-</g>
-<g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
-<text x="{label_text_shadow_start}" y="148" textLength="{label_text_width}" fill="#000" opacity="0.1">{label}</text>
-<text x="{label_text_start}" y="138" textLength="{label_text_width}">{label}</text>
-<text x="{status_text_shadow_start}" y="148" textLength="{status_text_width}" fill="#000" opacity="0.1">{status}</text>
-<text x="{status_text_start}" y="138" textLength="{status_text_width}">{status}</text>
-</g>
-{icon_markup}
-</svg>
-"##
-        ).trim().replace('\n', "");
+        return formatdoc!(r##"
+            <svg width="{badge_scaled_width}" height="{badge_scaled_height}" viewBox="0 0 {badge_viewbox_width} 200" xmlns="http://www.w3.org/2000/svg"{xlink} role="img">
+            <title>{accessible_text}</title>
+            <g>
+            <rect fill="{label_color}" width="{label_rect_width}" height="200" />
+            <rect fill="{color}" x="{status_rect_start}" width="{status_rect_width}" height="200" />
+            </g>
+            <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+            <text x="{label_text_shadow_start}" y="148" textLength="{label_text_width}" fill="#000" opacity="0.1">{label}</text>
+            <text x="{label_text_start}" y="138" textLength="{label_text_width}">{label}</text>
+            <text x="{status_text_shadow_start}" y="148" textLength="{status_text_width}" fill="#000" opacity="0.1">{status}</text>
+            <text x="{status_text_start}" y="138" textLength="{status_text_width}">{status}</text>
+            </g>
+            {icon_markup}
+            </svg>
+        "##).trim().replace('\n', "");
     }
 }
 
@@ -135,7 +134,7 @@ mod tests {
     #[test]
     fn test_default_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "foo".into(),
             label: Some("bar".into()),
             color: None,
@@ -150,7 +149,7 @@ mod tests {
     #[test]
     fn test_colored_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "passing".into(),
             label: Some("checks".into()),
             color: Some("green".into()),
@@ -165,7 +164,7 @@ mod tests {
     #[test]
     fn test_default_scaled_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "foo".into(),
             label: Some("bar".into()),
             color: None,
@@ -180,7 +179,7 @@ mod tests {
     #[test]
     fn test_colored_scaled_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "passing".into(),
             label: Some("checks".into()),
             color: Some("green".into()),
@@ -195,7 +194,7 @@ mod tests {
     #[test]
     fn test_icon_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "Quintschaf".into(),
             label: None,
             color: None,

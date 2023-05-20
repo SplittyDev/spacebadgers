@@ -39,7 +39,7 @@ fn main() {
     let svg = BadgeBuilder::new()
         .optional_label(app.label.map(Cow::Owned))
         .optional_status(app.status.map(Cow::Owned))
-        .color_palette(color_palette)
+        .color_palette(Cow::Borrowed(color_palette))
         .optional_color(app.color.map(Cow::Owned))
         .optional_label_color(app.label_color.map(Cow::Owned))
         .scale(app.scale)

@@ -14,5 +14,5 @@ export async function GET(request: NextRequest, { params: { owner, repo } }: Par
         octokit => octokit.issues.listForRepo({ owner, repo, state: 'all' })
     )
     const issues = resp.data?.filter(issue => issue.pull_request === undefined)
-    return await Badge.generate('issues', issues?.length?.toString() ?? 'None', )
+    return await Badge.generate(request, 'issues', issues?.length?.toString() ?? 'None', )
 }

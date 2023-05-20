@@ -1,3 +1,4 @@
+use indoc::formatdoc;
 use std::borrow::Cow;
 
 /// Badge color palette.
@@ -60,23 +61,79 @@ impl ColorPalette {
     /// Get a [ColorPalette] by name.
     ///
     /// If the desired palette is not found, the default palette is returned.
-    pub fn from_name(name: &str) -> Cow<'static, ColorPalette> {
+    pub fn from_name(name: &str) -> &'static ColorPalette {
         palettes::ALL
             .iter()
             .find(|p| p.name == name)
-            .map(|palette| Cow::Borrowed(*palette))
             .unwrap_or_else(|| {
-                eprintln!("Warning: color palette '{}' not found, using default", name);
-                Cow::Borrowed(&palettes::BADGEN)
+                eprintln!("Warning: color palette '{name}' not found, using default");
+                &palettes::DEFAULT
             })
+    }
+
+    pub fn colors(&self) -> Vec<&'static str> {
+        vec![
+            self.black,
+            self.default_label,
+            self.gray,
+            self.red,
+            self.orange,
+            self.yellow,
+            self.green,
+            self.cyan,
+            self.blue,
+            self.pink,
+            self.purple,
+        ]
+    }
+
+    pub fn svg(&self, rounded: bool, bordered: bool) -> String {
+        let name = self.name;
+        let colors = self.colors();
+        let rect_width = 200;
+        let rect_height = 200;
+        let corner_radius = if rounded { 50 } else { 0 };
+        let full_width = rect_width * colors.len();
+        let mut segments = Vec::new();
+        for (i, color) in colors.iter().enumerate() {
+            let rect_offset = i * rect_width;
+            let rect_svg = format!(
+                r#"<rect x="{rect_offset}" y="0" width="{rect_width}" height="{rect_height}" fill="{color}" />"#,
+            );
+            segments.push(rect_svg);
+        }
+        let segments_svg = segments.join("");
+        let viewbox = format!("0 0 {full_width} {rect_height}",);
+        let output_width = full_width / 10;
+        let output_height = rect_height / 10;
+        let mask_svg = format!(
+            r##"<defs><mask id="rounded"><rect rx="{corner_radius}" ry="{corner_radius}" width="{full_width}" height="{rect_height}" fill="#fff" /></mask></defs>"##,
+        );
+        let border_svg = format!(
+            r##"<rect rx="{corner_radius}" ry="{corner_radius}" width="{full_width}" height="{rect_height}" fill="none" stroke="#666" stroke-width="10" stroke-linecap="round" />"##
+        );
+        formatdoc! {r##"
+            <svg width="{output_width}" height="{output_height}" viewBox="{viewbox}" xmlns="http://www.w3.org/2000/svg" role="img">
+            <title>{name}</title>{mask}
+            <g{mask_addon}>
+            {segments_svg}{border}
+            </g>
+            </svg>
+            "##,
+            mask = if rounded { mask_svg.as_ref() } else { "" },
+            mask_addon = if rounded { r##" mask="url(#rounded)""## } else { "" },
+            border = if bordered { border_svg.as_ref() } else { "" },
+        }.trim().replace('\n', "")
     }
 }
 
 pub mod palettes {
     use super::ColorPalette;
 
+    pub const DEFAULT: &ColorPalette = &HONEY;
+
     /// All available color palettes.
-    pub const ALL: &[&ColorPalette] = &[&BADGEN, &TAILWIND];
+    pub const ALL: &[&ColorPalette] = &[&HONEY, &TAILWIND, &BADGEN];
 
     /// The same color palette used by [badgen.net](https://badgen.net).
     pub const BADGEN: ColorPalette = ColorPalette {
@@ -112,5 +169,23 @@ pub mod palettes {
         blue: "#3b82f6",
         pink: "#ec4899",
         purple: "#a855f7",
+    };
+
+    /// Spacebadger's own hand-picked color palette.
+    pub const HONEY: ColorPalette = ColorPalette {
+        name: "honey",
+        default_label: "#4a414e",
+        default_status: "#3373cc",
+        black: "#030712",
+        white: "#f9f6f7",
+        gray: "#8f8494",
+        red: "#dd3c4f",
+        yellow: "#dfb920",
+        orange: "#ee6f2b",
+        green: "#1bbb40",
+        cyan: "#12b4bf",
+        blue: "#3373cc",
+        pink: "#c39",
+        purple: "#943ae9",
     };
 }

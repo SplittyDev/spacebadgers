@@ -1,6 +1,6 @@
 [package]
 name = "spacebadgers"
-version = "1.0.1"
+version = "1.1.1"
 edition = "2021"
 description = "Fast SVG badge generator"
 
@@ -13,6 +13,7 @@ authors.workspace = true
 
 [dependencies]
 htmlize = "1.0.2"
+indoc = "2.0.1"
 
 [dev-dependencies]
 insta = "1.29.0"
