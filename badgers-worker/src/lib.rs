@@ -112,9 +112,38 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         }
     }
 
+    async fn handle_theme_route(req: Request, ctx: RouteContext<()>) -> worker::Result<Response> {
+        // Get path params
+        let name = {
+            if let Some(name) = ctx.param("name").cloned() {
+                name
+            } else {
+                return Response::error("Missing theme name in url path.", 400);
+            }
+        };
+
+        // Parse query params
+        let mut rounded = false;
+        let mut bordered = false;
+        if let Ok(options) = req.url().as_ref().map(|url| url.query_pairs()) {
+            for (key, _) in options {
+                match key.as_ref() {
+                    "rounded" => rounded = true,
+                    "border" => bordered = true,
+                    _ => (),
+                }
+            }
+        }
+
+        let color_palette = ColorPalette::from_name(&name).svg(rounded, bordered);
+        Response::from_bytes(color_palette.into_bytes())
+            .map(|res| res.with_headers(get_svg_headers(DEFAULT_CACHE_DURATION).unwrap()))
+    }
+
     Router::new()
         .get_async("/badge/:label/:status/:color", handle_badge_route)
         .get_async("/badge/:label/:status", handle_badge_route)
+        .get_async("/theme/:name", handle_theme_route)
         .run(req, env)
         .await
 }
