@@ -1,5 +1,5 @@
-use std::borrow::Cow;
 use indoc::formatdoc;
+use std::borrow::Cow;
 
 /// Badge color palette.
 #[derive(Debug, Clone)]
@@ -104,9 +104,7 @@ impl ColorPalette {
             segments.push(rect_svg);
         }
         let segments_svg = segments.join("");
-        let viewbox = format!(
-            "0 0 {full_width} {rect_height}",
-        );
+        let viewbox = format!("0 0 {full_width} {rect_height}",);
         let output_width = full_width / 10;
         let output_height = rect_height / 10;
         let mask_svg = format!(
@@ -126,7 +124,7 @@ impl ColorPalette {
             mask = if rounded { mask_svg.as_ref() } else { "" },
             mask_addon = if rounded { r##" mask="url(#rounded)""## } else { "" },
             border = if bordered { border_svg.as_ref() } else { "" },
-        }.trim().replace("\n", "")
+        }.trim().replace('\n', "")
     }
 }
 

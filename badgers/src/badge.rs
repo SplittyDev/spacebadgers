@@ -1,5 +1,5 @@
-use std::borrow::Cow;
 use indoc::formatdoc;
+use std::borrow::Cow;
 
 use crate::{util::calculate_width, ColorPalette};
 
