@@ -61,14 +61,13 @@ impl ColorPalette {
     /// Get a [ColorPalette] by name.
     ///
     /// If the desired palette is not found, the default palette is returned.
-    pub fn from_name(name: &str) -> Cow<'static, ColorPalette> {
+    pub fn from_name(name: &str) -> &'static ColorPalette {
         palettes::ALL
             .iter()
             .find(|p| p.name == name)
-            .map(|palette| Cow::Borrowed(*palette))
             .unwrap_or_else(|| {
-                eprintln!("Warning: color palette '{}' not found, using default", name);
-                Cow::Borrowed(&palettes::BADGEN)
+                eprintln!("Warning: color palette '{name}' not found, using default");
+                &palettes::DEFAULT
             })
     }
 
@@ -131,8 +130,10 @@ impl ColorPalette {
 pub mod palettes {
     use super::ColorPalette;
 
+    pub const DEFAULT: &ColorPalette = &HONEYPUNK;
+
     /// All available color palettes.
-    pub const ALL: &[&ColorPalette] = &[&BADGEN, &TAILWIND, &HONEYPUNK];
+    pub const ALL: &[&ColorPalette] = &[&HONEYPUNK, &TAILWIND, &BADGEN];
 
     /// The same color palette used by [badgen.net](https://badgen.net).
     pub const BADGEN: ColorPalette = ColorPalette {

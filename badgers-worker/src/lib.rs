@@ -44,7 +44,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         // Initialize query params
         let mut label_color: Option<String> = None;
         let mut scale: Option<f32> = None;
-        let mut theme: ColorPalette = color_palettes::BADGEN;
+        let mut theme: &ColorPalette = color_palettes::DEFAULT;
         let mut cache = DEFAULT_CACHE_DURATION;
         let mut icon: Option<String> = None;
         let mut icon_width: Option<u32> = None;
@@ -60,7 +60,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
                     "cache" => cache = value.parse().unwrap_or(cache),
                     "icon" => icon = Some(value.into_owned()),
                     "icon_width" => icon_width = value.parse().ok(),
-                    "theme" => theme = ColorPalette::from_name(&value).into_owned(),
+                    "theme" => theme = ColorPalette::from_name(&value),
                     _ => (),
                 }
             }
@@ -96,7 +96,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             .status(status)
             .optional_color(color)
             .scale(scale.unwrap_or(1.0))
-            .color_palette(Cow::Owned(theme))
+            .color_palette(Cow::Borrowed(theme))
             .optional_icon(fetched_icon)
             .optional_icon_width(icon_width)
             .build()

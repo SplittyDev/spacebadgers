@@ -17,7 +17,7 @@ pub struct BadgeBuilder {
 impl BadgeBuilder {
     /// Construct a new [BadgeBuilder] with default values.
     pub fn new() -> Self {
-        let color_palette = Cow::Borrowed(&crate::color_palettes::BADGEN);
+        let color_palette = Cow::Borrowed(crate::color_palettes::DEFAULT);
         let scale = 1.0;
         Self {
             color_palette,

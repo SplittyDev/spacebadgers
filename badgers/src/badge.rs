@@ -134,7 +134,7 @@ mod tests {
     #[test]
     fn test_default_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "foo".into(),
             label: Some("bar".into()),
             color: None,
@@ -149,7 +149,7 @@ mod tests {
     #[test]
     fn test_colored_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "passing".into(),
             label: Some("checks".into()),
             color: Some("green".into()),
@@ -164,7 +164,7 @@ mod tests {
     #[test]
     fn test_default_scaled_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "foo".into(),
             label: Some("bar".into()),
             color: None,
@@ -179,7 +179,7 @@ mod tests {
     #[test]
     fn test_colored_scaled_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "passing".into(),
             label: Some("checks".into()),
             color: Some("green".into()),
@@ -194,7 +194,7 @@ mod tests {
     #[test]
     fn test_icon_badge() {
         insta::assert_debug_snapshot!(Badge {
-            color_palette: Cow::Borrowed(&color_palettes::BADGEN),
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
             status: "Quintschaf".into(),
             label: None,
             color: None,
