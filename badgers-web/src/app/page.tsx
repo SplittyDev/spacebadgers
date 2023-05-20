@@ -112,40 +112,7 @@ export default function Home() {
             {/* Themes */}
             <div className="flex flex-col gap-4 flex-grow">
                 <h2 className="text-xl text-gray-700 font-bold">Themes</h2>
-                <ThemeStrip themes={[
-                    {
-                        name: 'badgen',
-                        palette: [
-                            { name: 'black', color: '#2a2a2a' },
-                            { name: 'default_label', color: '#555' },
-                            { name: 'gray', color: '#999' },
-                            { name: 'red', color: '#e43' },
-                            { name: 'yellow', color: '#db1' },
-                            { name: 'orange', color: '#f73' },
-                            { name: 'green', color: '#3c1' },
-                            { name: 'cyan', color: '#1bc' },
-                            { name: 'blue', color: '#08c' },
-                            { name: 'pink', color: '#e5b' },
-                            { name: 'purple', color: '#94e' },
-                        ]
-                    },
-                    {
-                        name: 'tailwind',
-                        palette: [
-                            { name: 'black', color: '#030712' },
-                            { name: 'default_label', color: '#334155' },
-                            { name: 'gray', color: '#9ca3af' },
-                            { name: 'red', color: '#ef4444' },
-                            { name: 'yellow', color: '#eab308' },
-                            { name: 'orange', color: '#f97316' },
-                            { name: 'green', color: '#22c55e' },
-                            { name: 'cyan', color: '#06b6d4' },
-                            { name: 'blue', color: '#3b82f6' },
-                            { name: 'pink', color: '#ec4899' },
-                            { name: 'purple', color: '#a855f7' },
-                        ]
-                    },
-                    // {
+                {/*
                     //     name: 'monokai',
                     //     palette: [
                     //         { name: 'black', color: '#272822' },
@@ -160,8 +127,8 @@ export default function Home() {
                     //         { name: 'pink', color: '#f25fa6' },
                     //         { name: 'purple', color: '#745af6' },
                     //     ]
-                    // },
-                ]} />
+                */}
+                <ThemeStrip themes={['honeypunk', 'tailwind', 'badgen']} />
             </div>
         </div>
 
