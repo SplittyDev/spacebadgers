@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server"
 
-import { Badge, Npm } from '@/utils'
+import Badge from '@/utils/Badge'
+import Npm from '@/utils/Npm'
 
 interface Params {
     params: {
@@ -13,3 +14,5 @@ export async function GET(request: NextRequest, { params: { org_or_pkg: pkg } }:
     if (data === null) return await Badge.error(request, 'npm')
     return await Badge.generate(request, 'npm', data.name)
 }
+
+export const runtime = 'edge'

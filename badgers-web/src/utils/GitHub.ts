@@ -1,25 +1,36 @@
 import { Octokit } from '@octokit/rest'
 import { OctokitResponse } from '@octokit/types'
 
-interface GitHubResponse<T> {
-    data: T | null,
-}
-
 type WrappedGitHubRequest<T> = (arg0: Octokit) => Promise<OctokitResponse<T>>
+
+type GitHubResponse<T> = {
+    data: T | null
+}
 
 type CombinedCheckResult = {
     status: string
     color: string
 }
 
-export default class GitHubUtil {
+export default class GitHub {
+    /**
+     * Get an Octokit instance.
+     *
+     * @returns An Octokit instance.
+     */
     static getOctokit(): Octokit {
         return new Octokit({ auth: process.env.GITHUB_TOKEN })
     }
 
+    /**
+     * Wrap a GitHub request in a try-catch block.
+     *
+     * @param request The request to wrap.
+     * @returns The response
+     */
     static async wrapRequest<T>(request: WrappedGitHubRequest<T>): Promise<GitHubResponse<T>> {
         try {
-            const { data } = await request(GitHubUtil.getOctokit())
+            const { data } = await request(GitHub.getOctokit())
             return {
                 data
             }
@@ -30,6 +41,12 @@ export default class GitHubUtil {
         }
     }
 
+    /**
+     * Reduce an array of check runs to a single check conclusion.
+     *
+     * @param checkRuns An array of check runs.
+     * @returns The combined check conclusion.
+     */
     static getCombinedCheckConclusion(conclusions: string[]): CombinedCheckResult {
         const ignoreList = ['neutral', 'cancelled', 'skipped']
 
