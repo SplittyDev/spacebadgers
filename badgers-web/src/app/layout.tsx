@@ -9,8 +9,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Badgers',
-  description: 'Fast SVG badges',
+  title: 'SpaceBadgers',
+  description: 'Fast and clean SVG badges',
 }
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
                 <header className="flex flex-col gap-4">
                     <div className="flex gap-4">
                         <div className="max-w-[64px] max-h-[64px] rounded-full shadow-md">
-                            <Image placeholder='blur' priority unoptimized alt="badgers.space Logo" src={Logo} width={256} height={256} />
+                            <Image placeholder='blur' priority alt="badgers.space Logo" src={Logo} width={256} height={256} />
                         </div>
                         <h1 className="text-6xl font-bold text-center">
                             Badge
