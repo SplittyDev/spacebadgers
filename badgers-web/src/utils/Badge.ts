@@ -8,16 +8,36 @@ interface BadgeOverrides {
     theme?: string,
 }
 
-export default class BadgeUtil {
+/**
+ * Badge generation utility.
+ *
+ * Uses the Spacebadgers worker to generate badges.
+ */
+export default class Badge {
+
+    /**
+     * Generate a badge.
+     *
+     * @param request The incoming request.
+     * @param label The badge label.
+     * @param status The badge status.
+     * @param overrides Badge overrides.
+     * @returns The badge response.
+     */
     static async generate(request: NextRequest, label: string, status: string, overrides: BadgeOverrides = {}): Promise<NextResponse> {
+        // Get API configuration from env
         const api = {
             proto: process.env.NEXT_PUBLIC_API_PROTO,
             host: process.env.NEXT_PUBLIC_API_HOST,
         }
+
+        // Build path params
         const pathParams = {
             label: encodeURIComponent(label),
             status: encodeURIComponent(status),
         }
+
+        // Build query params
         const systemQueryOverrides = overrides
         const userQueryOverrides = request.nextUrl.search
             .replace(/^\?+/gm, '').split('&')
@@ -30,8 +50,12 @@ export default class BadgeUtil {
             .entries(unifiedQueryOverrides)
             .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
             .join('&')
+
+        // Fetch the badge from the worker
         const resp = await fetch(`${api.proto}://${api.host}/badge/${pathParams.label}/${pathParams.status}?${queryParams}`)
         const data = await resp.arrayBuffer()
+
+        // Build response headers
         const headers = {
             'content-type': 'image/svg+xml',
         } as Record<string, string>
@@ -39,6 +63,8 @@ export default class BadgeUtil {
         if (cacheControl) {
             headers['cache-control'] = cacheControl
         }
+
+        // Return the response
         return new NextResponse(data, {
             status: resp.status,
             statusText: resp.statusText,
@@ -47,7 +73,7 @@ export default class BadgeUtil {
     }
 
     static async error(request: NextRequest, subsystem: string): Promise<NextResponse> {
-        return await BadgeUtil.generate(request, subsystem, 'error', { color: 'gray' })
+        return await Badge.generate(request, subsystem, 'error', { color: 'gray' })
     }
 
     static async passThrough(request: NextRequest): Promise<NextResponse> {

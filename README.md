@@ -1,13 +1,13 @@
 <p align="center">
-    <img alt="badgers.space Logo" src="./badgers-web/src/app/logo.png" width="256" height="256" />
+    <img alt="badgers.space Logo" src="./badgers-web/src/app/logo.png" width="128" height="128" />
 </p>
 
-# Badgers - Fast SVG Badges
+# SpaceBadgers - Fast SVG Badges
 
 [![](https://badgers.space/badge/live%20instance/badgers.space)](https://badgers.space)
-[![](https://badgers.space/github/license/splittydev/badgers)](./LICENSE)
+[![](https://badgers.space/github/license/splittydev/spacebadgers)](./LICENSE)
 [![](https://badgers.space/badge/crates.io/spacebadgers)](https://crates.io/crates/spacebadgers)
-![](https://badgers.space/github/checks/splittydev/badgers)
+[![](https://badgers.space/github/checks/splittydev/spacebadgers)](https://github.com/splittydev/spacebadgers/actions)
 
 > Yes, badgers is an ingenious name. It contains the word badge, is similar to [badgen](https://badgen.net) (a popular badge generation service), includes the `-rs` suffix 🦀 and it's an actual word! Badgers are awesome animals. And they're also the mascot of the [University of Wisconsin-Madison](https://en.wikipedia.org/wiki/Wisconsin_Badgers). I don't know why I'm telling you this, I don't even live in the US. But hey, the more you know.
 
@@ -15,7 +15,7 @@
 
 ## Project Structure
 
-- `badgers`: Core badgers library
+- `spacebadgers`: Core badgers library
 - `badgers-cli`: CLI for generating SVG badges
 - `badgers-worker`: Cloudflare worker
 - `badgers-web`: Web frontend for [badgers.space](https://badgers.space)
@@ -27,6 +27,18 @@
 - npm
 
 <small>More integrations coming soon!</small>
+
+## Why SpaceBadgers?
+
+The creation of SpaceBadgers was spurred by my experiences and challenges with existing badge generators such as shields.io and badgen.net. These platforms offer excellent services, but I found certain issues that could be improved upon. Here's why I decided to build SpaceBadgers:
+
+**1. Performance:** Acknowledging past speed concerns with platforms like Shields.io, SpaceBadgers emphasizes high performance and reliability. Our Rust-based core library and Cloudflare worker enable swift, edge-based badge delivery. Smooth integration with third-party services is achieved via NextJS API routes on Vercel, and we continually aim to enhance speed by utilizing the `edge` runtime.
+
+**2. Stability:** Badgen.net was created as a faster alternative to shields.io, but due to its lack of active maintenance, it often breaks, leading to broken images. SpaceBadgers is actively maintained and is committed to ensuring stability and uptime.
+
+**3. SVG Exclusivity:** In contrast to Shields.io, which produces images, SpaceBadgers dedicates itself solely to the generation of SVGs. Recognizing the scalability and high-quality visuals of SVGs, we deemed them the ideal choice. To optimize performance, we serve SVGs in a minified form, ensuring a swift and efficient delivery of badges.
+
+Building SpaceBadgers has been a labor of love, aiming to offer a superior, reliable, and open-source SVG badge generator for the developer community. I am excited to hear your feedback and to continue evolving this project with your help. Your suggestions, contributions, and active participation are always welcome.
 
 ## Development
 
@@ -45,17 +57,39 @@ GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges
 CRATESIO_TOKEN = "cio51fdR1234567"      # Required for crates.io badges
 ```
 
-### badgers
-> Requires: cargo
+### spacebadgers
+<details>
+<summary>Click to expand</summary>
+
+#### Prerequisites
+
+- cargo
 
 #### Running tests
 
 ```bash
-cargo test -p badgers
+cargo test -p spacebadgers
 ```
 
+</details>
+
 ### badgers-worker
-> Requires: cargo, npm/yarn
+
+<details>
+<summary>Click to expand</summary>
+
+#### Prerequisites
+
+- cargo
+- yarn (preferred) or npm
+
+#### Installing dependencies
+
+```bash
+cd badgers-worker
+npm install         # If you're using npm
+yarn                # If you're using yarn
+```
 
 #### Running locally
 
@@ -73,8 +107,16 @@ npm run deploy      # If you're using npm
 yarn deploy         # If you're using yarn
 ```
 
+</details>
+
 ### badgers-web
-> Requires: npm/yarn
+
+<details>
+<summary>Click to expand</summary>
+
+#### Prerequisites
+
+- yarn (preferred) or npm
 
 #### Installing dependencies
 
@@ -92,12 +134,4 @@ npm run dev     # If you're using npm
 yarn dev        # If you're using yarn
 ```
 
-## Why
-
-Over the years, I've used quite a few badge generator services. First shields.io, which became slower and less reliable over time. Then badgen.net, which was fast and reliable at first, but became similarly disfunctional and doesn't seem to be maintained anymore.
-
-Badgers is my attempt at creating a fast, reliable, and easy to use badge generator. It's written in Rust, and uses Cloudflare Workers to serve the badges. On my machine, badge generation takes ~1ms. Cloudflare reports a median CPU time of 2.4ms.
-
-Even though there is an "official" live instance for everyone to use, I encourage you to host your own instance. It's super easy, and you can customize it to your needs.
-
-Feel free to contribute!
+</details>

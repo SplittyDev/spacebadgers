@@ -29,7 +29,7 @@ type Package = {
     keywords: string[]
 }
 
-export default class NpmUtil {
+export default class Npm {
     /**
      * Use `getPackageVersion` whenever possible.
      *
@@ -47,6 +47,19 @@ export default class NpmUtil {
         return await response.json() as Package
     }
 
+    /**
+     * Get the latest version of a package.
+     *
+     * @param packageName Package name
+     * @param version Version or `'latest'`
+     * @returns The latest version of the package, or `null` if the package does not exist.
+     *
+     * @example
+     * ```ts
+     * await Npm.getPackageVersion('react', 'latest')
+     * await Npm.getPackageVersion('@octocat/rest', 'latest')
+     * ```
+     */
     static async getPackageVersion(packageName: string, version: VersionIdentifier): Promise<PackageVersion | null> {
         const url = `${BASE_URL}/${packageName}/${version}`
 
@@ -63,9 +76,15 @@ export default class NpmUtil {
         }
     }
 
+    /**
+     * Get the corresponding `@types` package for an npm package.
+     *
+     * @param packageName Package name
+     * @returns The corresponding `@types` package, or `null` if the package does not exist.
+     */
     static async getTypesPackage(packageName: string): Promise<string | null> {
         const typesPackage = `@types/${packageName}`
-        const data = await NpmUtil.getPackageVersion(typesPackage, 'latest')
+        const data = await Npm.getPackageVersion(typesPackage, 'latest')
         if (data === null) return null
         return typesPackage
     }
