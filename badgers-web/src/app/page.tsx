@@ -147,13 +147,25 @@ export default function Home() {
                     <Row name="License" path="/github/license/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                 </div>
             </Section>
-            <Section name="Crates.io">
+            <Section name="crates.io">
                 <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
                     <Row name="Name" path="/crates/name/:crate" inject={['serde']} />
                     <Row name="Version" path="/crates/version/:crate" inject={['serde']} />
                     <Row name="Name and Version" path="/crates/info/:crate" inject={['serde']} />
                     <Row name="Downloads" path="/crates/downloads/:crate" inject={['serde']} />
                     <Row name="Downloads (latest version)" path="/crates/downloads/:crate/latest" inject={['serde']} />
+                </div>
+            </Section>
+            <Section name="npm">
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
+                    <Row name="Name" path="/npm/name/:pkg" inject={['log4js']} />
+                    <Row name="Name (scoped)" path="/npm/name/:org/:pkg" inject={['@octokit', 'rest']} />
+                    <Row name="Version" path="/npm/version/:pkg" inject={['log4js']} />
+                    <Row name="Version (scoped)" path="/npm/version/:org/:pkg" inject={['@octokit', 'rest']} />
+                    <Row name="License" path="/npm/license/:pkg" inject={['log4js']} />
+                    <Row name="License (scoped)" path="/npm/license/:org/:pkg" inject={['@octokit', 'rest']} />
+                    <Row name="Types" path="/npm/types/:pkg" inject={['react']} />
+                    <Row name="Types (scoped)" path="/npm/types/:org/:pkg" inject={['@octokit', 'rest']} />
                 </div>
             </Section>
         </div>

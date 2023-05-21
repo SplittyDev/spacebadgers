@@ -24,6 +24,7 @@
 
 - GitHub
 - crates.io
+- npm
 
 <small>More integrations coming soon!</small>
 
@@ -98,7 +99,5 @@ Over the years, I've used quite a few badge generator services. First shields.io
 Badgers is my attempt at creating a fast, reliable, and easy to use badge generator. It's written in Rust, and uses Cloudflare Workers to serve the badges. On my machine, badge generation takes ~1ms. Cloudflare reports a median CPU time of 2.4ms.
 
 Even though there is an "official" live instance for everyone to use, I encourage you to host your own instance. It's super easy, and you can customize it to your needs.
-
-For now, all that's supported is simple badges, without third-party data sources.
 
 Feel free to contribute!
