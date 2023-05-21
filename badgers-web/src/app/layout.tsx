@@ -10,7 +10,12 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'SpaceBadgers',
+  applicationName: 'SpaceBadgers',
   description: 'Fast and clean SVG badges',
+  keywords: ['badge', 'badges', 'badgers', 'spacebadgers', 'badge-generator', 'svg',],
+  colorScheme: 'light',
+  authors: [{ name: 'Marco Quinten', url: 'https://github.com/splittydev' }],
+  creator: 'Marco Quinten',
 }
 
 export default function RootLayout({
