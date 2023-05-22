@@ -25,8 +25,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        <body className={inter.className}>
-            <div className="flex min-h-screen flex-col items-center py-4 md:p-16 gap-8">
+        <body className={`${inter.className} w-full flex flex-col items-center`}>
+            <div className="flex min-h-screen w-full xl:w-10/12 2xl:w-8/12 flex-col items-center py-4 md:p-16 gap-8">
                 <header className="flex flex-col gap-4">
                     <div className="flex gap-4">
                         <div className="max-w-[64px] max-h-[64px] rounded-full shadow-md">
@@ -41,7 +41,7 @@ export default function RootLayout({
                         Fast and clean SVG badges for your projects
                     </div>
                 </header>
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 w-full">
                     {children}
                     <footer className="flex flex-wrap justify-between gap-2 bg-gray-100 mx-4 px-4 py-2 rounded-md">
                         <div className="text-sm">
