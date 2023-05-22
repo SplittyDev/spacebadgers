@@ -48,19 +48,28 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         let mut cache = DEFAULT_CACHE_DURATION;
         let mut icon: Option<String> = None;
         let mut icon_width: Option<u32> = None;
+        let mut corner_radius: Option<u32> = None;
 
         // Parse query params
         if let Ok(options) = req.url().as_ref().map(|url| url.query_pairs()) {
             for (key, value) in options {
                 match key.as_ref() {
                     "label" => label = Some(value.into_owned()),
-                    "label_color" => label_color = Some(value.into_owned()),
+                    "label_color" | "labelColor" => label_color = Some(value.into_owned()),
                     "color" => color = Some(value.into_owned()),
                     "scale" => scale = value.parse().ok(),
                     "cache" => cache = value.parse().unwrap_or(cache),
                     "icon" => icon = Some(value.into_owned()),
-                    "icon_width" => icon_width = value.parse().ok(),
-                    "theme" => theme = ColorPalette::from_name(&value),
+                    "icon_width" | "iconWidth" => icon_width = value.parse().ok(),
+                    "theme" => theme = ColorPalette::from_name_or_default(&value),
+                    "corner_radius" | "cornerRadius" => {
+                        corner_radius = match value.as_ref() {
+                            "s" => Some(2),
+                            "m" => Some(4),
+                            "l" => Some(6),
+                            value => value.parse().ok(),
+                        }
+                    }
                     _ => (),
                 }
             }
@@ -92,13 +101,14 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         // Build badge svg
         let badge = BadgeBuilder::new()
             .label(label)
-            .optional_label_color(label_color)
             .status(status)
             .optional_color(color)
-            .scale(scale.unwrap_or(1.0))
+            .optional_label_color(label_color)
             .color_palette(Cow::Borrowed(theme))
             .optional_icon(fetched_icon)
             .optional_icon_width(icon_width)
+            .optional_corner_radius(corner_radius)
+            .scale(scale.unwrap_or(1.0))
             .build()
             .svg();
 
@@ -135,7 +145,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             }
         }
 
-        let color_palette = ColorPalette::from_name(&name).svg(rounded, bordered);
+        let color_palette = ColorPalette::from_name_or_default(&name).svg(rounded, bordered);
         Response::from_bytes(color_palette.into_bytes())
             .map(|res| res.with_headers(get_svg_headers(DEFAULT_CACHE_DURATION).unwrap()))
     }

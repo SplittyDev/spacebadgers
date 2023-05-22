@@ -59,9 +59,14 @@ impl ColorPalette {
     }
 
     /// Get a [ColorPalette] by name.
+    pub fn from_name(name: &str) -> Option<&'static ColorPalette> {
+        palettes::ALL.iter().find(|p| p.name == name).copied()
+    }
+
+    /// Get a [ColorPalette] by name.
     ///
     /// If the desired palette is not found, the default palette is returned.
-    pub fn from_name(name: &str) -> &'static ColorPalette {
+    pub fn from_name_or_default(name: &str) -> &'static ColorPalette {
         palettes::ALL
             .iter()
             .find(|p| p.name == name)
@@ -87,6 +92,7 @@ impl ColorPalette {
         ]
     }
 
+    /// Generate an SVG color strip.
     pub fn svg(&self, rounded: bool, bordered: bool) -> String {
         let name = self.name;
         let colors = self.colors();
