@@ -40,8 +40,8 @@ export default function BadgeEndpoint({ name, path, inject }: Props) {
 
     return (
         <>
-            <div className="text-gray-700 text-sm py-2 pl-2 w-24 md:w-28 lg:w-48">{name}</div>
-            <div className="text-sm cursor-pointer">
+            <div className="text-gray-700 text-sm py-2 pl-2 w-16 sm:w-24 md:w-28 lg:w-48">{name}</div>
+            <div className="text-xs sm:text-sm cursor-pointer">
                 <Path value={path} />
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}

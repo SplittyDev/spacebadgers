@@ -3,20 +3,24 @@ type Props = {
 }
 
 export default function Path({ value }: Props) {
-    const getPathColor = (path: string, i: number) => {
+    const containsProtocol = /^https?:[/]{2}/m.test(value)
+
+    const getPathColor = (path: string, i: number, isProtocol: boolean) => {
         const staticColors = [
             'text-slate-800',
             'text-zinc-600',
             'text-stone-600',
         ]
         const dynamicColors = [
-            'text-lime-700',
-            'text-green-700',
             'text-emerald-700',
-            'text-teal-700',
             'text-cyan-700',
             'text-sky-700',
+            'text-indigo-700',
+            'text-purple-700',
         ]
+        if (isProtocol) {
+            return 'text-gray-400'
+        }
         return path.startsWith(':')
             ? dynamicColors[i % dynamicColors.length]
             : staticColors[i % staticColors.length]
@@ -27,10 +31,11 @@ export default function Path({ value }: Props) {
         let staticIndex = 0
         let dynamicIndex = 0
         return parts.map(value => {
+            const isProtocol = value.endsWith(':')
             const isDynamic = value.startsWith(':')
             return {
                 value,
-                className: getPathColor(value, isDynamic ? dynamicIndex++ : staticIndex++)
+                className: getPathColor(value, isDynamic ? dynamicIndex++ : staticIndex++, isProtocol)
             }
         })
     }
@@ -41,7 +46,9 @@ export default function Path({ value }: Props) {
         <div className="flex flex-wrap text-gray-400 font-mono">
             {parts.map(({ value, className }, i) => (
                 <>
-                    <div key={`sep-${value}`}>/</div>
+                    {(!containsProtocol || (containsProtocol && i != 0)) && (
+                        <div key={`sep-${value}`}>/</div>
+                    )}
                     <div key={value} className={className}>
                         {value}
                     </div>
