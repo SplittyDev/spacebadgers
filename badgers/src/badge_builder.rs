@@ -11,6 +11,7 @@ pub struct BadgeBuilder {
     label_color: Option<Cow<'static, str>>,
     icon: Option<Cow<'static, str>>,
     icon_width: Option<u32>,
+    corner_radius: Option<u32>,
     scale: f32,
 }
 
@@ -27,6 +28,7 @@ impl BadgeBuilder {
             label_color: None,
             icon: None,
             icon_width: None,
+            corner_radius: None,
             scale,
         }
     }
@@ -118,6 +120,18 @@ impl BadgeBuilder {
         self
     }
 
+    /// Set the corner radius.
+    pub fn corner_radius(mut self, corner_radius: u32) -> Self {
+        self.corner_radius = Some(corner_radius);
+        self
+    }
+
+    /// Set an optional corner radius.
+    pub fn optional_corner_radius(mut self, corner_radius: Option<u32>) -> Self {
+        self.corner_radius = corner_radius;
+        self
+    }
+
     /// Build the [Badge].
     pub fn build(self) -> Badge {
         Badge {
@@ -129,6 +143,7 @@ impl BadgeBuilder {
             icon: self.icon,
             icon_width: self.icon_width,
             scale: self.scale,
+            corner_radius: self.corner_radius,
         }
     }
 }
