@@ -12,6 +12,7 @@ pub struct Badge {
     pub(crate) label_color: Option<Cow<'static, str>>,
     pub(crate) icon: Option<Cow<'static, str>>,
     pub(crate) icon_width: Option<u32>,
+    pub(crate) corner_radius: Option<u32>,
     pub(crate) scale: f32,
 }
 
@@ -32,6 +33,9 @@ impl Badge {
         let text_shadow_offset: f32 = 10.0;
         let icon_gap: f32 = 50.0;
 
+        // Calculate corner radius
+        let corner_radius = self.corner_radius.map(|r| r as f32 * 10.0);
+
         // Space between icon and text
         let actual_icon_gap = {
             let label_is_empty = self
@@ -39,7 +43,7 @@ impl Badge {
                 .as_ref()
                 .map(|s| s.chars().count())
                 .unwrap_or_default()
-                == 0;
+                .eq(&0);
             (self.icon.is_some() && !label_is_empty)
                 .then_some(icon_gap)
                 .unwrap_or_default()
@@ -68,10 +72,11 @@ impl Badge {
         let status_text_start = label_rect_width + status_padding;
         let status_text_shadow_start = status_text_start + text_shadow_offset;
 
-        // Calculate full SVG width
-        let badge_viewbox_width = label_rect_width + status_rect_width;
-        let badge_scaled_width = self.scale * badge_viewbox_width / 10.0;
-        let badge_scaled_height = self.scale * 20.0;
+        // Calculate viewbox and scaled dimensions
+        let badge_viewbox_width: f32 = label_rect_width + status_rect_width;
+        let badge_viewbox_height: f32 = 200.0;
+        let badge_scaled_width: f32 = self.scale * badge_viewbox_width / 10.0;
+        let badge_scaled_height: f32 = self.scale * badge_viewbox_height / 10.0;
 
         // Evaluate badge parameters
         let color = self
@@ -94,23 +99,31 @@ impl Badge {
         let status = htmlize::escape_text(self.status.as_ref());
         let accessible_text = self.accessible_text();
 
-        // Build additional svg
+        // Build rounded corner mask
+        let mask_svg = corner_radius.map(|corner_radius| {
+            format!(r##"<defs><mask id="rounded"><rect rx="{corner_radius}" ry="{corner_radius}" width="{badge_viewbox_width}" height="{badge_viewbox_height}" fill="#fff" /></mask></defs>"##)
+        }).unwrap_or_default();
+
+        // Build icon xlink
         let xlink = self
             .icon
             .is_some()
-            .then_some(" xmlns:xlink=\"http://www.w3.org/1999/xlink\"")
+            .then_some(r#" xmlns:xlink="http://www.w3.org/1999/xlink""#)
             .unwrap_or_default();
+
+        // Build icon markup
         let icon_markup = self.icon.as_ref().map(|icon| {
             format!(r#"<image x="{icon_start}" y="35" width="{icon_width}" height="132" xlink:href="{icon}" />"#)
         }).unwrap_or_default();
 
         // Build final svg
         return formatdoc!(r##"
-            <svg width="{badge_scaled_width}" height="{badge_scaled_height}" viewBox="0 0 {badge_viewbox_width} 200" xmlns="http://www.w3.org/2000/svg"{xlink} role="img">
+            <svg width="{badge_scaled_width}" height="{badge_scaled_height}" viewBox="0 0 {badge_viewbox_width} {badge_viewbox_height}" xmlns="http://www.w3.org/2000/svg"{xlink} role="img">
             <title>{accessible_text}</title>
-            <g>
-            <rect fill="{label_color}" width="{label_rect_width}" height="200" />
-            <rect fill="{color}" x="{status_rect_start}" width="{status_rect_width}" height="200" />
+            {mask_svg}
+            <g{mask_addon}>
+            <rect fill="{label_color}" width="{label_rect_width}" height="{badge_viewbox_height}" />
+            <rect fill="{color}" x="{status_rect_start}" width="{status_rect_width}" height="{badge_viewbox_height}" />
             </g>
             <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
             <text x="{label_text_shadow_start}" y="148" textLength="{label_text_width}" fill="#000" opacity="0.1">{label}</text>
@@ -120,7 +133,9 @@ impl Badge {
             </g>
             {icon_markup}
             </svg>
-        "##).trim().replace('\n', "");
+            "##,
+            mask_addon = corner_radius.is_some().then_some(r##" mask="url(#rounded)""##).unwrap_or_default(),
+        ).trim().replace('\n', "");
     }
 }
 
@@ -141,6 +156,7 @@ mod tests {
             label_color: None,
             icon: None,
             icon_width: None,
+            corner_radius: None,
             scale: 1.0,
         }
         .svg());
@@ -156,6 +172,7 @@ mod tests {
             label_color: Some("gray".into()),
             icon: None,
             icon_width: None,
+            corner_radius: None,
             scale: 1.0,
         }
         .svg());
@@ -171,6 +188,7 @@ mod tests {
             label_color: None,
             icon: None,
             icon_width: None,
+            corner_radius: None,
             scale: 5.0,
         }
         .svg());
@@ -186,6 +204,7 @@ mod tests {
             label_color: Some("gray".into()),
             icon: None,
             icon_width: None,
+            corner_radius: None,
             scale: 5.0,
         }
         .svg());
@@ -201,6 +220,23 @@ mod tests {
             label_color: None,
             icon: Some("https://quintschaf.com/favicon.ico".into()),
             icon_width: None,
+            corner_radius: None,
+            scale: 1.0,
+        }
+        .svg());
+    }
+
+    #[test]
+    fn test_rounded_badge() {
+        insta::assert_debug_snapshot!(Badge {
+            color_palette: Cow::Borrowed(&color_palettes::DEFAULT),
+            status: "foo".into(),
+            label: Some("bar".into()),
+            color: None,
+            label_color: None,
+            icon: None,
+            icon_width: None,
+            corner_radius: Some(30),
             scale: 1.0,
         }
         .svg());
