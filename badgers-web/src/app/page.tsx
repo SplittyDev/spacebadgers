@@ -145,6 +145,19 @@ export default function Home() {
                     <Row name="License" path="/github/license/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                 </div>
             </Section>
+            <Section name="GitLab">
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
+                    <Row name="Latest release" path="/gitlab/release/:owner/:repo" inject={['CalcProgrammer1', 'OpenRGB']} />
+                    <Row name="Issues" path="/gitlab/issues/:owner/:repo" inject={['inkscape', 'inkscape']} />
+                    <Row name="Open issues" path="/gitlab/open-issues/:owner/:repo" inject={['inkscape', 'inkscape']} />
+                    <Row name="Closed issues" path="/gitlab/closed-issues/:owner/:repo" inject={['inkscape', 'inkscape']} />
+                    <Row name="Pipelines (combined)" path="/gitlab/pipelines/:owner/:repo" inject={['inkscape', 'inkscape']} />
+                    <Row name="Pipelines (combined)" path="/gitlab/pipelines/:owner/:repo/:branch" inject={['inkscape', 'inkscape', 'master']} />
+                    <Row name="Pipelines (specific)" path="/gitlab/pipelines/:owner/:repo/:branch/:pipeline" inject={['inkscape', 'inkscape', 'master', 'build']} />
+                    <Row name="Contributors" path="/gitlab/contributors/:owner/:repo" inject={['inkscape', 'inkscape']} />
+                    <Row name="License" path="/gitlab/license/:owner/:repo" inject={['CalcProgrammer1', 'OpenRGB']} />
+                </div>
+            </Section>
             <Section name="crates.io">
                 <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
                     <Row name="Name" path="/crates/name/:crate" inject={['serde']} />
