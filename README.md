@@ -43,7 +43,7 @@ Building SpaceBadgers has been a labor of love, aiming to offer a superior, reli
 ## Development
 
 ### Environment Variables
-> Paste this template into `badgers-web/.env.local`
+> Paste this template into `badgers-web/.env.local` for local development
 
 ```py
 # Frontend Configuration
@@ -53,7 +53,8 @@ NEXT_PUBLIC_WEB_PROTO = "http"          # Web frontend protocol
 NEXT_PUBLIC_WEB_HOST = "127.0.0.1:3000" # Web frontend host
 
 # API Tokens
-GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges
+GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges (private token)
+GITLAB_TOKEN = "glfoo-zKvC1234"         # Required for GitLab badges (private token)
 CRATESIO_TOKEN = "cio51fdR1234567"      # Required for crates.io badges
 ```
 
