@@ -1,7 +1,7 @@
 use indoc::formatdoc;
 use std::borrow::Cow;
 
-use crate::{util::calculate_width, ColorPalette};
+use crate::{minify::minify_svg, util::calculate_width, ColorPalette};
 
 /// Badge generator.
 pub struct Badge {
@@ -117,7 +117,8 @@ impl Badge {
         }).unwrap_or_default();
 
         // Build final svg
-        return formatdoc!(r##"
+        minify_svg(formatdoc!(
+            r##"
             <svg width="{badge_scaled_width}" height="{badge_scaled_height}" viewBox="0 0 {badge_viewbox_width} {badge_viewbox_height}" xmlns="http://www.w3.org/2000/svg"{xlink} role="img">
             <title>{accessible_text}</title>
             {mask_svg}
@@ -134,8 +135,11 @@ impl Badge {
             {icon_markup}
             </svg>
             "##,
-            mask_addon = corner_radius.is_some().then_some(r##" mask="url(#rounded)""##).unwrap_or_default(),
-        ).trim().replace('\n', "");
+            mask_addon = corner_radius
+                .is_some()
+                .then_some(r##" mask="url(#rounded)""##)
+                .unwrap_or_default(),
+        ))
     }
 }
 
