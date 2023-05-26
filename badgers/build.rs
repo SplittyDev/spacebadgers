@@ -223,6 +223,14 @@ impl IconSetCompiler {
 
             /// All available icon sets.
             pub const ALL_ICON_SETS: &[&IconSet] = &[{all_icon_sets}];
+
+            /// Get the code for a named icon.
+            pub fn get_icon_svg(name: impl AsRef<str>) -> Option<&'static str> {{
+                let name = name.as_ref();
+                ALL_ICON_SETS
+                    .iter()
+                    .find_map(|icon_set| icon_set.get(name))
+            }}
         "###};
 
         // Write to file

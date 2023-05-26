@@ -12,27 +12,42 @@ impl<'a> Icon<'a> {
         }
     }
 
+    /// Turn the icon into a data URI.
+    ///
+    /// **Note on URL handling**
+    ///
+    /// In the case of external URLs, the icon will be downloaded first, and then
+    /// converted to a data URI. This will introduce additional latency,
+    /// so it's not generally recommended.
     pub async fn get_data(&self) -> Option<String> {
         match self.value {
             // Handle URLs
-            v if v.starts_with("http") => self.fetch_as_data().await,
+            v if v.starts_with("http:") || v.starts_with("https:") => self.fetch_as_data().await,
 
             // Handle data URIs
             v if v.starts_with("data:") => Some(v.to_string()),
 
-            // Handle named icons
-            v => spacebadgers::icons::ALL_ICON_SETS
-                .iter()
-                .find_map(|icon_set| {
-                    icon_set.get(v).map(|svg| {
-                        let engine = base64::engine::general_purpose::STANDARD;
-                        let data = engine.encode(svg);
-                        format!("data:image/svg+xml;base64,{data}")
-                    })
-                }),
+            // Handle everything else
+            v => {
+                // Try to find the icon in the built-in set of named icons
+                let named_icon = spacebadgers::icons::get_icon_svg(v).map(|svg| {
+                    let engine = base64::engine::general_purpose::STANDARD;
+                    let data = engine.encode(svg);
+                    format!("data:image/svg+xml;base64,{data}")
+                });
+
+                // Otherwise, try to download the icon.
+                // The `value` might be a website without the protocol prefix.
+                if named_icon.is_none() {
+                    return self.fetch_as_data().await;
+                }
+
+                named_icon
+            }
         }
     }
 
+    /// Download the icon using a `Fetch` request, and convert it to a data URI.
     async fn fetch_as_data(&self) -> Option<String> {
         let req = Request::new(self.value, worker::Method::Get).ok()?;
         let mut res = Fetch::Request(req).send().await.ok()?;

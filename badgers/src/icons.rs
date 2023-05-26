@@ -11,3 +11,9 @@ pub use feather_icons::FEATHER_ICONS;
 
 /// All available icon sets.
 pub const ALL_ICON_SETS: &[&IconSet] = &[&FEATHER_ICONS];
+
+/// Get the code for a named icon.
+pub fn get_icon_svg(name: impl AsRef<str>) -> Option<&'static str> {
+    let name = name.as_ref();
+    ALL_ICON_SETS.iter().find_map(|icon_set| icon_set.get(name))
+}
