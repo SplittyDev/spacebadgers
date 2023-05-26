@@ -182,7 +182,7 @@ impl IconSetCompiler {
         let modules = self
             .icon_sets
             .iter()
-            .map(|set| format!("pub mod {};", set.module))
+            .map(|set| format!("#[rustfmt::skip]\npub mod {};", set.module))
             .collect::<Vec<_>>()
             .join("\n");
 
@@ -190,7 +190,7 @@ impl IconSetCompiler {
         let reexports = self
             .icon_sets
             .iter()
-            .map(|set| format!("pub use {}::{};", set.module, set.export))
+            .map(|set| format!("#[rustfmt::skip]\npub use {}::{};", set.module, set.export))
             .collect::<Vec<_>>()
             .join("\n");
 
@@ -224,7 +224,7 @@ impl IconSetCompiler {
             .truncate(true)
             .open(format!("src/icons.rs"))
             .expect("Unable to open/create file: src/icons.rs")
-            .write_all(code.trim().as_bytes())
+            .write_all(code.as_bytes())
             .expect("Unable to write to file: src/icons.rs");
     }
 }
