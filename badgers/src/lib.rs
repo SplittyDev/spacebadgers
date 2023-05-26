@@ -18,6 +18,7 @@
 mod badge;
 mod badge_builder;
 mod color_palette;
+pub mod icons;
 pub mod minify;
 mod util;
 mod width;
