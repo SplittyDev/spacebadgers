@@ -93,7 +93,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
 
         // Fetch icon as base64
         let fetched_icon = if let Some(icon) = icon {
-            icon::Icon::new(&icon).fetch_as_data().await
+            icon::Icon::new(&icon).get_data().await
         } else {
             None
         };
