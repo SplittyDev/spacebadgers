@@ -18,6 +18,9 @@ fn main() {
             "feather",
             "../vendor/feather/icons",
             "../vendor/feather/LICENSE",
+            // Feather icons use `currentColor` for strokes, which doesn't work in our case.
+            // We embed the code as a base64 data URI, so we need to replace `currentColor`.
+            Some(|svg: &str| svg.replace("currentColor", "#fff")),
         )
         .finalize();
 }
@@ -89,6 +92,7 @@ impl IconSetCompiler {
         prefix: impl AsRef<str>,
         icon_path: impl AsRef<Path>,
         license_path: impl AsRef<Path>,
+        post_process: Option<impl Fn(&str) -> String>,
     ) -> Self {
         let prefix = prefix.as_ref();
         let module = module.as_ref();
@@ -118,6 +122,10 @@ impl IconSetCompiler {
                 let icon_name = format!("{prefix}-{icon_name}");
                 let icon_svg =
                     read_to_string(path).expect(&format!("Unable to read file: {:?}", path));
+                let icon_svg = post_process
+                    .as_ref()
+                    .map(|f| f(&icon_svg))
+                    .unwrap_or(icon_svg);
                 icons.push(Icon {
                     name: icon_name,
                     svg: icon_svg,
