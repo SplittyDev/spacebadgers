@@ -3,6 +3,7 @@ name = "spacebadgers"
 version = "1.2.0"
 edition = "2021"
 description = "Fast SVG badge generator"
+build = "build.rs"
 
 license.workspace = true
 repository.workspace = true
@@ -25,6 +26,12 @@ features = ["std", "perf", "unicode-perl"]
 [dev-dependencies]
 criterion = { version = "0.5.0", features = ["html_reports"] }
 insta = "1.29.0"
+
+[build-dependencies]
+walkdir = "2"
+indoc = "2.0.1"
+once_cell = "1.17.1"
+regex = { version = "1.8.2", default-features = false, features = ["std", "perf", "unicode-perl"] }
 
 [[bench]]
 name = "minify"

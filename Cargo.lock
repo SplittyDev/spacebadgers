@@ -998,6 +998,7 @@ dependencies = [
  "once_cell",
  "phf",
  "regex",
+ "walkdir",
 ]
 
 [[package]]
