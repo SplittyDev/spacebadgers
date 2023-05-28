@@ -1,5 +1,6 @@
 import { StaticBadge, Section, ThemeStrip, Path } from '@/components'
 import { BadgeEndpointRow as Row } from '@/components'
+import Link from 'next/link'
 
 const ApiParams = [
     {
@@ -30,7 +31,7 @@ const ApiParams = [
     {
         name: 'icon',
         description: 'Set label icon',
-        extra: ['image url'],
+        extra: ['named icon', 'image url'],
     },
     {
         name: 'icon_width',
@@ -79,6 +80,18 @@ export default function Home() {
                     <StaticBadge label="color" status="black" color="black" />
                 </div>
             </div>
+        </div>
+
+        {/* Icons */}
+        <div className="flex flex-col gap-4">
+            <h2 className="text-xl text-gray-700 font-bold self-start">Icons</h2>
+            <div className="flex gap-1 justify-start">
+                <StaticBadge label="github" status="Open Source" color="gray" icon="feather-github" labelOverride='' />
+                <StaticBadge label="alert" status="Funky CI" color="orange" icon="feather-alert-triangle" labelOverride='' />
+                <StaticBadge label="check" status="It works" color="green" icon="feather-check" labelOverride='' />
+                <StaticBadge label="cloud" status="enabled" color="cyan" icon="feather-cloud" />
+            </div>
+            <Link className="text-sm text-gray-600 underline underline-offset-2" href="/icons">See all supported icons here</Link>
         </div>
 
         <div className="flex flex-col gap-6 lg:flex-row lg:justify-between">

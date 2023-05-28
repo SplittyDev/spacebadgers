@@ -5,7 +5,7 @@ type Props = {
 export default function Path({ value }: Props) {
     const containsProtocol = /^https?:[/]{2}/m.test(value)
 
-    const getPathColor = (path: string, i: number, isProtocol: boolean) => {
+    const getPathColor = (path: string, i: number, isProtocol: boolean, isQueryParam: boolean) => {
         const staticColors = [
             'text-slate-800',
             'text-zinc-600',
@@ -18,8 +18,15 @@ export default function Path({ value }: Props) {
             'text-indigo-700',
             'text-purple-700',
         ]
+        const queryParamColors = [
+            'text-pink-600',
+            'text-purple-600',
+        ]
         if (isProtocol) {
             return 'text-gray-400'
+        }
+        if (isQueryParam) {
+            return queryParamColors[i % queryParamColors.length]
         }
         return path.startsWith(':')
             ? dynamicColors[i % dynamicColors.length]
@@ -27,15 +34,23 @@ export default function Path({ value }: Props) {
     }
 
     const explodePath = (path: string) => {
-        const parts = value.replace(/^[/]+/gm, '').split('/')
+        const parts = path.replace(/^[/]+/gm, '').split(/\/|&|__query__/)
         let staticIndex = 0
         let dynamicIndex = 0
+        let queryParamCount = 0
+        let isQueryParam = false
         return parts.map(value => {
             const isProtocol = value.endsWith(':')
             const isDynamic = value.startsWith(':')
+            isQueryParam ||= value.startsWith('?') || value.startsWith('&')
+            if (isQueryParam) {
+                queryParamCount += 1
+            }
             return {
                 value,
-                className: getPathColor(value, isDynamic ? dynamicIndex++ : staticIndex++, isProtocol)
+                className: getPathColor(value, isQueryParam ? queryParamCount - 1 : isDynamic ? dynamicIndex++ : staticIndex++, isProtocol, isQueryParam),
+                isQuery: isQueryParam,
+                renderAmpersand: queryParamCount == 2
             }
         })
     }
@@ -43,12 +58,13 @@ export default function Path({ value }: Props) {
     const parts = explodePath(value)
 
     return (
-        <div className="flex flex-wrap text-gray-400 font-mono">
-            {parts.map(({ value, className }, i) => (
+        <div className="flex flex-wrap whitespace-pre-wrap text-gray-400 font-mono">
+            {parts.map(({ value, className, isQuery, renderAmpersand }, i) => (
                 <>
-                    {(!containsProtocol || (containsProtocol && i != 0)) && (
+                    {!isQuery && (!containsProtocol || (containsProtocol && i != 0)) && (
                         <div key={`sep-${value}`}>/</div>
                     )}
+                    {renderAmpersand && <div className={className}>&amp;</div>}
                     <div key={value} className={className}>
                         {value}
                     </div>

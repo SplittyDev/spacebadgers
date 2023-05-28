@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import Logo from './logo.png'
 
 import './globals.css'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +29,7 @@ export default function RootLayout({
         <body className={`${inter.className} w-full flex flex-col items-center`}>
             <div className="flex min-h-screen w-full xl:w-10/12 2xl:w-8/12 flex-col items-center py-4 md:p-16 gap-8">
                 <header className="flex flex-col gap-4">
-                    <div className="flex gap-4">
+                    <Link href="/" className="flex gap-4 select-none">
                         <div className="max-w-[64px] max-h-[64px] rounded-full shadow-md">
                             <Image placeholder='blur' priority alt="badgers.space Logo" src={Logo} width={256} height={256} />
                         </div>
@@ -36,7 +37,7 @@ export default function RootLayout({
                             Badge
                             <span className="text-orange-500">rs</span>
                         </h1>
-                    </div>
+                    </Link>
                     <div className="flex flex-col items-center justify-center">
                         Fast and clean SVG badges for your projects
                     </div>
