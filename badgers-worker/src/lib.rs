@@ -150,8 +150,14 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             .map(|res| res.with_headers(get_svg_headers(DEFAULT_CACHE_DURATION).unwrap()))
     }
 
-    async fn handle_list_icons_route(_req: Request, _ctx: RouteContext<()>) -> worker::Result<Response> {
-        let icons = spacebadgers::icons::ALL_ICON_SETS.iter().flat_map(|set| serde_json::to_value(set)).collect::<Vec<_>>();
+    async fn handle_list_icons_route(
+        _req: Request,
+        _ctx: RouteContext<()>,
+    ) -> worker::Result<Response> {
+        let icons = spacebadgers::icons::ALL_ICON_SETS
+            .iter()
+            .flat_map(|set| serde_json::to_value(set))
+            .collect::<Vec<_>>();
         Response::from_json(&icons)
     }
 
