@@ -53,7 +53,7 @@ export default function RootLayout({
                                 </span>
                             </div>
                             <div className="flex gap-4 text-sm">
-                                <a target="_blank" className="text-gray-500 hover:text-amber-600" href="https://github.com/splittydev/badgers">GitHub</a>
+                                <a target="_blank" className="text-gray-500 hover:text-amber-600" href="https://github.com/splittydev/spacebadgers">GitHub</a>
                             </div>
                         </section>
 
