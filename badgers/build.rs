@@ -4,19 +4,20 @@ use std::{
     path::Path,
 };
 
-use badgers_utils::minify::minify_svg;
 use indoc::formatdoc;
+use spacebadgers_utils::minify::minify_svg;
 use walkdir::WalkDir;
 
 /// Main entry point for the build script.
 fn main() {
+    println!("cargo:rerun-if-changed=vendor/*");
     IconSetCompiler::new()
         .compile(
             "Feather Icons",
             "feather_icons",
             "feather",
-            "../vendor/feather/icons",
-            "../vendor/feather/LICENSE",
+            "vendor/feather/icons",
+            "vendor/feather/LICENSE",
             // Feather icons use `currentColor` for strokes, which doesn't work in our case.
             // We embed the code as a base64 data URI, so we need to replace `currentColor`.
             Some(|svg: &str| svg.replace("currentColor", "#fff")),
@@ -93,7 +94,6 @@ impl IconSetCompiler {
         for entry in WalkDir::new(icon_path).into_iter().filter_map(Result::ok) {
             let path = entry.path();
             if path.is_file() && path.extension().map(|e| e == "svg").unwrap_or(false) {
-                println!("cargo:rerun-if-changed={}", path.display());
                 let icon_name = path
                     .file_stem()
                     .expect(&format!("Unable to get file stem for file: {:?}", path))
