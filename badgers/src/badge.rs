@@ -1,5 +1,5 @@
-use badgers_utils::minify::minify_svg;
 use indoc::formatdoc;
+use spacebadgers_utils::minify::minify_svg;
 use std::borrow::Cow;
 
 use crate::{util::calculate_width, ColorPalette};

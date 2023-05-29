@@ -1,5 +1,5 @@
 [package]
-name = "badgers-utils"
+name = "spacebadgers-utils"
 version = "1.0.0"
 edition = "2021"
 description = "A collection of utilities for the SpaceBadgers project."
