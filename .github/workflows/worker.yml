@@ -1,4 +1,4 @@
-name: Spacebadgers Worker
+name: worker
 
 on:
   pull_request:

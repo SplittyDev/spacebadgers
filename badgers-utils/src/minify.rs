@@ -8,6 +8,7 @@ static REGEX_MATCH_TAG_END: Lazy<Regex> = Lazy::new(|| Regex::new(r"(\s+)(/?>)")
 static REGEX_MATCH_START_END_WHITESPACE: Lazy<Regex> =
     Lazy::new(|| Regex::new(r"(?m)^\s+|\s+$").unwrap());
 
+/// Minify an SVG string.
 pub fn minify_svg(str: impl AsRef<str>) -> String {
     let str = str.as_ref();
     let str = REGEX_MATCH_START_END_WHITESPACE.replace_all(str, "");

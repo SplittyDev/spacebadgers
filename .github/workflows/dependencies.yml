@@ -1,4 +1,4 @@
-name: Dependency Checks
+name: deps
 
 on:
   pull_request:

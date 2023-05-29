@@ -1,4 +1,4 @@
-name: spacebadgers
+name: utils
 
 on:
   pull_request:
@@ -23,10 +23,10 @@ jobs:
           submodules: true
       - run: rustup toolchain install stable --profile default
       - name: cargo test
-        run: cargo test --release -p spacebadgers
+        run: cargo test --release -p badgers-utils
       - name: cargo test (doctests)
-        run: cargo test --release --doc -p spacebadgers
+        run: cargo test --release --doc -p badgers-utils
       - name: cargo clippy
-        run: cargo clippy -p spacebadgers
+        run: cargo clippy -p badgers-utils
       - name: rustfmt
-        run: cargo fmt -p spacebadgers --check
+        run: cargo fmt -p badgers-utils --check
