@@ -20,7 +20,7 @@ pub fn minify_svg(str: impl AsRef<str>) -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::minify_svg;
 
     /// Test minification of an SVG icon.
     #[test]

@@ -15,7 +15,8 @@
 
 ## Project Structure
 
-- `spacebadgers`: Core badgers library
+- `badgers`: Core spacebadgers library
+- `badgers-utils`: Internal utilities for spacebadgers
 - `badgers-cli`: CLI for generating SVG badges
 - `badgers-worker`: Cloudflare worker
 - `badgers-web`: Web frontend for [badgers.space](https://badgers.space)
@@ -130,8 +131,8 @@ yarn                # If you're using yarn
 
 ```bash
 cd badgers-web
-npm run dev     # If you're using npm
-yarn dev        # If you're using yarn
+npm run dev         # If you're using npm
+yarn dev            # If you're using yarn
 ```
 
 </details>

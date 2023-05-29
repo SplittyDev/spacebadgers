@@ -92,6 +92,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "badgers-utils"
+version = "1.0.0"
+dependencies = [
+ "criterion",
+ "once_cell",
+ "regex",
+]
+
+[[package]]
 name = "badgers-worker"
 version = "1.4.0"
 dependencies = [
@@ -994,13 +1003,12 @@ dependencies = [
 name = "spacebadgers"
 version = "1.3.0"
 dependencies = [
+ "badgers-utils",
  "criterion",
  "htmlize",
  "indoc",
  "insta",
- "once_cell",
  "phf",
- "regex",
  "serde",
  "walkdir",
 ]

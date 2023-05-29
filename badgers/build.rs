@@ -4,9 +4,8 @@ use std::{
     path::Path,
 };
 
+use badgers_utils::minify::minify_svg;
 use indoc::formatdoc;
-use once_cell::sync::Lazy;
-use regex::Regex;
 use walkdir::WalkDir;
 
 /// Main entry point for the build script.
@@ -24,26 +23,6 @@ fn main() {
         )
         .finalize();
 }
-
-// TODO: Split this off into a utility crate.
-// This is a copy of the `minify_svg` function from the spacebadgers crate.
-static REGEX_MATCH_NEWLINE: Lazy<Regex> = Lazy::new(|| Regex::new(r"\r?\n").unwrap());
-static REGEX_MATCH_COMMENTS: Lazy<Regex> = Lazy::new(|| Regex::new(r"(?s)<!--.*?-->").unwrap());
-static REGEX_MATCH_BETWEEN_TAGS: Lazy<Regex> = Lazy::new(|| Regex::new(r"(>)(\s+)(<)").unwrap());
-static REGEX_MATCH_TAG_END: Lazy<Regex> = Lazy::new(|| Regex::new(r"(\s+)(/?>)").unwrap());
-static REGEX_MATCH_START_END_WHITESPACE: Lazy<Regex> =
-    Lazy::new(|| Regex::new(r"(?m)^\s+|\s+$").unwrap());
-
-fn minify_svg(str: impl AsRef<str>) -> String {
-    let str = str.as_ref();
-    let str = REGEX_MATCH_START_END_WHITESPACE.replace_all(str, "");
-    let str = REGEX_MATCH_NEWLINE.replace_all(&str, " ");
-    let str = REGEX_MATCH_COMMENTS.replace_all(&str, "");
-    let str = REGEX_MATCH_BETWEEN_TAGS.replace_all(&str, "$1$3");
-    let str = REGEX_MATCH_TAG_END.replace_all(&str, "$2");
-    str.trim().to_string()
-}
-// END TODO
 
 /// A single icon entry.
 /// Used for generating the icon hashmap.

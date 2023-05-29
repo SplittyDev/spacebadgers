@@ -1,7 +1,8 @@
+use badgers_utils::minify::minify_svg;
 use indoc::formatdoc;
 use std::borrow::Cow;
 
-use crate::{minify::minify_svg, util::calculate_width, ColorPalette};
+use crate::{util::calculate_width, ColorPalette};
 
 /// Badge generator.
 pub struct Badge {

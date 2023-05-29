@@ -2,6 +2,7 @@
 members = [
     "badgers",
     "badgers-cli",
+    "badgers-utils",
     "badgers-worker"
 ]
 
@@ -13,6 +14,7 @@ authors = ["Marco Quinten <splittydev@gmail.com>"]
 
 [workspace.dependencies]
 spacebadgers = { path = "badgers" }
+badgers-utils = { path = "badgers-utils" }
 
 [profile.release.package.badgers-worker]
 # Tell `rustc` to optimize for small code size.

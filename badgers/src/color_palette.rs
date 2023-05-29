@@ -1,4 +1,4 @@
-use crate::minify::minify_svg;
+use badgers_utils::minify::minify_svg;
 use indoc::formatdoc;
 use std::borrow::Cow;
 

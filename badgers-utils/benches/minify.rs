@@ -19,7 +19,7 @@ fn criterion_benchmark(c: &mut Criterion) {
         </svg>
         "#;
     c.bench_function("minify_svg", |b| {
-        b.iter(|| spacebadgers::minify::minify_svg(black_box(svg)))
+        b.iter(|| badgers_utils::minify::minify_svg(black_box(svg)))
     });
 }
 
