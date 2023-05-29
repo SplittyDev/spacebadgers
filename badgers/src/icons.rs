@@ -4,13 +4,17 @@
 pub mod icon_set;
 #[rustfmt::skip]
 pub mod feather_icons;
+#[rustfmt::skip]
+pub mod cssgg_icons;
 
 pub use icon_set::IconSet;
 #[rustfmt::skip]
 pub use feather_icons::FEATHER_ICONS;
+#[rustfmt::skip]
+pub use cssgg_icons::CSSGG_ICONS;
 
 /// All available icon sets.
-pub const ALL_ICON_SETS: &[&IconSet] = &[&FEATHER_ICONS];
+pub const ALL_ICON_SETS: &[&IconSet] = &[&FEATHER_ICONS, &CSSGG_ICONS];
 
 /// Get the code for a named icon.
 pub fn get_icon_svg(name: impl AsRef<str>) -> Option<&'static str> {

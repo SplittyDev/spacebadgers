@@ -1,3 +1,6 @@
 [submodule "badgers/vendor/feather"]
 	path = badgers/vendor/feather
 	url = https://github.com/feathericons/feather.git
+[submodule "badgers/vendor/cssgg"]
+	path = badgers/vendor/cssgg
+	url = https://github.com/astrit/css.gg.git
