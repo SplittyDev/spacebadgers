@@ -93,7 +93,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
 
         // Fetch icon as base64
         let fetched_icon = if let Some(icon) = icon {
-            icon::Icon::new(&icon).fetch_as_data().await
+            icon::Icon::new(&icon).get_data().await
         } else {
             None
         };
@@ -150,10 +150,22 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
             .map(|res| res.with_headers(get_svg_headers(DEFAULT_CACHE_DURATION).unwrap()))
     }
 
+    async fn handle_list_icons_route(
+        _req: Request,
+        _ctx: RouteContext<()>,
+    ) -> worker::Result<Response> {
+        let icons = spacebadgers::icons::ALL_ICON_SETS
+            .iter()
+            .flat_map(|set| serde_json::to_value(set))
+            .collect::<Vec<_>>();
+        Response::from_json(&icons)
+    }
+
     Router::new()
         .get_async("/badge/:label/:status/:color", handle_badge_route)
         .get_async("/badge/:label/:status", handle_badge_route)
         .get_async("/theme/:name", handle_theme_route)
+        .get_async("/json/icons", handle_list_icons_route)
         .run(req, env)
         .await
 }

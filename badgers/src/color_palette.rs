@@ -1,3 +1,4 @@
+use badgers_utils::minify::minify_svg;
 use indoc::formatdoc;
 use std::borrow::Cow;
 
@@ -118,7 +119,7 @@ impl ColorPalette {
         let border_svg = format!(
             r##"<rect rx="{corner_radius}" ry="{corner_radius}" width="{full_width}" height="{rect_height}" fill="none" stroke="#666" stroke-width="10" stroke-linecap="round" />"##
         );
-        formatdoc! {r##"
+        minify_svg(formatdoc! {r##"
             <svg width="{output_width}" height="{output_height}" viewBox="{viewbox}" xmlns="http://www.w3.org/2000/svg" role="img">
             <title>{name}</title>{mask}
             <g{mask_addon}>
@@ -129,7 +130,7 @@ impl ColorPalette {
             mask = if rounded { mask_svg.as_ref() } else { "" },
             mask_addon = if rounded { r##" mask="url(#rounded)""## } else { "" },
             border = if bordered { border_svg.as_ref() } else { "" },
-        }.trim().replace('\n', "")
+        })
     }
 }
 

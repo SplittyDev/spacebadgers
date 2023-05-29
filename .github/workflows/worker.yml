@@ -1,4 +1,4 @@
-name: Spacebadgers Worker
+name: worker
 
 on:
   pull_request:
@@ -19,6 +19,8 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - run: rustup toolchain install stable --profile default
       - name: cargo test
         run: cargo test --release -p badgers-worker
@@ -34,6 +36,8 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - run: rustup toolchain install stable --profile minimal
       - run: yarn
         working-directory: ./badgers-worker

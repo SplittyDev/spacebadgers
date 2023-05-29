@@ -2,6 +2,8 @@ type Props = {
     label: string
     status: string
     color?: string
+    icon?: string,
+    labelOverride?: string,
 }
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -20,22 +22,26 @@ const widthLut = {
     'color/black/black': 76,
 } as Record<string, number>
 
-export default function StaticBadge({ label, status, color }: Props) {
+export default function StaticBadge({ label, status, color, icon, labelOverride }: Props) {
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_API_PROTO
         const host = process.env.NEXT_PUBLIC_API_HOST
         const baseUrl = `${proto}://${host}/badge`
-        const params = [
+        const pathParams = [
             label,
             status,
             color,
         ]
-        const bustParam = isDevelopment ? `&bust=${Date.now()}` : ''
-        return `${baseUrl}/${params.filter(Boolean).join('/').replace(/^[/]+/gm, '')}?cache=86400${bustParam}`
+        const queryParams = [
+            icon && `icon=${icon}`,
+            labelOverride !== undefined && `label=${labelOverride}`,
+            isDevelopment && `bust=${Date.now()}`,
+        ].filter(Boolean).join("&")
+        return `${baseUrl}/${pathParams.filter(Boolean).join('/').replace(/^[/]+/gm, '')}?cache=86400&${queryParams}`
     }
 
     const badgeHash = `${label}/${status}/${color}`
-    const width = widthLut[badgeHash] || 70
+    const width = widthLut[badgeHash] || undefined
 
     return (
         <div className="flex justify-start items-start">

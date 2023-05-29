@@ -1,0 +1,25 @@
+[package]
+name = "badgers-utils"
+version = "1.0.0"
+edition = "2021"
+description = "A collection of utilities for the SpaceBadgers project."
+
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+
+[dependencies]
+once_cell = "1.17.1"
+
+[dependencies.regex]
+version = "1.8.2"
+default-features = false
+features = ["std", "perf", "unicode-perl"]
+
+[dev-dependencies]
+criterion = { version = "0.5.0", features = ["html_reports"] }
+
+[[bench]]
+name = "minify"
+harness = false

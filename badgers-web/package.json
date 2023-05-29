@@ -26,6 +26,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@octokit/types": "^9.2.2"
+    "@octokit/types": "^9.2.2",
+    "encoding": "^0.1.13"
   }
 }

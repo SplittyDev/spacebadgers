@@ -1,5 +1,6 @@
 import { StaticBadge, Section, ThemeStrip, Path } from '@/components'
 import { BadgeEndpointRow as Row } from '@/components'
+import Link from 'next/link'
 
 const ApiParams = [
     {
@@ -30,7 +31,7 @@ const ApiParams = [
     {
         name: 'icon',
         description: 'Set label icon',
-        extra: ['image url'],
+        extra: ['named icon', 'image url'],
     },
     {
         name: 'icon_width',
@@ -62,7 +63,7 @@ export default function Home() {
 
         {/* Named Colors */}
         <div className="flex flex-col gap-4">
-            <h2 className="text-xl text-gray-700 font-bold self-start">Supported Colors</h2>
+            <h2 className="text-xl text-gray-700 font-bold self-start">Colors</h2>
             <div className="flex flex-col gap-1 items-start md:items-center md:flex-row">
                 <div className="flex gap-1 justify-start">
                     <StaticBadge label="color" status="blue" color="blue" />
@@ -79,6 +80,20 @@ export default function Home() {
                     <StaticBadge label="color" status="black" color="black" />
                 </div>
             </div>
+            <div className="text-sm text-gray-600">We also support <abbr title="examples: fff, 24c66b, c624a0...">hex annotation</abbr> for custom colors.</div>
+        </div>
+
+        {/* Icons */}
+        <div className="flex flex-col gap-4">
+            <h2 className="text-xl text-gray-700 font-bold self-start">200+ Icons</h2>
+            <div className="flex gap-1 justify-start">
+                <StaticBadge label="github" status="open source" color="blue" icon="feather-github" labelOverride='' />
+                <StaticBadge label="alert" status="warning" color="orange" icon="feather-alert-triangle" labelOverride='' />
+                <StaticBadge label="check" status="success" color="green" icon="feather-check" labelOverride='' />
+                <StaticBadge label="cloud" status="enabled" color="cyan" icon="feather-cloud" />
+                <StaticBadge label="plus" status="and many more!" color="pink" icon="feather-plus" labelOverride='' />
+            </div>
+            <Link className="text-sm text-gray-600 underline underline-offset-2" href="/icons">Browse all supported icons here</Link>
         </div>
 
         <div className="flex flex-col gap-6 lg:flex-row lg:justify-between">

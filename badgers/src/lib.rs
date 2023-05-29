@@ -21,6 +21,8 @@ mod color_palette;
 mod util;
 mod width;
 
+pub mod icons;
+
 pub use badge::Badge;
 pub use badge_builder::BadgeBuilder;
 pub use color_palette::ColorPalette;
