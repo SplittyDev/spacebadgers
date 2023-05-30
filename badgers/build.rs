@@ -22,6 +22,16 @@ fn main() {
             // We embed the code as a base64 data URI, so we need to replace `currentColor`.
             Some(|svg: &str| svg.replace("currentColor", "#fff")),
         )
+        .compile(
+            "css.gg Icons",
+            "cssgg_icons",
+            "cssgg",
+            "vendor/cssgg/icons/svg",
+            "vendor/cssgg/LICENSE",
+            // css.gg icons use `currentColor` for strokes, which doesn't work in our case.
+            // We embed the code as a base64 data URI, so we need to replace `currentColor`.
+            Some(|svg: &str| svg.replace("currentColor", "#fff")),
+        )
         .finalize();
 }
 

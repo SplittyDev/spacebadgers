@@ -26,6 +26,9 @@ export default function IconShelf({ icons }: Props) {
                 <section key={name} className="flex flex-col gap-2">
                     <h2 className="text-2xl font-bold">{name}</h2>
                     <div className="border-2 border-gray-600 p-4 rounded-md grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto_1fr] lg:grid-cols-[auto_1fr_auto_1fr_auto_1fr] items-center gap-4">
+                        {Object.keys(icons).length === 0 && (
+                            <div className="text-gray-700">No matches.</div>
+                        )}
                         {Object.entries(icons).map(([name, data]) => {
                             return (
                                 <>

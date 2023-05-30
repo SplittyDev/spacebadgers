@@ -85,7 +85,7 @@ export default function Home() {
 
         {/* Icons */}
         <div className="flex flex-col gap-4">
-            <h2 className="text-xl text-gray-700 font-bold self-start">200+ Icons</h2>
+            <h2 className="text-xl text-gray-700 font-bold self-start">900+ Icons</h2>
             <div className="flex gap-1 justify-start">
                 <StaticBadge label="github" status="open source" color="blue" icon="feather-github" labelOverride='' />
                 <StaticBadge label="alert" status="warning" color="orange" icon="feather-alert-triangle" labelOverride='' />
