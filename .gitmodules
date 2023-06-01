@@ -4,3 +4,6 @@
 [submodule "badgers/vendor/cssgg"]
 	path = badgers/vendor/cssgg
 	url = https://github.com/astrit/css.gg.git
+[submodule "badgers/vendor/eva"]
+	path = badgers/vendor/eva
+	url = https://github.com/akveo/eva-icons.git

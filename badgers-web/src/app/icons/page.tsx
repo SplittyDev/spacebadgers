@@ -8,8 +8,10 @@ export type IconSetList = {
 }[]
 
 async function getIcons() {
+    const isDevelopment = process.env.NODE_ENV === 'development'
+    const revalidate = isDevelopment ? 1 : 3600
     const endpoint = `${process.env.NEXT_PUBLIC_API_PROTO}://${process.env.NEXT_PUBLIC_API_HOST}/json/icons`
-    const res = await fetch(endpoint, { next: { revalidate: 3600 } })
+    const res = await fetch(endpoint, { next: { revalidate } })
     const data = await res.json() as IconSetList
     for (const item in data) {
         data[item].icons = Object.fromEntries(Object.entries(data[item].icons).map(([key, value]) => {

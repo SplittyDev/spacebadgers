@@ -32,6 +32,22 @@ fn main() {
             // We embed the code as a base64 data URI, so we need to replace `currentColor`.
             Some(|svg: &str| svg.replace("currentColor", "#fff")),
         )
+        .compile(
+            "Eva Icons / Filled",
+            "eva_icons_fill",
+            "eva",
+            "vendor/eva/package/icons/fill/svg",
+            "vendor/eva/LICENSE.txt",
+            Some(|svg: &str| svg.replace("#231f20", "#fff")),
+        )
+        .compile(
+            "Eva Icons / Outlined",
+            "eva_icons_outline",
+            "eva",
+            "vendor/eva/package/icons/outline/svg",
+            "vendor/eva/LICENSE.txt",
+            Some(|svg: &str| svg.replace("#231f20", "#fff")),
+        )
         .finalize();
 }
 
