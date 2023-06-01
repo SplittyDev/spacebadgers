@@ -22,6 +22,7 @@ pub use eva_icons_fill::EVA_ICONS_FILL;
 pub use eva_icons_outline::EVA_ICONS_OUTLINE;
 
 /// All available icon sets.
+#[rustfmt::skip]
 pub const ALL_ICON_SETS: &[&IconSet] = &[&FEATHER_ICONS, &CSSGG_ICONS, &EVA_ICONS_FILL, &EVA_ICONS_OUTLINE];
 
 /// Get the code for a named icon.

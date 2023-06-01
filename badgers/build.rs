@@ -227,6 +227,7 @@ impl IconSetCompiler {
             {reexports}
 
             /// All available icon sets.
+            #[rustfmt::skip]
             pub const ALL_ICON_SETS: &[&IconSet] = &[{all_icon_sets}];
 
             /// Get the code for a named icon.
