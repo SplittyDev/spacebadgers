@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from "react"
+
 import { type IconSetList } from "./page"
 
 type Props = {
@@ -21,7 +22,7 @@ export default function IconShelf({ icons }: Props) {
 
     return (
         <div className="flex flex-col gap-4 w-full">
-            <input className="border-2 border-gray-400 p-2 rounded-md" type="search" placeholder="Search for icons" value={searchTerm} onInput={e => setSearchTerm((e.target as HTMLInputElement).value)} />
+            <input className="border-2 border-gray-600 p-2 rounded-md" type="search" placeholder="Search for icons" value={searchTerm} onInput={e => setSearchTerm((e.target as HTMLInputElement).value)} />
             {filteredIcons.map(({ name, icons }) => (
                 <section key={name} className="flex flex-col gap-2">
                     <h2 className="text-2xl font-bold">{name}</h2>
