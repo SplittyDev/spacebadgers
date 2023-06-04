@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server"
 
-import { Badge, Crates } from '@/utils'
+import Badge from '@/utils/Badge'
+import Crates from '@/utils/Crates'
 
 interface Params {
     params: {

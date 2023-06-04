@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server"
 
-import { Badge, Npm } from '@/utils'
+import Badge from '@/utils/Badge'
+import Npm from '@/utils/Npm'
 
 interface Params {
     params: {

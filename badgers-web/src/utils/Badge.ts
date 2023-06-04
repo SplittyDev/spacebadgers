@@ -52,7 +52,11 @@ export default class Badge {
             .join('&')
 
         // Fetch the badge from the worker
-        const resp = await fetch(`${api.proto}://${api.host}/badge/${pathParams.label}/${pathParams.status}?${queryParams}`)
+        const resp = await fetch(`${api.proto}://${api.host}/badge/${pathParams.label}/${pathParams.status}?${queryParams}`, {
+            next: {
+                revalidate: 300, // 5m
+            }
+        })
         const data = await resp.arrayBuffer()
 
         // Build response headers
@@ -84,7 +88,7 @@ export default class Badge {
         const urlPath = request.nextUrl.pathname.replace(/^[/]+/gm, '')
         const urlQuery = request.nextUrl.search.replace(/^\?+/gm, '')
         const url = `${api.proto}://${api.host}/${urlPath}?${urlQuery}`
-        const resp = await fetch(url)
+        const resp = await fetch(url, { next: { revalidate: 300 } })
         const data = await resp.arrayBuffer()
         const headers = {
             'content-type': 'image/svg+xml',

@@ -70,3 +70,8 @@ export default class GitHub {
         )
     }
 }
+
+// Disable Vercel data cache for all requests.
+// This is a temporary solution. Once we can serve all routes via fetch,
+// we can remove this and use the next revalidate feature.
+export const fetchCache = 'force-no-store'

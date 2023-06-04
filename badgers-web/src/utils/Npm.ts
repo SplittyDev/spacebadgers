@@ -29,6 +29,12 @@ type Package = {
     keywords: string[]
 }
 
+const fetchOptions = {
+    next: {
+        revalidate: 300, // 5m
+    }
+}
+
 export default class Npm {
     /**
      * Use `getPackageVersion` whenever possible.
@@ -38,7 +44,7 @@ export default class Npm {
      */
     static async getPackage(packageName: string): Promise<Package | null> {
         const url = `${BASE_URL}/${packageName}`
-        const response = await fetch(url)
+        const response = await fetch(url, fetchOptions)
 
         if (response.status === 404) {
             return null
@@ -64,7 +70,7 @@ export default class Npm {
         const url = `${BASE_URL}/${packageName}/${version}`
 
         try {
-            const response = await fetch(url)
+            const response = await fetch(url, fetchOptions)
 
             if (response.status === 404) {
                 return null
