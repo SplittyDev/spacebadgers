@@ -1,6 +1,23 @@
 {
-    "projectName": "SpaceBadgers",
-    "projectOwner": "SplittyDev",
-    "linkToUsage": true,
-    "skipCi": true
+  "projectName": "spacebadgers",
+  "projectOwner": "SplittyDev",
+  "linkToUsage": true,
+  "skipCi": true,
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "rossmacarthur",
+      "name": "Ross MacArthur",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17109887?v=4",
+      "profile": "https://github.com/rossmacarthur",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
 }
