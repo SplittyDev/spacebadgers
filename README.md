@@ -26,6 +26,7 @@
 - GitHub
 - crates.io
 - npm
+- PyPI
 
 <small>More integrations coming soon!</small>
 
@@ -42,6 +43,12 @@ The creation of SpaceBadgers was spurred by my experiences and challenges with e
 Building SpaceBadgers has been a labor of love, aiming to offer a superior, reliable, and open-source SVG badge generator for the developer community. I am excited to hear your feedback and to continue evolving this project with your help. Your suggestions, contributions, and active participation are always welcome.
 
 ## Development
+
+Clone the repository and make sure to initialize the submodules
+
+```bash
+git submodule update --init --recursive
+```
 
 ### Environment Variables
 > Paste this template into `badgers-web/.env.local`
