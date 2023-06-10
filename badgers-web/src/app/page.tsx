@@ -180,6 +180,14 @@ export default function Home() {
                     <Row name="Types" path="/npm/types/:pkg" inject={['react']} />
                     <Row name="Types (scoped)" path="/npm/types/:org/:pkg" inject={['@octokit', 'rest']} />
                 </div>
+              </Section>
+              <Section name="PyPI">
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
+                    <Row name="Name" path="/pypi/name/:pkg" inject={['janus']} />
+                    <Row name="Version" path="/pypi/version/:pkg" inject={['janus']} />
+                    <Row name="Name and Version" path="/pypi/info/:pkg" inject={['janus']} />
+                    <Row name="License" path="/pypi/license/:pkg" inject={['janus']} />
+                </div>
             </Section>
         </div>
     </main>
