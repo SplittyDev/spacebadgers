@@ -6,7 +6,7 @@ use worker::*;
 mod icon;
 mod utils;
 
-const DEFAULT_CACHE_DURATION: u32 = 3600; // 1 hour
+const DEFAULT_CACHE_DURATION: u32 = 300; // 5 minutes
 const ERROR_CACHE_DURATION: u32 = 300; // 5 minutes
 
 #[event(fetch)]
@@ -29,7 +29,7 @@ pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> Result<Respo
         headers
             .set(
                 "Cache-Control",
-                &format!("public, max-age={cache_duration}, immutable"),
+                &format!("public, max-age={cache_duration}, no-transform, must-revalidate"),
             )
             .ok()?;
         Some(headers)
