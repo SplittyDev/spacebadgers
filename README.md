@@ -63,6 +63,7 @@ NEXT_PUBLIC_WEB_HOST = "127.0.0.1:3000" # Web frontend host
 # API Tokens
 GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges
 CRATESIO_TOKEN = "cio51fdR1234567"      # Required for crates.io badges
+CODEBERG_TOKEN = "foobar123456789"      # Required for Codeberg badges
 ```
 
 ### spacebadgers
