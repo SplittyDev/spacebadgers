@@ -160,6 +160,14 @@ export default function Home() {
                     <Row name="License" path="/github/license/:owner/:repo" inject={['quintschaf', 'schafkit']} />
                 </div>
             </Section>
+            <Section name="Codeberg">
+                <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
+                    <Row name="Latest release" path="/codeberg/release/:owner/:repo" inject={['forgejo', 'forgejo']} />
+                    <Row name="Issues" path="/codeberg/issues/:owner/:repo" inject={['forgejo', 'forgejo']} />
+                    <Row name="Open issues" path="/codeberg/open-issues/:owner/:repo" inject={['forgejo', 'forgejo']} />
+                    <Row name="Closed issues" path="/codeberg/closed-issues/:owner/:repo" inject={['forgejo', 'forgejo']} />
+                </div>
+            </Section>
             <Section name="crates.io">
                 <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
                     <Row name="Name" path="/crates/name/:crate" inject={['serde']} />
