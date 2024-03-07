@@ -18,7 +18,7 @@ jobs:
   test:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - run: rustup toolchain install stable --profile default
@@ -35,11 +35,18 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - run: rustup toolchain install stable --profile minimal
-      - run: yarn
+      - name: Enable corepack
+        run: corepack enable
+      - name: Use Node 21
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+          cache: yarn
+      - run: yarn install --immutable
         working-directory: ./badgers-worker
       - name: Deploy to Cloudflare
         run: npx wrangler deploy
