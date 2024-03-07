@@ -24,6 +24,7 @@
 ## Service Integrations
 
 - GitHub
+- Codeberg
 - crates.io
 - npm
 - PyPI
@@ -53,17 +54,35 @@ git submodule update --init --recursive
 ### Environment Variables
 > Paste this template into `badgers-web/.env.local`
 
-```py
+```ini
+#
 # Frontend Configuration
-NEXT_PUBLIC_API_PROTO = "http"          # Worker protocol
-NEXT_PUBLIC_API_HOST = "127.0.0.1:8787" # Worker host
-NEXT_PUBLIC_WEB_PROTO = "http"          # Web frontend protocol
-NEXT_PUBLIC_WEB_HOST = "127.0.0.1:3000" # Web frontend host
+#
 
+# Worker protocol
+NEXT_PUBLIC_API_PROTO=http
+
+# Worker host
+NEXT_PUBLIC_API_HOST=127.0.0.1:8787
+
+# Web frontend protocol
+NEXT_PUBLIC_WEB_PROTO=http
+
+# Web frontend host
+NEXT_PUBLIC_WEB_HOST=127.0.0.1:3000
+
+#
 # API Tokens
-GITHUB_TOKEN = "ghp_Foo1234567"         # Required for GitHub badges
-CRATESIO_TOKEN = "cio51fdR1234567"      # Required for crates.io badges
-CODEBERG_TOKEN = "foobar123456789"      # Required for Codeberg badges
+#
+
+# Required for GitHub badges
+GITHUB_TOKEN=ghp_Foo1234567
+
+# Required for crates.io badges
+CRATESIO_TOKEN=cio51fdR1234567
+
+# Required for Codeberg badges
+CODEBERG_TOKEN=foobar123456789
 ```
 
 ### spacebadgers
