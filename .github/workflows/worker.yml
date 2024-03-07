@@ -46,6 +46,7 @@ jobs:
         with:
           node-version: 21
           cache: yarn
+          cache-dependency-path: badgers-worker/yarn.lock
       - run: yarn install --immutable
         working-directory: ./badgers-worker
       - name: Deploy to Cloudflare
