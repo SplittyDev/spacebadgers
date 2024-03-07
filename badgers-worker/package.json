@@ -3,10 +3,10 @@
 	"version": "1.4.0",
 	"scripts": {
 		"deploy": "wrangler deploy",
-		"dev": "wrangler dev --local"
+		"dev": "wrangler dev"
 	},
 	"devDependencies": {
 		"wrangler": "^3.0.0"
 	},
-	"packageManager": "yarn@3.5.1"
+	"packageManager": "yarn@3.8.1+sha256.860bab3ca20acc0476b3229f4841674e62e15453bd8f5dc8d0fea399edd235b6"
 }

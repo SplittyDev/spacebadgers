@@ -5,6 +5,7 @@ members = [
     "badgers-utils",
     "badgers-worker"
 ]
+resolver = "2"
 
 [workspace.package]
 license = "MIT"
