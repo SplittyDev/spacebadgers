@@ -166,6 +166,7 @@ export default function Home() {
                     <Row name="Issues" path="/codeberg/issues/:owner/:repo" inject={['forgejo', 'forgejo']} />
                     <Row name="Open issues" path="/codeberg/open-issues/:owner/:repo" inject={['forgejo', 'forgejo']} />
                     <Row name="Closed issues" path="/codeberg/closed-issues/:owner/:repo" inject={['forgejo', 'forgejo']} />
+                    <Row name="Stargazers" path="/codeberg/stars/:owner/:repo" inject={['forgejo', 'forgejo']} />
                 </div>
             </Section>
             <Section name="crates.io">
