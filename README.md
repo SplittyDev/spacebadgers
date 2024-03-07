@@ -174,6 +174,7 @@ yarn dev            # If you're using yarn
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/rossmacarthur"><img src="https://avatars.githubusercontent.com/u/17109887?v=4?s=100" width="100px;" alt="Ross MacArthur"/><br /><sub><b>Ross MacArthur</b></sub></a><br /><a href="#code-rossmacarthur" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://tranzystorekk.codeberg.page"><img src="https://avatars.githubusercontent.com/u/5671049?v=4?s=100" width="100px;" alt="Marcin Puc"/><br /><sub><b>Marcin Puc</b></sub></a><br /><a href="#code-tranzystorekk" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.michaelaltfield.net"><img src="https://avatars.githubusercontent.com/u/5026712?v=4?s=100" width="100px;" alt="Michael Altfield"/><br /><sub><b>Michael Altfield</b></sub></a><br /><a href="#bug-maltfield" title="Bug reports">🐛</a> <a href="#ideas-maltfield" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
   <tfoot>
