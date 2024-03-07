@@ -27,6 +27,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "maltfield",
+      "name": "Michael Altfield",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5026712?v=4",
+      "profile": "https://www.michaelaltfield.net",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
     }
   ]
 }
