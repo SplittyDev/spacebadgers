@@ -1,6 +1,6 @@
 [package]
 name = "badgers-cli"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 description = "Command-line SVG badge generation"
 
@@ -12,7 +12,7 @@ authors.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.2.7", features = ["derive"] }
+clap = { version = "4.5", features = ["derive"] }
 
 [dependencies.spacebadgers]
 workspace = true

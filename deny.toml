@@ -1,112 +1,22 @@
-# When creating the dependency graph used as the source of truth when checks are
-# executed, this field can be used to prune crates from the graph, removing them
-# from the view of cargo-deny. This is an extremely heavy hammer, as if a crate
-# is pruned from the graph, all of its dependencies will also be pruned unless
-# they are connected to another crate in the graph that hasn't been pruned,
-# so it should be used with care. The identifiers are [Package ID Specifications]
-# (https://doc.rust-lang.org/cargo/reference/pkgid-spec.html)
-#exclude = []
-
-# If true, metadata will be collected with `--all-features`. Note that this can't
-# be toggled off if true, if you want to conditionally enable `--all-features` it
-# is recommended to pass `--all-features` on the cmd line instead
-all-features = false
-
-# If true, metadata will be collected with `--no-default-features`. The same
-# caveat with `all-features` applies
-no-default-features = false
-
-# If set, these feature will be enabled when collecting metadata. If `--features`
-# is specified on the cmd line they will take precedence over this option.
-#features = []
-
-# When outputting inclusion graphs in diagnostics that include features, this
-# option can be used to specify the depth at which feature edges will be added.
-# This option is included since the graphs can be quite large and the addition
-# of features from the crate(s) to all of the graph roots can be far too verbose.
-# This option can be overridden via `--feature-depth` on the cmd line
-feature-depth = 1
-
-# This section is considered when running `cargo deny check advisories`
-# More documentation for the advisories section can be found here:
-# https://embarkstudios.github.io/cargo-deny/checks/advisories/cfg.html
 [advisories]
-
-# The path where the advisory database is cloned/fetched into
+version = 2
 db-path = "~/.cargo/advisory-db"
-
-# The url(s) of the advisory databases to use
 db-urls = ["https://github.com/rustsec/advisory-db"]
-
-# The lint level for security vulnerabilities
-vulnerability = "deny"
-
-# The lint level for unmaintained crates
-unmaintained = "warn"
-
-# The lint level for crates that have been yanked from their source registry
-yanked = "warn"
-
-# The lint level for crates with security notices. Note that as of
-# 2019-12-17 there are no security notice advisories in
-# https://github.com/rustsec/advisory-db
-notice = "warn"
-
-# A list of advisory IDs to ignore. Note that ignored advisories will still
-# output a note when they are encountered.
 ignore = [
     #"RUSTSEC-0000-0000",
 ]
 
-# This section is considered when running `cargo deny check licenses`
-# More documentation for the licenses section can be found here:
-# https://embarkstudios.github.io/cargo-deny/checks/licenses/cfg.html
 [licenses]
-
-# The lint level for crates which do not have a detectable license
-unlicensed = "deny"
-
-# List of explicitly allowed licenses
-# See https://spdx.org/licenses/ for list of possible licenses
-# [possible values: any SPDX 3.11 short identifier (+ optional exception)].
+version = 2
 allow = [
     "MIT",
+    "BSD-3-Clause",
     "Apache-2.0",
     "Unicode-DFS-2016", # used by unicode-ident
 ]
 
-# List of explicitly disallowed licenses
-# See https://spdx.org/licenses/ for list of possible licenses
-# [possible values: any SPDX 3.11 short identifier (+ optional exception)].
-deny = [
-    #"Nokia",
-]
-
-# Lint level for licenses considered copyleft
-copyleft = "deny"
-
-# Blanket approval or denial for OSI-approved or FSF Free/Libre licenses
-# * both - The license will be approved if it is both OSI-approved *AND* FSF
-# * either - The license will be approved if it is either OSI-approved *OR* FSF
-# * osi-only - The license will be approved if is OSI-approved *AND NOT* FSF
-# * fsf-only - The license will be approved if is FSF *AND NOT* OSI-approved
-# * neither - This predicate is ignored and the default lint level is used
-allow-osi-fsf-free = "neither"
-
-# Lint level used when no other predicates are matched
-# 1. License isn't in the allow or deny lists
-# 2. License isn't copyleft
-# 3. License isn't OSI/FSF, or allow-osi-fsf-free = "neither"
-default = "deny"
-
-# This section is considered when running `cargo deny check bans`.
-# More documentation about the 'bans' section can be found here:
-# https://embarkstudios.github.io/cargo-deny/checks/bans/cfg.html
 [bans]
-
-# Certain crates/versions that will be skipped when doing duplicate detection.
 skip = [
-    { name = "syn", version = "1.0.0" },
     { name = "syn", version = "2.0.0" },
     { name = "windows_x86_64_msvc", version = "*" },
     { name = "windows_x86_64_gnu", version = "*" },
@@ -120,22 +30,11 @@ skip = [
     #{ name = "ansi_term", version = "=0.11.0" },
 ]
 
-# This section is considered when running `cargo deny check sources`.
-# More documentation about the 'sources' section can be found here:
-# https://embarkstudios.github.io/cargo-deny/checks/sources/cfg.html
 [sources]
-
-# Lint level for what to happen when a crate from a crate registry that is not
-# in the allow list is encountered
-unknown-registry = "warn"
-
-# Lint level for what to happen when a crate from a git repository that is not
-# in the allow list is encountered
-unknown-git = "warn"
-
-# List of URLs for allowed crate registries. Defaults to the crates.io index
-# if not specified. If it is specified but empty, no registries are allowed.
+unknown-registry = "deny"
+unknown-git = "deny"
 allow-registry = ["https://github.com/rust-lang/crates.io-index"]
-
-# List of URLs for allowed Git repositories
 allow-git = []
+
+[output]
+feature-depth = 1
