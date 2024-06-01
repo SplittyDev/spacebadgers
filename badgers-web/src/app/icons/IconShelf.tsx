@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react"
 
-import { type IconSetList } from "./page"
+import type { IconSetList } from "./page"
 
 type Props = {
     icons: IconSetList

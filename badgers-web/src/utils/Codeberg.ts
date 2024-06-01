@@ -47,7 +47,7 @@ class CodebergClient {
         return await resp.json() as Repository
     }
 
-    async getIssuesCount({ owner, repo }: ProjectInfo, query: Record<string, any> = {}): Promise<Number | null> {
+    async getIssuesCount({ owner, repo }: ProjectInfo, query: Record<string, any> = {}): Promise<number | null> {
         const repoId = `${owner}/${repo}`
         const url = this.buildUrl(`repos/${repoId}/issues`, query)
         const resp = await fetch(url)

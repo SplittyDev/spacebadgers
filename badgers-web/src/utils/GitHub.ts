@@ -1,5 +1,5 @@
 import { Octokit } from '@octokit/rest'
-import { OctokitResponse } from '@octokit/types'
+import type { OctokitResponse } from '@octokit/types'
 
 type WrappedGitHubRequest<T> = (arg0: Octokit) => Promise<OctokitResponse<T>>
 

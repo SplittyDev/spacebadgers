@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server"
+import type { NextRequest } from "next/server"
 
 import Badge from '@/utils/Badge'
 import Npm from '@/utils/Npm'

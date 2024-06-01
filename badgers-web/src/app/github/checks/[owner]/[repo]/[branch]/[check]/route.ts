@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server"
+import type { NextRequest } from "next/server"
 
 import Badge from '@/utils/Badge'
 import GitHub from '@/utils/GitHub'
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, { params: { owner, repo, branch,
     )
 
     // Get all check results
-    let lowerCaseCheck = check.toLowerCase()
+    const lowerCaseCheck = check.toLowerCase()
     const checkResults = allChecksData.data?.check_runs
         .filter(checkRun => checkRun.name.toLowerCase() === lowerCaseCheck)
         .map(checkRun => checkRun.conclusion)

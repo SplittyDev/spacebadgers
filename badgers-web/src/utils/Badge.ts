@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 
 const pick = (obj: any, keys: string[]) => Object.fromEntries(keys.map(key => [key, obj[key]]))
 

@@ -6,7 +6,7 @@ import Logo from "./logo.png";
 
 import "./globals.css";
 import Link from "next/link";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -72,7 +72,7 @@ export default function RootLayout({
                     <a
                       target="_blank"
                       className="text-gray-500 hover:text-amber-600"
-                      href="https://github.com/SplittyDev"
+                      href="https://github.com/SplittyDev" rel="noreferrer"
                     >
                       Marco Quinten
                     </a>
@@ -83,7 +83,7 @@ export default function RootLayout({
                   <a
                     target="_blank"
                     className="text-gray-500 hover:text-amber-600"
-                    href="https://github.com/splittydev/spacebadgers"
+                    href="https://github.com/splittydev/spacebadgers" rel="noreferrer"
                   >
                     GitHub
                   </a>
@@ -114,7 +114,7 @@ export default function RootLayout({
                   <a
                     className="text-xs text-gray-700 hover:text-orange-600"
                     href="https://crates.io/crates/spacebadgers"
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     (crates.io)
                   </a>{" "}
@@ -144,7 +144,7 @@ export default function RootLayout({
                   <a
                     className="text-gray-700 hover:text-orange-600 underline underline-offset-2"
                     href="https://github.com/splittydev/spacebadgers"
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     GitHub
                   </a>
