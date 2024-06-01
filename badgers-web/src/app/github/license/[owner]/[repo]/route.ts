@@ -16,6 +16,6 @@ export async function GET(request: NextRequest, { params: { owner, repo } }: Par
     )
     const licenseName = resp.data?.license?.spdx_id ?? resp.data?.license?.name
     return await Badge.generate(request, 'license', licenseName ?? 'unknown', {
-        color: !!licenseName ? 'blue' : 'gray'
+        color: licenseName ? 'blue' : 'gray'
     })
 }

@@ -10,6 +10,15 @@ import type { Metadata, Viewport } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const metadataBase = (() => {
+    const proto = process.env.NEXT_PUBLIC_WEB_PROTO
+    const host = process.env.NEXT_PUBLIC_WEB_HOST
+    if (!proto || !host) {
+        throw new Error("Missing environment variables: NEXT_PUBLIC_WEB_PROTO, NEXT_PUBLIC_WEB_HOST")
+    }
+    return new URL(`${proto}://${host}`)
+})()
+
 export const metadata: Metadata = {
   title: "SpaceBadgers",
   applicationName: "SpaceBadgers",
@@ -24,7 +33,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Marco Quinten", url: "https://github.com/splittydev" }],
   creator: "Marco Quinten",
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_WEB_PROTO!}://${process.env.NEXT_PUBLIC_WEB_HOST!}`),
+  metadataBase,
 }
 
 export const viewport: Viewport = {

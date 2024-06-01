@@ -25,7 +25,7 @@ class CodebergClient {
         this.token = token
     }
 
-    buildUrl(path: string, query: Record<string, any> = {}): string {
+    buildUrl(path: string, query: Record<string, string | number | boolean> = {}): string {
         const queryArgs = {
             ...query,
             token: this.token,
@@ -47,7 +47,7 @@ class CodebergClient {
         return await resp.json() as Repository
     }
 
-    async getIssuesCount({ owner, repo }: ProjectInfo, query: Record<string, any> = {}): Promise<number | null> {
+    async getIssuesCount({ owner, repo }: ProjectInfo, query: Record<string, string | number | boolean> = {}): Promise<number | null> {
         const repoId = `${owner}/${repo}`
         const url = this.buildUrl(`repos/${repoId}/issues`, query)
         const resp = await fetch(url)
@@ -67,8 +67,10 @@ class CodebergClient {
     }
 }
 
-export default class Codeberg {
-    static getClient(): CodebergClient {
+const Codeberg = {
+    getClient(): CodebergClient {
         return new CodebergClient(process.env.CODEBERG_TOKEN as string)
-    }
+    },
 }
+
+export default Codeberg

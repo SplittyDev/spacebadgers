@@ -1,7 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
 
-const pick = (obj: any, keys: string[]) => Object.fromEntries(keys.map(key => [key, obj[key]]))
-
 interface BadgeOverrides {
     labelColor?: string,
     color?: string,
@@ -13,7 +11,7 @@ interface BadgeOverrides {
  *
  * Uses the Spacebadgers worker to generate badges.
  */
-export default class Badge {
+const Badge = {
 
     /**
      * Generate a badge.
@@ -24,7 +22,7 @@ export default class Badge {
      * @param overrides Badge overrides.
      * @returns The badge response.
      */
-    static async generate(request: NextRequest, label: string, status: string, overrides: BadgeOverrides = {}): Promise<NextResponse> {
+    async generate(request: NextRequest, label: string, status: string, overrides: BadgeOverrides = {}): Promise<NextResponse> {
         // Get API configuration from env
         const api = {
             proto: process.env.NEXT_PUBLIC_API_PROTO,
@@ -43,8 +41,9 @@ export default class Badge {
             .replace(/^\?+/gm, '').split('&')
             .reduce((acc, pair) => {
                 const [key, value] = pair.split('=')
-                return {...acc, [key]: value}
-            }, {})
+                acc[key] = value
+                return acc
+            }, {} as Record<string, string>)
         const unifiedQueryOverrides = {...systemQueryOverrides, ...userQueryOverrides}
         const queryParams = Object
             .entries(unifiedQueryOverrides)
@@ -74,13 +73,13 @@ export default class Badge {
             statusText: resp.statusText,
             headers,
         })
-    }
+    },
 
-    static async error(request: NextRequest, subsystem: string): Promise<NextResponse> {
+    async error(request: NextRequest, subsystem: string): Promise<NextResponse> {
         return await Badge.generate(request, subsystem, 'error', { color: 'gray' })
-    }
+    },
 
-    static async passThrough(request: NextRequest): Promise<NextResponse> {
+    async passThrough(request: NextRequest): Promise<NextResponse> {
         const api = {
             proto: process.env.NEXT_PUBLIC_API_PROTO,
             host: process.env.NEXT_PUBLIC_API_HOST,
@@ -102,5 +101,7 @@ export default class Badge {
             statusText: resp.statusText,
             headers,
         })
-    }
+    },
 }
+
+export default Badge

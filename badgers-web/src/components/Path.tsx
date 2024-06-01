@@ -1,3 +1,5 @@
+import { Fragment } from "react"
+
 type Props = {
     value: string,
 }
@@ -50,7 +52,7 @@ export default function Path({ value }: Props) {
                 value,
                 className: getPathColor(value, isQueryParam ? queryParamCount - 1 : isDynamic ? dynamicIndex++ : staticIndex++, isProtocol, isQueryParam),
                 isQuery: isQueryParam,
-                renderAmpersand: queryParamCount == 2
+                renderAmpersand: queryParamCount === 2
             }
         })
     }
@@ -60,15 +62,15 @@ export default function Path({ value }: Props) {
     return (
         <div className="flex flex-wrap whitespace-pre-wrap text-gray-400 font-mono">
             {parts.map(({ value, className, isQuery, renderAmpersand }, i) => (
-                <>
-                    {!isQuery && (!containsProtocol || (containsProtocol && i != 0)) && (
-                        <div key={`sep-${value}`}>/</div>
+                <Fragment key={value}>
+                    {!isQuery && (!containsProtocol || (containsProtocol && i !== 0)) && (
+                        <div>/</div>
                     )}
                     {renderAmpersand && <div className={className}>&amp;</div>}
-                    <div key={value} className={className}>
+                    <div className={className}>
                         {value}
                     </div>
-                </>
+                </Fragment>
             ))}
         </div>
     )

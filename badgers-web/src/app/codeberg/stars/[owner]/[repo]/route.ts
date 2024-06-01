@@ -15,7 +15,7 @@ export async function GET(request: NextRequest, { params: { owner, repo } }: Par
     const stargazers = repository?.stars_count
 
     return await Badge.generate(request, 'stars', stargazers?.toString() ?? 'None', {
-        color: !!stargazers ? 'blue' : 'yellow'
+        color: stargazers ? 'blue' : 'yellow'
     })
 }
 

@@ -15,13 +15,12 @@ export async function GET(request: NextRequest, { params: { owner, repo } }: Par
 
     const shortestName = (() => {
         if (release === null) { return null }
-        return [release?.tag_name, release?.name]
-        .filter(Boolean)
-        .reduce((a, b) => a!.length < b!.length ? a : b)
+        return [release.tag_name, release.name]
+            .reduce((a, b) => a.length < b.length ? a : b)
     })()
 
     return await Badge.generate(request, 'release', shortestName ?? 'None', {
-        color: !!shortestName ? 'blue' : 'yellow'
+        color: shortestName ? 'blue' : 'yellow'
     })
 }
 

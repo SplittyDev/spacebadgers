@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from "react"
+import { Fragment, useMemo, useState } from "react"
 
 import type { IconSetList } from "./page"
 
@@ -32,13 +32,13 @@ export default function IconShelf({ icons }: Props) {
                         )}
                         {Object.entries(icons).map(([name, data]) => {
                             return (
-                                <>
+                                <Fragment key={name}>
                                     <div className="flex justify-center items-center bg-gray-700 rounded-md w-8 h-8">
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
                                         <img width="20" height="20" alt={name} src={data} />
                                     </div>
                                     <div className="text-gray-800">{name}</div>
-                                </>
+                                </Fragment>
                             )
                         })}
                     </div>

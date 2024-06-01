@@ -17,7 +17,7 @@ const fetchOptions = {
     }
 }
 
-export default class PyPI {
+const PyPI = {
     /**
      * Get the package information for the given version.
      *
@@ -31,7 +31,7 @@ export default class PyPI {
      * await PyPI.getPackageVersion('numpy', '1.24.3')
      * ```
      */
-    static async getPackage(packageName: string, version: VersionIdentifier): Promise<Package | null> {
+    async getPackage(packageName: string, version: VersionIdentifier): Promise<Package | null> {
         const url = (version === 'latest') ?
             `${BASE_URL}/${packageName}/json` :
             `${BASE_URL}/${packageName}/${version}/json`
@@ -48,5 +48,7 @@ export default class PyPI {
         } catch {
             return null
         }
-    }
+    },
 }
+
+export default PyPI
