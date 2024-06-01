@@ -9,7 +9,7 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@octokit/rest": "^19.0.13",
+        "@octokit/rest": "^20.1.1",
         "@types/node": "20.13.0",
         "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
@@ -26,7 +26,7 @@
         "typescript": "5.4.5"
     },
     "devDependencies": {
-        "@octokit/types": "^9.3.2",
+        "@octokit/types": "^13.5.0",
         "encoding": "^0.1.13",
         "sharp": "^0.33.4"
     },
