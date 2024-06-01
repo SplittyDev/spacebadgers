@@ -1,8 +1,8 @@
 'use client'
 
-import { Fragment, useMemo, useState } from "react"
+import { Fragment, useMemo, useState } from 'react'
 
-import type { IconSetList } from "./page"
+import type { IconSetList } from './page'
 
 type Props = {
     icons: IconSetList
@@ -15,14 +15,26 @@ export default function IconShelf({ icons }: Props) {
         return icons.map(({ name, icons }) => {
             return {
                 name,
-                icons: Object.fromEntries(Object.entries(icons).filter(([key]) => key.includes(searchTerm))),
+                icons: Object.fromEntries(
+                    Object.entries(icons).filter(([key]) =>
+                        key.includes(searchTerm),
+                    ),
+                ),
             }
         })
     }, [icons, searchTerm])
 
     return (
         <div className="flex flex-col gap-4 w-full">
-            <input className="border-2 border-gray-600 p-2 rounded-md" type="search" placeholder="Search for icons" value={searchTerm} onInput={e => setSearchTerm((e.target as HTMLInputElement).value)} />
+            <input
+                className="border-2 border-gray-600 p-2 rounded-md"
+                type="search"
+                placeholder="Search for icons"
+                value={searchTerm}
+                onInput={e =>
+                    setSearchTerm((e.target as HTMLInputElement).value)
+                }
+            />
             {filteredIcons.map(({ name, icons }) => (
                 <section key={name} className="flex flex-col gap-2">
                     <h2 className="text-2xl font-bold">{name}</h2>
@@ -35,7 +47,12 @@ export default function IconShelf({ icons }: Props) {
                                 <Fragment key={name}>
                                     <div className="flex justify-center items-center bg-gray-700 rounded-md w-8 h-8">
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img width="20" height="20" alt={name} src={data} />
+                                        <img
+                                            width="20"
+                                            height="20"
+                                            alt={name}
+                                            src={data}
+                                        />
                                     </div>
                                     <div className="text-gray-800">{name}</div>
                                 </Fragment>

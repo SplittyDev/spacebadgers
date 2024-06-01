@@ -1,6 +1,6 @@
 const BASE_URL = 'https://registry.npmjs.com'
 
-type VersionIdentifier = string | "latest"
+type VersionIdentifier = string | 'latest'
 
 type PackageVersion = {
     _id: string
@@ -16,7 +16,7 @@ type Package = {
     _rev: string
     name: string
     description: string
-    "dist-tags": {
+    'dist-tags': {
         latest: string
     } & Record<string, string>
     versions: Record<string, PackageVersion>
@@ -32,7 +32,7 @@ type Package = {
 const fetchOptions = {
     next: {
         revalidate: 300, // 5m
-    }
+    },
 }
 
 const Npm = {
@@ -50,7 +50,7 @@ const Npm = {
             return null
         }
 
-        return await response.json() as Package
+        return (await response.json()) as Package
     },
 
     /**
@@ -66,7 +66,10 @@ const Npm = {
      * await Npm.getPackageVersion('@octocat/rest', 'latest')
      * ```
      */
-    async getPackageVersion(packageName: string, version: VersionIdentifier): Promise<PackageVersion | null> {
+    async getPackageVersion(
+        packageName: string,
+        version: VersionIdentifier,
+    ): Promise<PackageVersion | null> {
         const url = `${BASE_URL}/${packageName}/${version}`
 
         try {
@@ -76,7 +79,7 @@ const Npm = {
                 return null
             }
 
-            return await response.json() as PackageVersion
+            return (await response.json()) as PackageVersion
         } catch {
             return null
         }

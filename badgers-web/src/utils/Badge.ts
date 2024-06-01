@@ -1,9 +1,9 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from 'next/server'
 
 interface BadgeOverrides {
-    labelColor?: string,
-    color?: string,
-    theme?: string,
+    labelColor?: string
+    color?: string
+    theme?: string
 }
 
 /**
@@ -12,7 +12,6 @@ interface BadgeOverrides {
  * Uses the Spacebadgers worker to generate badges.
  */
 const Badge = {
-
     /**
      * Generate a badge.
      *
@@ -22,7 +21,12 @@ const Badge = {
      * @param overrides Badge overrides.
      * @returns The badge response.
      */
-    async generate(request: NextRequest, label: string, status: string, overrides: BadgeOverrides = {}): Promise<NextResponse> {
+    async generate(
+        request: NextRequest,
+        label: string,
+        status: string,
+        overrides: BadgeOverrides = {},
+    ): Promise<NextResponse> {
         // Get API configuration from env
         const api = {
             proto: process.env.NEXT_PUBLIC_API_PROTO,
@@ -38,24 +42,33 @@ const Badge = {
         // Build query params
         const systemQueryOverrides = overrides
         const userQueryOverrides = request.nextUrl.search
-            .replace(/^\?+/gm, '').split('&')
-            .reduce((acc, pair) => {
-                const [key, value] = pair.split('=')
-                acc[key] = value
-                return acc
-            }, {} as Record<string, string>)
-        const unifiedQueryOverrides = {...systemQueryOverrides, ...userQueryOverrides}
-        const queryParams = Object
-            .entries(unifiedQueryOverrides)
+            .replace(/^\?+/gm, '')
+            .split('&')
+            .reduce(
+                (acc, pair) => {
+                    const [key, value] = pair.split('=')
+                    acc[key] = value
+                    return acc
+                },
+                {} as Record<string, string>,
+            )
+        const unifiedQueryOverrides = {
+            ...systemQueryOverrides,
+            ...userQueryOverrides,
+        }
+        const queryParams = Object.entries(unifiedQueryOverrides)
             .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
             .join('&')
 
         // Fetch the badge from the worker
-        const resp = await fetch(`${api.proto}://${api.host}/badge/${pathParams.label}/${pathParams.status}?${queryParams}`, {
-            next: {
-                revalidate: 300, // 5m
-            }
-        })
+        const resp = await fetch(
+            `${api.proto}://${api.host}/badge/${pathParams.label}/${pathParams.status}?${queryParams}`,
+            {
+                next: {
+                    revalidate: 300, // 5m
+                },
+            },
+        )
         const data = await resp.arrayBuffer()
 
         // Build response headers
@@ -75,8 +88,13 @@ const Badge = {
         })
     },
 
-    async error(request: NextRequest, subsystem: string): Promise<NextResponse> {
-        return await Badge.generate(request, subsystem, 'error', { color: 'gray' })
+    async error(
+        request: NextRequest,
+        subsystem: string,
+    ): Promise<NextResponse> {
+        return await Badge.generate(request, subsystem, 'error', {
+            color: 'gray',
+        })
     },
 
     async passThrough(request: NextRequest): Promise<NextResponse> {

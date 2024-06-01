@@ -2,7 +2,7 @@
 
 const BASE_URL = 'https://pypi.org/pypi'
 
-type VersionIdentifier = string | "latest"
+type VersionIdentifier = string | 'latest'
 
 type Package = {
     name: string
@@ -14,7 +14,7 @@ type Package = {
 const fetchOptions = {
     next: {
         revalidate: 300, // 5m
-    }
+    },
 }
 
 const PyPI = {
@@ -31,10 +31,14 @@ const PyPI = {
      * await PyPI.getPackageVersion('numpy', '1.24.3')
      * ```
      */
-    async getPackage(packageName: string, version: VersionIdentifier): Promise<Package | null> {
-        const url = (version === 'latest') ?
-            `${BASE_URL}/${packageName}/json` :
-            `${BASE_URL}/${packageName}/${version}/json`
+    async getPackage(
+        packageName: string,
+        version: VersionIdentifier,
+    ): Promise<Package | null> {
+        const url =
+            version === 'latest'
+                ? `${BASE_URL}/${packageName}/json`
+                : `${BASE_URL}/${packageName}/${version}/json`
 
         try {
             const response = await fetch(url, fetchOptions)
@@ -43,7 +47,7 @@ const PyPI = {
                 return null
             }
 
-            const resp = await response.json() as { info: Package }
+            const resp = (await response.json()) as { info: Package }
             return resp.info
         } catch {
             return null

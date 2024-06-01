@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
-import Path from "@/components/Path"
+import Path from '@/components/Path'
 
 const iconList = [
     'feather-github',
@@ -88,7 +88,9 @@ const iconList = [
     'eva-at',
 ]
 
-const maxIconLength = iconList.reduce((a, b) => a.length > b.length ? a : b).length
+const maxIconLength = iconList.reduce((a, b) =>
+    a.length > b.length ? a : b,
+).length
 
 export default function IconUrlBanner() {
     const [iconIndex, setIconIndex] = useState(0)

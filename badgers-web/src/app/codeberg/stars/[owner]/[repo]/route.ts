@@ -10,13 +10,21 @@ interface Params {
     }
 }
 
-export async function GET(request: NextRequest, { params: { owner, repo } }: Params) {
+export async function GET(
+    request: NextRequest,
+    { params: { owner, repo } }: Params,
+) {
     const repository = await Codeberg.getClient().getRepository({ owner, repo })
     const stargazers = repository?.stars_count
 
-    return await Badge.generate(request, 'stars', stargazers?.toString() ?? 'None', {
-        color: stargazers ? 'blue' : 'yellow'
-    })
+    return await Badge.generate(
+        request,
+        'stars',
+        stargazers?.toString() ?? 'None',
+        {
+            color: stargazers ? 'blue' : 'yellow',
+        },
+    )
 }
 
 export const runtime = 'edge'

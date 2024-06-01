@@ -1,13 +1,18 @@
-import { Fragment } from "react"
+import { Fragment } from 'react'
 
 type Props = {
-    value: string,
+    value: string
 }
 
 export default function Path({ value }: Props) {
     const containsProtocol = /^https?:[/]{2}/m.test(value)
 
-    const getPathColor = (path: string, i: number, isProtocol: boolean, isQueryParam: boolean) => {
+    const getPathColor = (
+        path: string,
+        i: number,
+        isProtocol: boolean,
+        isQueryParam: boolean,
+    ) => {
         const staticColors = [
             'text-slate-800',
             'text-zinc-600',
@@ -20,10 +25,7 @@ export default function Path({ value }: Props) {
             'text-indigo-700',
             'text-purple-700',
         ]
-        const queryParamColors = [
-            'text-pink-600',
-            'text-purple-600',
-        ]
+        const queryParamColors = ['text-pink-600', 'text-purple-600']
         if (isProtocol) {
             return 'text-gray-400'
         }
@@ -50,9 +52,18 @@ export default function Path({ value }: Props) {
             }
             return {
                 value,
-                className: getPathColor(value, isQueryParam ? queryParamCount - 1 : isDynamic ? dynamicIndex++ : staticIndex++, isProtocol, isQueryParam),
+                className: getPathColor(
+                    value,
+                    isQueryParam
+                        ? queryParamCount - 1
+                        : isDynamic
+                          ? dynamicIndex++
+                          : staticIndex++,
+                    isProtocol,
+                    isQueryParam,
+                ),
                 isQuery: isQueryParam,
-                renderAmpersand: queryParamCount === 2
+                renderAmpersand: queryParamCount === 2,
             }
         })
     }
@@ -63,13 +74,11 @@ export default function Path({ value }: Props) {
         <div className="flex flex-wrap whitespace-pre-wrap text-gray-400 font-mono">
             {parts.map(({ value, className, isQuery, renderAmpersand }, i) => (
                 <Fragment key={value}>
-                    {!isQuery && (!containsProtocol || (containsProtocol && i !== 0)) && (
-                        <div>/</div>
-                    )}
+                    {!isQuery &&
+                        (!containsProtocol ||
+                            (containsProtocol && i !== 0)) && <div>/</div>}
                     {renderAmpersand && <div className={className}>&amp;</div>}
-                    <div className={className}>
-                        {value}
-                    </div>
+                    <div className={className}>{value}</div>
                 </Fragment>
             ))}
         </div>

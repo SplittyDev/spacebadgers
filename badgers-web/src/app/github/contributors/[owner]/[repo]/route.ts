@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server"
+import type { NextRequest } from 'next/server'
 
 import Badge from '@/utils/Badge'
 import GitHub from '@/utils/GitHub'
@@ -10,10 +10,17 @@ interface Params {
     }
 }
 
-export async function GET(request: NextRequest, { params: { owner, repo } }: Params) {
-    const resp = await GitHub.wrapRequest(
-        octokit => octokit.repos.listContributors({ owner, repo })
+export async function GET(
+    request: NextRequest,
+    { params: { owner, repo } }: Params,
+) {
+    const resp = await GitHub.wrapRequest(octokit =>
+        octokit.repos.listContributors({ owner, repo }),
     )
     if (!resp.data) return await Badge.error(request, 'github')
-    return await Badge.generate(request, 'contributors', resp.data.length.toString())
+    return await Badge.generate(
+        request,
+        'contributors',
+        resp.data.length.toString(),
+    )
 }
