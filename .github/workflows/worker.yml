@@ -41,10 +41,10 @@ jobs:
       - run: rustup toolchain install stable --profile minimal
       - name: Enable corepack
         run: corepack enable
-      - name: Use Node 21
+      - name: Use Node 22
         uses: actions/setup-node@v4
         with:
-          node-version: 21
+          node-version: 22
           cache: yarn
           cache-dependency-path: badgers-worker/yarn.lock
       - run: yarn install --immutable
