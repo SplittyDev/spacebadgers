@@ -1,6 +1,6 @@
 [package]
 name = "badgers-cli"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 description = "Command-line SVG badge generation"
 
@@ -15,4 +15,4 @@ authors.workspace = true
 clap = { version = "4.5", features = ["derive"] }
 
 [dependencies.spacebadgers]
-workspace = true
+version = "1"
