@@ -1,5 +1,5 @@
 import { Octokit } from '@octokit/rest'
-import { OctokitResponse } from '@octokit/types'
+import type { OctokitResponse } from '@octokit/types'
 
 type WrappedGitHubRequest<T> = (arg0: Octokit) => Promise<OctokitResponse<T>>
 
@@ -12,15 +12,15 @@ type CombinedCheckResult = {
     color: string
 }
 
-export default class GitHub {
+const GitHub = {
     /**
      * Get an Octokit instance.
      *
      * @returns An Octokit instance.
      */
-    static getOctokit(): Octokit {
+    getOctokit(): Octokit {
         return new Octokit({ auth: process.env.GITHUB_TOKEN })
-    }
+    },
 
     /**
      * Wrap a GitHub request in a try-catch block.
@@ -28,18 +28,20 @@ export default class GitHub {
      * @param request The request to wrap.
      * @returns The response
      */
-    static async wrapRequest<T>(request: WrappedGitHubRequest<T>): Promise<GitHubResponse<T>> {
+    async wrapRequest<T>(
+        request: WrappedGitHubRequest<T>,
+    ): Promise<GitHubResponse<T>> {
         try {
             const { data } = await request(GitHub.getOctokit())
             return {
-                data
+                data,
             }
         } catch (error) {
             return {
-                data: null
+                data: null,
             }
         }
-    }
+    },
 
     /**
      * Reduce an array of check runs to a single check conclusion.
@@ -47,10 +49,12 @@ export default class GitHub {
      * @param checkRuns An array of check runs.
      * @returns The combined check conclusion.
      */
-    static getCombinedCheckConclusion(conclusions: string[]): CombinedCheckResult {
+    getCombinedCheckConclusion(conclusions: string[]): CombinedCheckResult {
         const ignoreList = ['neutral', 'cancelled', 'skipped']
 
-        const shortCircuitMatch = (conclusion: string): CombinedCheckResult | undefined => {
+        const shortCircuitMatch = (
+            conclusion: string,
+        ): CombinedCheckResult | undefined => {
             if (conclusions.some(c => c === conclusion)) {
                 return { status: conclusion, color: 'red' }
             }
@@ -60,16 +64,16 @@ export default class GitHub {
             shortCircuitMatch('failure') ??
             shortCircuitMatch('timed_out') ??
             shortCircuitMatch('action_required') ??
-            (
-                conclusions
-                    .filter(conclusion => !ignoreList.includes(conclusion))
-                    .every(conclusion => conclusion === 'success')
-                    ? { status: 'success', color: 'green' }
-                    : { status: 'unknown', color: 'gray' }
-            )
+            (conclusions
+                .filter(conclusion => !ignoreList.includes(conclusion))
+                .every(conclusion => conclusion === 'success')
+                ? { status: 'success', color: 'green' }
+                : { status: 'unknown', color: 'gray' })
         )
-    }
+    },
 }
+
+export default GitHub
 
 // Disable Vercel data cache for all requests.
 // This is a temporary solution. Once we can serve all routes via fetch,

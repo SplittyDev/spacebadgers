@@ -1,6 +1,6 @@
 const BASE_URL = 'https://registry.npmjs.com'
 
-type VersionIdentifier = string | "latest"
+type VersionIdentifier = string | 'latest'
 
 type PackageVersion = {
     _id: string
@@ -16,7 +16,7 @@ type Package = {
     _rev: string
     name: string
     description: string
-    "dist-tags": {
+    'dist-tags': {
         latest: string
     } & Record<string, string>
     versions: Record<string, PackageVersion>
@@ -32,17 +32,17 @@ type Package = {
 const fetchOptions = {
     next: {
         revalidate: 300, // 5m
-    }
+    },
 }
 
-export default class Npm {
+const Npm = {
     /**
      * Use `getPackageVersion` whenever possible.
      *
      * @param packageName
      * @returns
      */
-    static async getPackage(packageName: string): Promise<Package | null> {
+    async getPackage(packageName: string): Promise<Package | null> {
         const url = `${BASE_URL}/${packageName}`
         const response = await fetch(url, fetchOptions)
 
@@ -50,8 +50,8 @@ export default class Npm {
             return null
         }
 
-        return await response.json() as Package
-    }
+        return (await response.json()) as Package
+    },
 
     /**
      * Get the latest version of a package.
@@ -66,7 +66,10 @@ export default class Npm {
      * await Npm.getPackageVersion('@octocat/rest', 'latest')
      * ```
      */
-    static async getPackageVersion(packageName: string, version: VersionIdentifier): Promise<PackageVersion | null> {
+    async getPackageVersion(
+        packageName: string,
+        version: VersionIdentifier,
+    ): Promise<PackageVersion | null> {
         const url = `${BASE_URL}/${packageName}/${version}`
 
         try {
@@ -76,11 +79,11 @@ export default class Npm {
                 return null
             }
 
-            return await response.json() as PackageVersion
+            return (await response.json()) as PackageVersion
         } catch {
             return null
         }
-    }
+    },
 
     /**
      * Get the corresponding `@types` package for an npm package.
@@ -88,10 +91,12 @@ export default class Npm {
      * @param packageName Package name
      * @returns The corresponding `@types` package, or `null` if the package does not exist.
      */
-    static async getTypesPackage(packageName: string): Promise<string | null> {
+    async getTypesPackage(packageName: string): Promise<string | null> {
         const typesPackage = `@types/${packageName}`
         const data = await Npm.getPackageVersion(typesPackage, 'latest')
         if (data === null) return null
         return typesPackage
-    }
+    },
 }
+
+export default Npm
