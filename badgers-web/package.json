@@ -29,5 +29,6 @@
         "@octokit/types": "^9.2.2",
         "encoding": "^0.1.13",
         "sharp": "^0.33.3"
-    }
+    },
+    "packageManager": "yarn@4.2.2"
 }
