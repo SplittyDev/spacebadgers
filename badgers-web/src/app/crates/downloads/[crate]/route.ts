@@ -4,12 +4,18 @@ import Badge from '@/utils/Badge'
 import Crates from '@/utils/Crates'
 
 interface Params {
-    params: {
+    params: Promise<{
         crate: string
-    }
+    }>
 }
 
-export async function GET(request: NextRequest, { params: { crate } }: Params) {
+export async function GET(request: NextRequest, props: Params) {
+    const params = await props.params;
+
+    const {
+        crate
+    } = params;
+
     const resp = await Crates.wrapRequest(crates =>
         crates.api.crates.getCrate(crate),
     )

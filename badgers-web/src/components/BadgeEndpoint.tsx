@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import Path from './Path'
-import { RefObject, useEffect, useMemo, useState } from 'react'
 
 type Props = {
     name: string
