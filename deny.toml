@@ -12,21 +12,11 @@ allow = [
     "MIT",
     "BSD-3-Clause",
     "Apache-2.0",
-    "Unicode-DFS-2016", # used by unicode-ident
+    "Unicode-3.0",
 ]
 
 [bans]
 skip = [
-    { name = "syn", version = "2.0.0" },
-    { name = "windows_x86_64_msvc", version = "*" },
-    { name = "windows_x86_64_gnu", version = "*" },
-    { name = "windows_x86_64_gnullvm", version = "*" },
-    { name = "windows_i686_msvc", version = "*" },
-    { name = "windows_i686_gnu", version = "*" },
-    { name = "windows_aarch64_msvc", version = "*" },
-    { name = "windows_aarch64_gnullvm", version = "*" },
-    { name = "windows-targets", version = "*" },
-    { name = "windows-sys", version = "*" },
     #{ name = "ansi_term", version = "=0.11.0" },
 ]
 
