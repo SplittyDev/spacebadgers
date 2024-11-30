@@ -4,17 +4,22 @@ import Badge from '@/utils/Badge'
 import GitHub from '@/utils/GitHub'
 
 interface Params {
-    params: {
+    params: Promise<{
         owner: string
         repo: string
         branch: string
-    }
+    }>
 }
 
-export async function GET(
-    request: NextRequest,
-    { params: { owner, repo, branch } }: Params,
-) {
+export async function GET(request: NextRequest, props: Params) {
+    const params = await props.params;
+
+    const {
+        owner,
+        repo,
+        branch
+    } = params;
+
     // Fetch all checks for latest commit
     const allChecksData = await GitHub.wrapRequest(octokit =>
         octokit.checks.listForRef({ owner, repo, ref: branch }),
