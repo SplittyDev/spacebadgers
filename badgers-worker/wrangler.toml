@@ -4,7 +4,7 @@ compatibility_date = "2023-05-15"
 account_id = "d9006e724848ae413c69d6f52a934063"
 
 [vars]
-WORKERS_RS_VERSION = "0.2.0"
+WORKERS_RS_VERSION = "0.4.2"
 
 [build]
 command = "cargo install -q worker-build && worker-build"
