@@ -1112,18 +1112,8 @@ dependencies = [
  "htmlize",
  "indoc",
  "phf",
- "spacebadgers-utils 1.0.0",
+ "spacebadgers-utils 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "walkdir",
-]
-
-[[package]]
-name = "spacebadgers-utils"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f382c5ac20abbd1d5caf1e4888da69e68da6fc919bcfe77df5fa3b688f5439a2"
-dependencies = [
- "once_cell",
- "regex",
 ]
 
 [[package]]
@@ -1131,6 +1121,16 @@ name = "spacebadgers-utils"
 version = "1.0.1"
 dependencies = [
  "criterion",
+ "once_cell",
+ "regex",
+]
+
+[[package]]
+name = "spacebadgers-utils"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f00b50a846c9c9fd39adfeaafaa1d8d8a09a6b3ea47b6d30b009d7ed8c78bd45"
+dependencies = [
  "once_cell",
  "regex",
 ]
