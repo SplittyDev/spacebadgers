@@ -10,10 +10,10 @@ homepage.workspace = true
 authors.workspace = true
 
 [dependencies]
-once_cell = "1.19"
+once_cell = "1.21"
 
 [dependencies.regex]
-version = "1.8.2"
+version = "1.11"
 default-features = false
 features = ["std", "perf", "unicode-perl"]
 
