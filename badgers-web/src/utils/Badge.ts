@@ -41,17 +41,7 @@ const Badge = {
 
         // Build query params
         const systemQueryOverrides = overrides
-        const userQueryOverrides = request.nextUrl.search
-            .replace(/^\?+/gm, '')
-            .split('&')
-            .reduce(
-                (acc, pair) => {
-                    const [key, value] = pair.split('=')
-                    acc[key] = value
-                    return acc
-                },
-                {} as Record<string, string>,
-            )
+        const userQueryOverrides = Object.fromEntries(request.nextUrl.searchParams)
         const unifiedQueryOverrides = {
             ...systemQueryOverrides,
             ...userQueryOverrides,
