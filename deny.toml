@@ -5,6 +5,7 @@ db-urls = ["https://github.com/rustsec/advisory-db"]
 ignore = [
     #"RUSTSEC-0000-0000",
 ]
+unmaintained = 'workspace'
 
 [licenses]
 version = 2
