@@ -104,7 +104,7 @@ export default function Home() {
                 <div className="text-sm text-gray-600">
                     We also support{' '}
                     <abbr title="examples: fff, 24c66b, c624a0...">
-                        hex annotation
+                        hex notation
                     </abbr>{' '}
                     for custom colors.
                 </div>
