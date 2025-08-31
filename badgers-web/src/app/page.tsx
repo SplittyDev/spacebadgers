@@ -273,6 +273,11 @@ export default function Home() {
                             path="/github/license/:owner/:repo"
                             inject={['quintschaf', 'schafkit']}
                         />
+                        <Row
+                            name="Last commit"
+                            path="/github/activity/:owner/:repo"
+                            inject={['quintschaf', 'schafkit']}
+                        />
                     </div>
                 </Section>
                 <Section name="Codeberg">
