@@ -6,7 +6,7 @@
 		"dev": "wrangler dev"
 	},
 	"devDependencies": {
-		"wrangler": "4"
+		"wrangler": "4.68.1"
 	},
 	"packageManager": "yarn@4.12.0"
 }
