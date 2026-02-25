@@ -65,18 +65,20 @@ export default class CratesClient {
     static BASE_URL = 'https://crates.io/api/v1'
 
     static async crate(crate: string): Promise<CrateInfoResponse | null> {
-        const url = `${CratesClient.BASE_URL}/crates/${crate}`
-        const resp = await fetch(url)
-
-        if (resp.status !== 200) return null
-        return await resp.json<CrateInfoResponse>()
+        return await this.request(`${CratesClient.BASE_URL}/crates/${crate}`)
     }
 
     static async versions(crate: string): Promise<CrateVersionResponse | null> {
-        const url = `${CratesClient.BASE_URL}/crates/${crate}/versions`
-        const resp = await fetch(url)
+        return await this.request(`${CratesClient.BASE_URL}/crates/${crate}/versions`)
+    }
 
+    private static async request<T>(url: string): Promise<T | null> {
+        const resp = await fetch(url, {
+            headers: {
+                'User-Agent': 'spacebadgers-badge-agent (badgers.space)'
+            }
+        })
         if (resp.status !== 200) return null
-        return await resp.json<CrateVersionResponse>()
+        return await resp.json<T>()
     }
 }
