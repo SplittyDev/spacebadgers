@@ -16,9 +16,7 @@ export async function GET(request: NextRequest, props: Params) {
         crate
     } = params;
 
-    const resp = await Crates.wrapRequest(crates =>
-        crates.api.crates.getVersions(crate),
-    )
+    const resp = await Crates.versions(crate)
     if (resp === null) return await Badge.error(request, 'crates.io')
     const latestVersion = resp.versions
         .filter(v => !v.yanked)

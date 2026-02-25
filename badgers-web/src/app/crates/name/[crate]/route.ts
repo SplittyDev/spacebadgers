@@ -16,9 +16,7 @@ export async function GET(request: NextRequest, props: Params) {
         crate
     } = params;
 
-    const crateResp = await Crates.wrapRequest(crates =>
-        crates.api.crates.getCrate(crate),
-    )
+    const crateResp = await Crates.crate(crate)
     if (crateResp === null) return await Badge.error(request, 'crates.io')
     return await Badge.generate(request, 'crates.io', `${crateResp.crate.name}`)
 }

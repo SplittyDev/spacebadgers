@@ -1,24 +1,82 @@
-import { CratesIO } from 'crates.io'
-
-type WrappedCratesRequest<T> = (arg0: CratesIO) => Promise<T>
-
-const Crates = {
-    getCratesClient(): CratesIO {
-        return new CratesIO()
-    },
-
-    async wrapRequest<T>(request: WrappedCratesRequest<T>): Promise<T | null> {
-        try {
-            return await request(Crates.getCratesClient())
-        } catch (error) {
-            return null
+export type CrateInfo = {
+    badges: {
+        [key: string]: {
+            [key: string]: string
         }
-    },
+    } | null
+    categories: null | string
+    created_at: string
+    description: string
+    documentation: null | string
+    downloads: number
+    exact_match: boolean
+    homepage: null | string
+    id: string
+    keywords: null | string
+    links: {
+        owner_team: string
+        owner_user: string
+        owners: string
+        reverse_dependencies: string
+        version_downloads: string
+        versions: string
+    }
+    max_version: string
+    name: string
+    recent_downloads: null | number
+    repository: null | string
+    updated_at: string
+    versions: null | number[]
 }
 
-export default Crates
+export type CrateVersion = {
+    crate: string
+    crate_size: number
+    created_at: string
+    dl_path: string
+    downloads: number
+    features: {
+        [key: string]: string[]
+    }
+    id: number
+    license: string
+    links: {
+        authors: string
+        dependencies: string
+        version_downloads: string
+    }
+    num: string
+    published_by: null | string
+    readme_path: string
+    updated_at: string
+    yanked: boolean
+}
 
-// Disable Vercel data cache for all requests.
-// This is a temporary solution. Once we can serve all routes via fetch,
-// we can remove this and use the next revalidate feature.
-export const fetchCache = 'force-no-store'
+export type CrateInfoResponse = {
+    crate: CrateInfo
+    versions: CrateVersion[]
+}
+
+export type CrateVersionResponse = {
+    versions: CrateVersion[]
+}
+
+export default class CratesClient {
+    static BASE_URL = 'https://crates.io/api/v1'
+
+    static async crate(crate: string): Promise<CrateInfoResponse | null> {
+        const url = `${CratesClient.BASE_URL}/crates/${crate}`
+        const resp = await fetch(url)
+
+        if (resp.status !== 200) return null
+        return await resp.json<CrateInfoResponse>()
+    }
+
+    static async versions(crate: string): Promise<CrateVersionResponse | null> {
+        const url = `${CratesClient.BASE_URL}/crates/${crate}/versions`
+        const resp = await fetch(url)
+
+        if (resp.status !== 200) return null
+        return await resp.json<CrateVersionResponse>()
+    }
+}

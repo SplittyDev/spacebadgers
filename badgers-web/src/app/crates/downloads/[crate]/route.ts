@@ -16,9 +16,7 @@ export async function GET(request: NextRequest, props: Params) {
         crate
     } = params;
 
-    const resp = await Crates.wrapRequest(crates =>
-        crates.api.crates.getCrate(crate),
-    )
+    const resp = await Crates.crate(crate)
     if (resp === null) return await Badge.error(request, 'crates.io')
     const downloadCount = Intl.NumberFormat('en-US', {
         notation: 'compact',
