@@ -35,4 +35,3 @@ export async function GET(request: NextRequest, props: Params) {
     })
 }
 
-export const runtime = 'edge'

@@ -1,10 +1,10 @@
-import { useState } from 'react'
 import Path from './Path'
 
 type Props = {
     name: string
     path: string
     inject: string[]
+    date?: number
 }
 
 // function useOnScreen(ref: RefObject<HTMLElement>) {
@@ -24,8 +24,7 @@ type Props = {
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-export default function BadgeEndpoint({ name, path, inject }: Props) {
-    const [date] = useState(() => Date.now())
+export default function BadgeEndpoint({ name, path, inject, date = Date.now() }: Props) {
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_WEB_PROTO
         const host = process.env.NEXT_PUBLIC_WEB_HOST

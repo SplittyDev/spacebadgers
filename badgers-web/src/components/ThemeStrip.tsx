@@ -1,14 +1,12 @@
-import { useState } from "react"
 
 type Props = {
     themes: string[]
+    date?: number
 }
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-export default function ThemeStrip({ themes }: Props) {
-    const [date] = useState(() => Date.now())
-
+export default function ThemeStrip({ themes, date = Date.now() }: Props) {
     return (
         <div className="flex flex-col gap-2">
             {themes.map(theme => {

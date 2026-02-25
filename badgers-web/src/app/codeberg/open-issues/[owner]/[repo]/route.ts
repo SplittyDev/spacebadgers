@@ -29,5 +29,3 @@ export async function GET(request: NextRequest, props: Params) {
         openIssuesCount?.toString() ?? 'None',
     )
 }
-
-export const runtime = 'edge'

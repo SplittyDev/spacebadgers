@@ -1,0 +1,42 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "account_id": "d9006e724848ae413c69d6f52a934063",
+    "main": ".open-next/worker.js",
+    "name": "badgers-web",
+    "compatibility_date": "2026-02-25",
+    "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+    "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS",
+    },
+    "vars": {
+        "NEXT_PUBLIC_WEB_PROTO": "https",
+        "NEXT_PUBLIC_WEB_HOST": "badgers.space",
+        "NEXT_PUBLIC_API_PROTO": "https",
+        "NEXT_PUBLIC_API_HOST": "honey.badgers.space",
+    },
+    "services": [
+        {
+            // Self-reference service binding, the service name must match the worker name
+            // see https://opennext.js.org/cloudflare/caching
+            "binding": "WORKER_SELF_REFERENCE",
+            "service": "badgers-web",
+        },
+    ],
+    "r2_buckets": [
+        // Use R2 incremental cache
+        // See https://opennext.js.org/cloudflare/caching
+        {
+            "binding": "NEXT_INC_CACHE_R2_BUCKET",
+            // Create the bucket before deploying
+            // You can change the bucket name if you want
+            // See https://developers.cloudflare.com/workers/wrangler/commands/#r2-bucket-create
+            "bucket_name": "badgers-web-opennext-cache",
+        },
+    ],
+    "images": {
+        // Enable image optimization
+        // see https://opennext.js.org/cloudflare/howtos/image
+        "binding": "IMAGES",
+    }
+}

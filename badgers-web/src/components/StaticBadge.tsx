@@ -1,4 +1,3 @@
-import { useState } from "react"
 
 type Props = {
     label: string
@@ -6,6 +5,7 @@ type Props = {
     color?: string
     icon?: string
     labelOverride?: string
+    date?: number
 }
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -30,8 +30,8 @@ export default function StaticBadge({
     color,
     icon,
     labelOverride,
+    date = Date.now()
 }: Props) {
-    const [date] = useState(() => Date.now())
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_API_PROTO
         const host = process.env.NEXT_PUBLIC_API_HOST

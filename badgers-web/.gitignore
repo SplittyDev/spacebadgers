@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# wrangler
+.wrangler
+
 # production
 /build
 
@@ -26,6 +29,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.dev.vars
 
 # vercel
 .vercel
@@ -33,3 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OpenNext
+.open-next

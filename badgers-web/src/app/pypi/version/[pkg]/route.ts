@@ -21,4 +21,3 @@ export async function GET(request: NextRequest, props: Params) {
     return await Badge.generate(request, 'pypi', `v${data.version}`)
 }
 
-export const runtime = 'edge'

@@ -23,4 +23,3 @@ export async function GET(request: NextRequest, props: Params) {
     return await Badge.generate(request, 'license', data.license)
 }
 
-export const runtime = 'edge'

@@ -29,5 +29,3 @@ export async function GET(request: NextRequest, props: Params) {
         closedIssuesCount?.toString() ?? 'None',
     )
 }
-
-export const runtime = 'edge'
