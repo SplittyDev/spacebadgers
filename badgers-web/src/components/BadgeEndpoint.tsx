@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Path from './Path'
 
 type Props = {
@@ -24,6 +25,7 @@ type Props = {
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 export default function BadgeEndpoint({ name, path, inject }: Props) {
+    const [date] = useState(() => Date.now())
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_WEB_PROTO
         const host = process.env.NEXT_PUBLIC_WEB_HOST
@@ -36,7 +38,7 @@ export default function BadgeEndpoint({ name, path, inject }: Props) {
             /:[^/]+/g,
             match => injectionTable[match],
         )
-        if (isDevelopment) return `${baseUrl}/${examplePath}?bust=${Date.now()}`
+        if (isDevelopment) return `${baseUrl}/${examplePath}?bust=${date}`
         return `${baseUrl}/${examplePath}`
     }
 

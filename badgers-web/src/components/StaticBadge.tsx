@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 type Props = {
     label: string
     status: string
@@ -29,6 +31,7 @@ export default function StaticBadge({
     icon,
     labelOverride,
 }: Props) {
+    const [date] = useState(() => Date.now())
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_API_PROTO
         const host = process.env.NEXT_PUBLIC_API_HOST
@@ -37,7 +40,7 @@ export default function StaticBadge({
         const queryParams = [
             icon && `icon=${icon}`,
             labelOverride !== undefined && `label=${labelOverride}`,
-            isDevelopment && `bust=${Date.now()}`,
+            isDevelopment && `bust=${date}`,
         ]
             .filter(Boolean)
             .join('&')

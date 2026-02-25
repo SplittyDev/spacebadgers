@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 type Props = {
     themes: string[]
 }
@@ -5,11 +7,13 @@ type Props = {
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 export default function ThemeStrip({ themes }: Props) {
+    const [date] = useState(() => Date.now())
+
     return (
         <div className="flex flex-col gap-2">
             {themes.map(theme => {
                 const name = theme === 'honey' ? 'honey (default)' : theme
-                const bust = isDevelopment ? `?bust=${Date.now()}` : ''
+                const bust = isDevelopment ? `?bust=${date}` : ''
                 const url = `${process.env.NEXT_PUBLIC_API_PROTO}://${process.env.NEXT_PUBLIC_API_HOST}/theme/${theme}${bust}`
                 return (
                     <div
