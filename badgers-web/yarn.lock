@@ -1738,6 +1738,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ffflorian/api-client@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@ffflorian/api-client@npm:2.2.0"
+  checksum: 10c0/70e868fb4ed211ce60bfc5eb2ab27a345cf9562b20d330d132732bfc16248d6040207aa3fa5b773ffe5d58d4a6d58abce0851b89b49c6d2b9ad2f27d99c8d9b1
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -4031,17 +4038,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.2":
-  version: 1.6.2
-  resolution: "axios@npm:1.6.2"
-  dependencies:
-    follow-redirects: "npm:^1.15.0"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/9b77e030e85e4f9cbcba7bb52fbff67d6ce906c92d213e0bd932346a50140faf83733bf786f55bd58301bd92f9973885c7b87d6348023e10f7eaf286d0791a1d
-  languageName: node
-  linkType: hard
-
 "axobject-query@npm:^4.1.0":
   version: 4.1.0
   resolution: "axobject-query@npm:4.1.0"
@@ -4061,7 +4057,7 @@ __metadata:
     "@types/react-dom": "npm:19.2.3"
     "@vercel/analytics": "npm:^1.3.1"
     autoprefixer: "npm:10.4.19"
-    crates.io: "npm:^2.2.7"
+    crates.io: "npm:^2.4.5"
     encoding: "npm:^0.1.13"
     eslint: "npm:^9"
     eslint-config-next: "npm:16.1.6"
@@ -4561,12 +4557,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crates.io@npm:^2.2.7":
-  version: 2.2.7
-  resolution: "crates.io@npm:2.2.7"
+"crates.io@npm:^2.4.5":
+  version: 2.4.5
+  resolution: "crates.io@npm:2.4.5"
   dependencies:
-    axios: "npm:1.6.2"
-  checksum: 10c0/45b1ca294071fab0f3e4f4adc5a2f7358188abc30414aee30b73e2dedd478a79788a9a199c1dff8a84256fec928bc0a0b2bc9322bac4523cc623e2704371a42d
+    "@ffflorian/api-client": "npm:2.2.0"
+  checksum: 10c0/eace8158c8c2422e2dd9d4eba042d576ca91143917708cdd487a32bcce51206a610d5a0a45f7a80383ad7eac051b429aec15e0e8e1952393c4c71ec2b1adf45e
   languageName: node
   linkType: hard
 
@@ -6127,16 +6123,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.0":
-  version: 1.15.6
-  resolution: "follow-redirects@npm:1.15.6"
-  peerDependenciesMeta:
-    debug:
-      optional: true
-  checksum: 10c0/9ff767f0d7be6aa6870c82ac79cf0368cd73e01bbc00e9eb1c2a16fbb198ec105e3c9b6628bb98e9f3ac66fe29a957b9645bcb9a490bb7aa0d35f908b6b85071
-  languageName: node
-  linkType: hard
-
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
@@ -6179,17 +6165,6 @@ __metadata:
   version: 1.7.2
   resolution: "form-data-encoder@npm:1.7.2"
   checksum: 10c0/56553768037b6d55d9de524f97fe70555f0e415e781cb56fc457a68263de3d40fadea2304d4beef2d40b1a851269bd7854e42c362107071892cb5238debe9464
-  languageName: node
-  linkType: hard
-
-"form-data@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "form-data@npm:4.0.0"
-  dependencies:
-    asynckit: "npm:^0.4.0"
-    combined-stream: "npm:^1.0.8"
-    mime-types: "npm:^2.1.12"
-  checksum: 10c0/cb6f3ac49180be03ff07ba3ff125f9eba2ff0b277fb33c7fc47569fc5e616882c5b1c69b9904c4c4187e97dd0419dd03b134174756f296dec62041e6527e2c6e
   languageName: node
   linkType: hard
 
@@ -8777,13 +8752,6 @@ __metadata:
     forwarded: "npm:0.2.0"
     ipaddr.js: "npm:1.9.1"
   checksum: 10c0/c3eed999781a35f7fd935f398b6d8920b6fb00bbc14287bc6de78128ccc1a02c89b95b56742bf7cf0362cc333c61d138532049c7dedc7a328ef13343eff81210
-  languageName: node
-  linkType: hard
-
-"proxy-from-env@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "proxy-from-env@npm:1.1.0"
-  checksum: 10c0/fe7dd8b1bdbbbea18d1459107729c3e4a2243ca870d26d34c2c1bcd3e4425b7bcc5112362df2d93cc7fb9746f6142b5e272fd1cc5c86ddf8580175186f6ad42b
   languageName: node
   linkType: hard
 
