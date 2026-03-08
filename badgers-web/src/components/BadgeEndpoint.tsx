@@ -30,13 +30,8 @@ export default function BadgeEndpoint({ name, path, inject, date = Date.now() }:
         const host = process.env.NEXT_PUBLIC_WEB_HOST
         const baseUrl = `${proto}://${host}`
         const injectables = path.split('/').filter(part => part.startsWith(':'))
-        const injectionTable = Object.fromEntries(
-            injectables.map((part, i) => [part, inject[i]]),
-        )
-        const examplePath = path.replace(
-            /:[^/]+/g,
-            match => injectionTable[match],
-        )
+        const injectionTable = Object.fromEntries(injectables.map((part, i) => [part, inject[i]]))
+        const examplePath = path.replace(/:[^/]+/g, match => injectionTable[match])
         if (isDevelopment) return `${baseUrl}/${examplePath}?bust=${date}`
         return `${baseUrl}/${examplePath}`
     }

@@ -25,10 +25,7 @@ class CodebergClient {
         this.token = token
     }
 
-    buildUrl(
-        path: string,
-        query: Record<string, string | number | boolean> = {},
-    ): string {
+    buildUrl(path: string, query: Record<string, string | number | boolean> = {}): string {
         const queryArgs = {
             ...query,
             token: this.token,
@@ -40,10 +37,7 @@ class CodebergClient {
         return `${API_BASE}/${path}?${queryString}`
     }
 
-    async getRepository({
-        owner,
-        repo,
-    }: ProjectInfo): Promise<Repository | null> {
+    async getRepository({ owner, repo }: ProjectInfo): Promise<Repository | null> {
         const repoId = `${owner}/${repo}`
         const url = this.buildUrl(`repos/${repoId}`)
         const resp = await fetch(url)
@@ -65,10 +59,7 @@ class CodebergClient {
         return Number(count)
     }
 
-    async getLatestRelease({
-        owner,
-        repo,
-    }: ProjectInfo): Promise<Release | null> {
+    async getLatestRelease({ owner, repo }: ProjectInfo): Promise<Release | null> {
         const repoId = `${owner}/${repo}`
         const url = this.buildUrl(`repos/${repoId}/releases/latest`)
         const resp = await fetch(url)

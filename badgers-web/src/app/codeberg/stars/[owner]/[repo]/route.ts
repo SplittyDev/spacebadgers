@@ -11,23 +11,14 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        owner,
-        repo
-    } = params;
+    const { owner, repo } = params
 
     const repository = await Codeberg.getClient().getRepository({ owner, repo })
     const stargazers = repository?.stars_count
 
-    return await Badge.generate(
-        request,
-        'stars',
-        stargazers?.toString() ?? 'None',
-        {
-            color: stargazers ? 'blue' : 'yellow',
-        },
-    )
+    return await Badge.generate(request, 'stars', stargazers?.toString() ?? 'None', {
+        color: stargazers ? 'blue' : 'yellow',
+    })
 }
-

@@ -16,9 +16,7 @@ export default function IconShelf({ icons }: Props) {
             return {
                 name,
                 icons: Object.fromEntries(
-                    Object.entries(icons).filter(([key]) =>
-                        key.includes(searchTerm),
-                    ),
+                    Object.entries(icons).filter(([key]) => key.includes(searchTerm)),
                 ),
             }
         })
@@ -31,9 +29,7 @@ export default function IconShelf({ icons }: Props) {
                 type="search"
                 placeholder="Search for icons"
                 value={searchTerm}
-                onInput={e =>
-                    setSearchTerm((e.target as HTMLInputElement).value)
-                }
+                onInput={e => setSearchTerm((e.target as HTMLInputElement).value)}
             />
             {filteredIcons.map(({ name, icons }) => (
                 <section key={name} className="flex flex-col gap-2">
@@ -47,12 +43,7 @@ export default function IconShelf({ icons }: Props) {
                                 <Fragment key={name}>
                                     <div className="flex justify-center items-center bg-gray-700 rounded-md w-8 h-8">
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
-                                            width="20"
-                                            height="20"
-                                            alt={name}
-                                            src={data}
-                                        />
+                                        <img width="20" height="20" alt={name} src={data} />
                                     </div>
                                     <div className="text-gray-800">{name}</div>
                                 </Fragment>

@@ -1,4 +1,3 @@
-
 type Props = {
     themes: string[]
     date?: number

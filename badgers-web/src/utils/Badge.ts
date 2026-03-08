@@ -78,10 +78,7 @@ const Badge = {
         })
     },
 
-    async error(
-        request: NextRequest,
-        subsystem: string,
-    ): Promise<NextResponse> {
+    async error(request: NextRequest, subsystem: string): Promise<NextResponse> {
         return await Badge.generate(request, subsystem, 'error', {
             color: 'gray',
         })

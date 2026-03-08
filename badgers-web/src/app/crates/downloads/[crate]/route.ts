@@ -10,11 +10,9 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        crate
-    } = params;
+    const { crate } = params
 
     const resp = await Crates.crate(crate)
     if (resp === null) return await Badge.error(request, 'crates.io')

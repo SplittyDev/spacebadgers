@@ -11,12 +11,9 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        org_or_pkg: org,
-        pkg
-    } = params;
+    const { org_or_pkg: org, pkg } = params
 
     const data = await Npm.getPackageVersion(`${org}/${pkg}`, 'latest')
     if (data === null) return await Badge.error(request, 'npm')
@@ -36,4 +33,3 @@ export async function GET(request: NextRequest, props: Params) {
         color: typesColor,
     })
 }
-

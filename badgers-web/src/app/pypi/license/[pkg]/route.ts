@@ -10,11 +10,9 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        pkg
-    } = params;
+    const { pkg } = params
 
     const data = await PyPI.getPackage(pkg, 'latest')
     if (data === null) return await Badge.error(request, 'pypi')
@@ -22,4 +20,3 @@ export async function GET(request: NextRequest, props: Params) {
     const color = data.license ? 'blue' : 'gray'
     return await Badge.generate(request, 'license', `${license}`, { color })
 }
-

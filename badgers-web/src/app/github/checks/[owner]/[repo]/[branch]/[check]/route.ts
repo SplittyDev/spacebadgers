@@ -13,14 +13,9 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        owner,
-        repo,
-        branch,
-        check
-    } = params;
+    const { owner, repo, branch, check } = params
 
     // Fetch all checks for latest commit
     const allChecksData = await GitHub.wrapRequest(octokit =>
@@ -36,9 +31,7 @@ export async function GET(request: NextRequest, props: Params) {
     if (checkResults.length === 0) return await Badge.error(request, 'github')
 
     // Combine check results
-    const combinedConclusion = GitHub.getCombinedCheckConclusion(
-        checkResults as string[],
-    )
+    const combinedConclusion = GitHub.getCombinedCheckConclusion(checkResults as string[])
 
     return await Badge.generate(request, check, combinedConclusion.status, {
         color: combinedConclusion.color,

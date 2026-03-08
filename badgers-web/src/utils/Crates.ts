@@ -75,8 +75,8 @@ export default class CratesClient {
     private static async request<T>(url: string): Promise<T | null> {
         const resp = await fetch(url, {
             headers: {
-                'User-Agent': 'spacebadgers-badge-agent (badgers.space)'
-            }
+                'User-Agent': 'spacebadgers-badge-agent (badgers.space)',
+            },
         })
         if (resp.status !== 200) return null
         return await resp.json<T>()

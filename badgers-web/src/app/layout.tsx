@@ -25,14 +25,7 @@ export const metadata: Metadata = {
     title: 'SpaceBadgers',
     applicationName: 'SpaceBadgers',
     description: 'Fast and clean SVG badges',
-    keywords: [
-        'badge',
-        'badges',
-        'badgers',
-        'spacebadgers',
-        'badge-generator',
-        'svg',
-    ],
+    keywords: ['badge', 'badges', 'badgers', 'spacebadgers', 'badge-generator', 'svg'],
     authors: [{ name: 'Marco Quinten', url: 'https://github.com/splittydev' }],
     creator: 'Marco Quinten',
     metadataBase,
@@ -42,16 +35,10 @@ export const viewport: Viewport = {
     colorScheme: 'light',
 }
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body
-                className={`${inter.className} w-full flex flex-col items-center`}
-            >
+            <body className={`${inter.className} w-full flex flex-col items-center`}>
                 <div className="flex min-h-screen w-full xl:w-10/12 2xl:w-8/12 flex-col items-center py-4 md:p-16 gap-8">
                     <header className="flex flex-col gap-4">
                         <Link href="/" className="flex gap-4 select-none">
@@ -81,9 +68,7 @@ export default function RootLayout({
                             <section className="flex flex-wrap justify-between gap-2 bg-gray-100 mx-4 px-4 py-2 rounded-md">
                                 <div className="text-sm">
                                     <span className="text-gray-600">
-                                        Made with{' '}
-                                        <span className="text-rose-500">♥</span>{' '}
-                                        by{' '}
+                                        Made with <span className="text-rose-500">♥</span> by{' '}
                                         <a
                                             target="_blank"
                                             className="text-gray-500 hover:text-amber-600"
@@ -113,24 +98,19 @@ export default function RootLayout({
                                     About SpaceBadgers
                                 </h2>
                                 <p>
-                                    Hey there, welcome to SpaceBadgers! If
-                                    you&#x27;re wondering who we are and what we
-                                    do, let us fill you in. We&#x27;re an
-                                    open-source project with a passion for
-                                    delivering top-notch SVG badges that are as
-                                    speedy as they are stylish.
+                                    Hey there, welcome to SpaceBadgers! If you&#x27;re wondering who
+                                    we are and what we do, let us fill you in. We&#x27;re an
+                                    open-source project with a passion for delivering top-notch SVG
+                                    badges that are as speedy as they are stylish.
                                 </p>
                                 <p>
-                                    You see, we noticed that developers and
-                                    project maintainers like you needed a way to
-                                    display key information &#x2013; think build
-                                    status, version, download counts &#x2013; in
-                                    a way that&#x27;s quick and easy to
-                                    integrate. That&#x27;s where we come in.
+                                    You see, we noticed that developers and project maintainers like
+                                    you needed a way to display key information &#x2013; think build
+                                    status, version, download counts &#x2013; in a way that&#x27;s
+                                    quick and easy to integrate. That&#x27;s where we come in.
                                 </p>
                                 <p>
-                                    Under the hood, we&#x27;re powered by a
-                                    Rust-based core library{' '}
+                                    Under the hood, we&#x27;re powered by a Rust-based core library{' '}
                                     <a
                                         className="text-xs text-gray-700 hover:text-orange-600"
                                         href="https://crates.io/crates/spacebadgers"
@@ -139,32 +119,25 @@ export default function RootLayout({
                                     >
                                         (crates.io)
                                     </a>{' '}
-                                    and a Cloudflare worker. This dynamic duo
-                                    ensures that we&#x27;re always delivering
-                                    badges with excellent performance, straight
-                                    from the edge. And speaking of integration,
-                                    we&#x27;ve made it our mission to ensure
-                                    smooth sailing when it comes to working with
-                                    third-party services, courtesy of our
-                                    NextJS-based API routes running on Vercel
-                                    edge infrastructure.
+                                    and a Cloudflare worker. This dynamic duo ensures that
+                                    we&#x27;re always delivering badges with excellent performance,
+                                    straight from the edge. And speaking of integration, we&#x27;ve
+                                    made it our mission to ensure smooth sailing when it comes to
+                                    working with third-party services, courtesy of our NextJS-based
+                                    API routes running on Vercel edge infrastructure.
                                 </p>
                                 <p>
-                                    What makes us different? We&#x27;re glad you
-                                    asked! Unlike traditional image-based
-                                    badges, we&#x27;re all about SVGs.
-                                    They&#x27;re scalable, high-quality, and we
-                                    serve them in a minified and compressed form
-                                    for optimal delivery.
+                                    What makes us different? We&#x27;re glad you asked! Unlike
+                                    traditional image-based badges, we&#x27;re all about SVGs.
+                                    They&#x27;re scalable, high-quality, and we serve them in a
+                                    minified and compressed form for optimal delivery.
                                 </p>
                                 <p>
-                                    So that&#x27;s us, SpaceBadgers, in a
-                                    nutshell. We&#x27;re here to provide a
-                                    seamless, efficient badge generation
-                                    process. If that sounds like your cup of
-                                    tea, why not join the open-source community
-                                    using SpaceBadgers today? We&#x27;d be
-                                    thrilled to have you onboard!
+                                    So that&#x27;s us, SpaceBadgers, in a nutshell. We&#x27;re here
+                                    to provide a seamless, efficient badge generation process. If
+                                    that sounds like your cup of tea, why not join the open-source
+                                    community using SpaceBadgers today? We&#x27;d be thrilled to
+                                    have you onboard!
                                 </p>
                                 <p>
                                     For more information, take a look at our{' '}

@@ -28,9 +28,7 @@ const GitHub = {
      * @param request The request to wrap.
      * @returns The response
      */
-    async wrapRequest<T>(
-        request: WrappedGitHubRequest<T>,
-    ): Promise<GitHubResponse<T>> {
+    async wrapRequest<T>(request: WrappedGitHubRequest<T>): Promise<GitHubResponse<T>> {
         try {
             const { data } = await request(GitHub.getOctokit())
             return {
@@ -52,9 +50,7 @@ const GitHub = {
     getCombinedCheckConclusion(conclusions: string[]): CombinedCheckResult {
         const ignoreList = ['neutral', 'cancelled', 'skipped']
 
-        const shortCircuitMatch = (
-            conclusion: string,
-        ): CombinedCheckResult | undefined => {
+        const shortCircuitMatch = (conclusion: string): CombinedCheckResult | undefined => {
             if (conclusions.some(c => c === conclusion)) {
                 return { status: conclusion, color: 'red' }
             }

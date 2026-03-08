@@ -1,4 +1,3 @@
-
 type Props = {
     label: string
     status: string
@@ -30,7 +29,7 @@ export default function StaticBadge({
     color,
     icon,
     labelOverride,
-    date = Date.now()
+    date = Date.now(),
 }: Props) {
     const buildUrl = () => {
         const proto = process.env.NEXT_PUBLIC_API_PROTO

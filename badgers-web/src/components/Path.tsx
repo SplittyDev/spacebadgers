@@ -7,17 +7,8 @@ type Props = {
 export default function Path({ value }: Props) {
     const containsProtocol = /^https?:[/]{2}/m.test(value)
 
-    const getPathColor = (
-        path: string,
-        i: number,
-        isProtocol: boolean,
-        isQueryParam: boolean,
-    ) => {
-        const staticColors = [
-            'text-slate-800',
-            'text-zinc-600',
-            'text-stone-600',
-        ]
+    const getPathColor = (path: string, i: number, isProtocol: boolean, isQueryParam: boolean) => {
+        const staticColors = ['text-slate-800', 'text-zinc-600', 'text-stone-600']
         const dynamicColors = [
             'text-emerald-700',
             'text-cyan-700',
@@ -54,11 +45,7 @@ export default function Path({ value }: Props) {
                 value,
                 className: getPathColor(
                     value,
-                    isQueryParam
-                        ? queryParamCount - 1
-                        : isDynamic
-                          ? dynamicIndex++
-                          : staticIndex++,
+                    isQueryParam ? queryParamCount - 1 : isDynamic ? dynamicIndex++ : staticIndex++,
                     isProtocol,
                     isQueryParam,
                 ),
@@ -74,9 +61,9 @@ export default function Path({ value }: Props) {
         <div className="flex flex-wrap whitespace-pre-wrap text-gray-400 font-mono">
             {parts.map(({ value, className, isQuery, renderAmpersand }, i) => (
                 <Fragment key={value}>
-                    {!isQuery &&
-                        (!containsProtocol ||
-                            (containsProtocol && i !== 0)) && <div>/</div>}
+                    {!isQuery && (!containsProtocol || (containsProtocol && i !== 0)) && (
+                        <div>/</div>
+                    )}
                     {renderAmpersand && <div className={className}>&amp;</div>}
                     <div className={className}>{value}</div>
                 </Fragment>

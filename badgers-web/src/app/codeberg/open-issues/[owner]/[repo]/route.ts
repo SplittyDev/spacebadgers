@@ -11,21 +11,14 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        owner,
-        repo
-    } = params;
+    const { owner, repo } = params
 
     const openIssuesCount = await Codeberg.getClient().getIssuesCount(
         { owner, repo },
         { type: 'issues', state: 'open' },
     )
 
-    return await Badge.generate(
-        request,
-        'open issues',
-        openIssuesCount?.toString() ?? 'None',
-    )
+    return await Badge.generate(request, 'open issues', openIssuesCount?.toString() ?? 'None')
 }

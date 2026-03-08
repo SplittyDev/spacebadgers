@@ -11,20 +11,13 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        owner,
-        repo
-    } = params;
+    const { owner, repo } = params
 
     const resp = await GitHub.wrapRequest(octokit =>
         octokit.issues.listForRepo({ owner, repo, state: 'all' }),
     )
     const issues = resp.data?.filter(issue => issue.pull_request === undefined)
-    return await Badge.generate(
-        request,
-        'issues',
-        issues?.length?.toString() ?? 'None',
-    )
+    return await Badge.generate(request, 'issues', issues?.length?.toString() ?? 'None')
 }

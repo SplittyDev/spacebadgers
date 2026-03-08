@@ -10,24 +10,17 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        crate
-    } = params;
+    const { crate } = params
 
     const crateResp = await Crates.crate(crate)
     if (crateResp === null) return await Badge.error(request, 'crates.io')
     const latestVersion = crateResp.versions
         .filter(v => !v.yanked)
-        .sort(
-            (a, b) =>
-                new Date(b.updated_at).getTime() -
-                new Date(a.updated_at).getTime(),
-        )
+        .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
         .shift()
-    if (latestVersion === undefined)
-        return await Badge.error(request, 'crates.io')
+    if (latestVersion === undefined) return await Badge.error(request, 'crates.io')
     return await Badge.generate(
         request,
         'crates.io',

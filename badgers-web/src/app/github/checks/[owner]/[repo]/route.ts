@@ -11,17 +11,12 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, props: Params) {
-    const params = await props.params;
+    const params = await props.params
 
-    const {
-        owner,
-        repo
-    } = params;
+    const { owner, repo } = params
 
     // Fetch repo
-    const repoData = await GitHub.wrapRequest(octokit =>
-        octokit.repos.get({ owner, repo }),
-    )
+    const repoData = await GitHub.wrapRequest(octokit => octokit.repos.get({ owner, repo }))
 
     // Get default branch
     const defaultBranch = repoData.data?.default_branch
@@ -33,15 +28,11 @@ export async function GET(request: NextRequest, props: Params) {
     )
 
     // Get all check results
-    const checkResults = allChecksData.data?.check_runs.map(
-        check => check.conclusion,
-    )
+    const checkResults = allChecksData.data?.check_runs.map(check => check.conclusion)
     if (checkResults === undefined) return await Badge.error(request, 'github')
 
     // Combine check results
-    const combinedConclusion = GitHub.getCombinedCheckConclusion(
-        checkResults as string[],
-    )
+    const combinedConclusion = GitHub.getCombinedCheckConclusion(checkResults as string[])
 
     return await Badge.generate(request, 'checks', combinedConclusion.status, {
         color: combinedConclusion.color,

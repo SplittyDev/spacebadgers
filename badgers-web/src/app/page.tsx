@@ -62,59 +62,33 @@ export default function Home() {
 
             {/* Named Colors */}
             <div className="flex flex-col gap-4">
-                <h2 className="text-xl text-gray-700 font-bold self-start">
-                    Colors
-                </h2>
+                <h2 className="text-xl text-gray-700 font-bold self-start">Colors</h2>
                 <div className="flex flex-col gap-1 items-start md:items-center md:flex-row">
                     <div className="flex gap-1 justify-start">
                         <StaticBadge label="color" status="blue" color="blue" />
                         <StaticBadge label="color" status="cyan" color="cyan" />
-                        <StaticBadge
-                            label="color"
-                            status="green"
-                            color="green"
-                        />
-                        <StaticBadge
-                            label="color"
-                            status="yellow"
-                            color="yellow"
-                        />
-                        <StaticBadge
-                            label="color"
-                            status="orange"
-                            color="orange"
-                        />
+                        <StaticBadge label="color" status="green" color="green" />
+                        <StaticBadge label="color" status="yellow" color="yellow" />
+                        <StaticBadge label="color" status="orange" color="orange" />
                     </div>
                     <div className="flex gap-1 justify-start">
                         <StaticBadge label="color" status="red" color="red" />
                         <StaticBadge label="color" status="pink" color="pink" />
-                        <StaticBadge
-                            label="color"
-                            status="purple"
-                            color="purple"
-                        />
+                        <StaticBadge label="color" status="purple" color="purple" />
                         <StaticBadge label="color" status="gray" color="gray" />
-                        <StaticBadge
-                            label="color"
-                            status="black"
-                            color="black"
-                        />
+                        <StaticBadge label="color" status="black" color="black" />
                     </div>
                 </div>
                 <div className="text-sm text-gray-600">
                     We also support{' '}
-                    <abbr title="examples: fff, 24c66b, c624a0...">
-                        hex annotation
-                    </abbr>{' '}
-                    for custom colors.
+                    <abbr title="examples: fff, 24c66b, c624a0...">hex annotation</abbr> for custom
+                    colors.
                 </div>
             </div>
 
             {/* Icons */}
             <div className="flex flex-col gap-4">
-                <h2 className="text-xl text-gray-700 font-bold self-start">
-                    900+ Icons
-                </h2>
+                <h2 className="text-xl text-gray-700 font-bold self-start">900+ Icons</h2>
                 <div className="flex gap-1 justify-start">
                     <StaticBadge
                         label="github"
@@ -137,12 +111,7 @@ export default function Home() {
                         icon="feather-check"
                         labelOverride=""
                     />
-                    <StaticBadge
-                        label="cloud"
-                        status="enabled"
-                        color="cyan"
-                        icon="feather-cloud"
-                    />
+                    <StaticBadge label="cloud" status="enabled" color="cyan" icon="feather-cloud" />
                     <StaticBadge
                         label="plus"
                         status="and many more!"
@@ -151,10 +120,7 @@ export default function Home() {
                         labelOverride=""
                     />
                 </div>
-                <Link
-                    className="text-sm text-gray-600 underline underline-offset-2"
-                    href="/icons"
-                >
+                <Link className="text-sm text-gray-600 underline underline-offset-2" href="/icons">
                     Browse all supported icons here
                 </Link>
             </div>
@@ -162,21 +128,14 @@ export default function Home() {
             <div className="flex flex-col gap-6 lg:flex-row lg:justify-between">
                 {/* Query Parameters */}
                 <div className="flex flex-col gap-4 flex-grow">
-                    <h2 className="text-xl text-gray-700 font-bold">
-                        Query Parameters
-                    </h2>
+                    <h2 className="text-xl text-gray-700 font-bold">Query Parameters</h2>
                     <ul className="list-none flex flex-col gap-2">
                         {ApiParams.map(({ name, description, extra }) => (
-                            <li
-                                key={name}
-                                className="flex flex-wrap gap-2 items-center"
-                            >
+                            <li key={name} className="flex flex-wrap gap-2 items-center">
                                 <span className="bg-gray-100 rounded-md text-gray-800 px-2 py-1 font-mono text-sm">
                                     {name}
                                 </span>
-                                <span className="text-gray-800">
-                                    {description}
-                                </span>
+                                <span className="text-gray-800">{description}</span>
                                 {extra && (
                                     <div className="flex flex-wrap gap-1 items-center">
                                         {extra.map(item => (
@@ -218,9 +177,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-2">
-                <h2 className="text-xl text-gray-700 font-bold">
-                    Service Integrations
-                </h2>
+                <h2 className="text-xl text-gray-700 font-bold">Service Integrations</h2>
                 <Section name="GitHub">
                     <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
                         <Row
@@ -256,12 +213,7 @@ export default function Home() {
                         <Row
                             name="Checks (specific)"
                             path="/github/checks/:owner/:repo/:branch/:check"
-                            inject={[
-                                'quintschaf',
-                                'schafkit',
-                                'master',
-                                'build',
-                            ]}
+                            inject={['quintschaf', 'schafkit', 'master', 'build']}
                         />
                         <Row
                             name="Contributors"
@@ -306,26 +258,14 @@ export default function Home() {
                 </Section>
                 <Section name="crates.io">
                     <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
-                        <Row
-                            name="Name"
-                            path="/crates/name/:crate"
-                            inject={['serde']}
-                        />
-                        <Row
-                            name="Version"
-                            path="/crates/version/:crate"
-                            inject={['serde']}
-                        />
+                        <Row name="Name" path="/crates/name/:crate" inject={['serde']} />
+                        <Row name="Version" path="/crates/version/:crate" inject={['serde']} />
                         <Row
                             name="Name and Version"
                             path="/crates/info/:crate"
                             inject={['serde']}
                         />
-                        <Row
-                            name="Downloads"
-                            path="/crates/downloads/:crate"
-                            inject={['serde']}
-                        />
+                        <Row name="Downloads" path="/crates/downloads/:crate" inject={['serde']} />
                         <Row
                             name="Downloads (latest version)"
                             path="/crates/downloads/:crate/latest"
@@ -335,41 +275,25 @@ export default function Home() {
                 </Section>
                 <Section name="npm">
                     <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
-                        <Row
-                            name="Name"
-                            path="/npm/name/:pkg"
-                            inject={['log4js']}
-                        />
+                        <Row name="Name" path="/npm/name/:pkg" inject={['log4js']} />
                         <Row
                             name="Name (scoped)"
                             path="/npm/name/:org/:pkg"
                             inject={['@octokit', 'rest']}
                         />
-                        <Row
-                            name="Version"
-                            path="/npm/version/:pkg"
-                            inject={['log4js']}
-                        />
+                        <Row name="Version" path="/npm/version/:pkg" inject={['log4js']} />
                         <Row
                             name="Version (scoped)"
                             path="/npm/version/:org/:pkg"
                             inject={['@octokit', 'rest']}
                         />
-                        <Row
-                            name="License"
-                            path="/npm/license/:pkg"
-                            inject={['log4js']}
-                        />
+                        <Row name="License" path="/npm/license/:pkg" inject={['log4js']} />
                         <Row
                             name="License (scoped)"
                             path="/npm/license/:org/:pkg"
                             inject={['@octokit', 'rest']}
                         />
-                        <Row
-                            name="Types"
-                            path="/npm/types/:pkg"
-                            inject={['react']}
-                        />
+                        <Row name="Types" path="/npm/types/:pkg" inject={['react']} />
                         <Row
                             name="Types (scoped)"
                             path="/npm/types/:org/:pkg"
@@ -379,26 +303,10 @@ export default function Home() {
                 </Section>
                 <Section name="PyPI">
                     <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-8">
-                        <Row
-                            name="Name"
-                            path="/pypi/name/:pkg"
-                            inject={['janus']}
-                        />
-                        <Row
-                            name="Version"
-                            path="/pypi/version/:pkg"
-                            inject={['janus']}
-                        />
-                        <Row
-                            name="Name and Version"
-                            path="/pypi/info/:pkg"
-                            inject={['janus']}
-                        />
-                        <Row
-                            name="License"
-                            path="/pypi/license/:pkg"
-                            inject={['janus']}
-                        />
+                        <Row name="Name" path="/pypi/name/:pkg" inject={['janus']} />
+                        <Row name="Version" path="/pypi/version/:pkg" inject={['janus']} />
+                        <Row name="Name and Version" path="/pypi/info/:pkg" inject={['janus']} />
+                        <Row name="License" path="/pypi/license/:pkg" inject={['janus']} />
                     </div>
                 </Section>
             </div>
