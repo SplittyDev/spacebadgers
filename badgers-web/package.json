@@ -6,7 +6,10 @@
     "build": "next build",
     "dev": "next dev --turbopack",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt src",
+    "fmt:check": "oxfmt --check src",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
@@ -32,6 +35,8 @@
   "devDependencies": {
     "@octokit/types": "^13.5.0",
     "encoding": "^0.1.13",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
     "sharp": "^0.33.4",
     "wrangler": "^4.68.1"
   },
