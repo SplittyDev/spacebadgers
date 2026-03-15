@@ -196,3 +196,33 @@ pub mod palettes {
         purple: "#943ae9",
     };
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::color_palettes;
+
+    #[test]
+    fn resolves_named_colors() {
+        assert_eq!(
+            color_palettes::HONEY
+                .resolve_color_string("blue")
+                .as_deref(),
+            Some("#3373cc")
+        );
+    }
+
+    #[test]
+    fn converts_hex_strings() {
+        assert_eq!(
+            color_palettes::HONEY
+                .resolve_color_string("24c66b")
+                .as_deref(),
+            Some("#24c66b")
+        );
+    }
+
+    #[test]
+    fn returns_none_for_unknown_colors() {
+        assert_eq!(color_palettes::HONEY.resolve_color_string("unknown"), None);
+    }
+}
