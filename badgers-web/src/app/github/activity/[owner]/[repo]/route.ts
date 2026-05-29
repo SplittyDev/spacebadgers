@@ -17,9 +17,21 @@ function getRelativeTimeText(commitDate: Date): string {
     const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
     const diffWeeks = Math.floor(diffDays / 7)
-    const diffMonths = Math.floor(diffDays / 30)
-    const diffYears = Math.floor(diffDays / 365)
 
+    // Calculate months and years using date components for accuracy
+    let diffMonths = (now.getFullYear() - commitDate.getFullYear()) * 12 + (now.getMonth() - commitDate.getMonth());
+    // If the current day is less than the commit day, subtract one month
+    if (now.getDate() < commitDate.getDate()) {
+        diffMonths -= 1;
+    }
+    const diffYears = now.getFullYear() - commitDate.getFullYear();
+    // If the current month/day is before the commit month/day, subtract one year
+    if (
+        now.getMonth() < commitDate.getMonth() ||
+        (now.getMonth() === commitDate.getMonth() && now.getDate() < commitDate.getDate())
+    ) {
+        diffYears -= 1;
+    }
     if (diffMinutes < 60) {
         return 'today'
     } else if (diffHours < 24) {
