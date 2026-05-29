@@ -93,8 +93,13 @@ export async function GET(request: NextRequest, props: Params) {
     }
 
     const latestCommit = commitsResp.data[0]
-    const commitDate = new Date(latestCommit.commit.author?.date || latestCommit.commit.committer?.date || '')
-    
+    const commitAuthorDate = latestCommit.commit.author?.date;
+    const commitCommitterDate = latestCommit.commit.committer?.date;
+    const commitDateString = commitAuthorDate || commitCommitterDate;
+    if (!commitDateString) {
+        return await Badge.error(request, 'github')
+    }
+    const commitDate = new Date(commitDateString);
     if (isNaN(commitDate.getTime())) {
         return await Badge.error(request, 'github')
     }
